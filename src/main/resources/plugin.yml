@@ -1,0 +1,9 @@
+name: GradzixCombatSystem
+version: '${project.version}'
+main: me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem
+api-version: '1.17'
+
+commands:
+  atrybut:
+    description: Pokazuje atrybuty gracza
+    permission: gradzixcombatsystem.atrybuty
