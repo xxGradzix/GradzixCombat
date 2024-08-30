@@ -4,8 +4,10 @@ import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -22,7 +24,7 @@ public class AttributeManager {
     private static final NamespacedKey INTELLIGENCE_REQUIREMENT_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "intelligence_requirement");
 
 
-    public static void incrementAttributeLevel(Player player, CombatAttribute combatAttribute) {
+    public static void incrementAttributeLevel(LivingEntity player, CombatAttribute combatAttribute) {
         PersistentDataContainer persistentDataContainer = player.getPersistentDataContainer();
         NamespacedKey playerAttributeKeyByAttribute = getPlayerAttributeKeyByAttribute(combatAttribute);
         int attributeLevel = persistentDataContainer.getOrDefault(playerAttributeKeyByAttribute, PersistentDataType.INTEGER, 0);
@@ -30,12 +32,12 @@ public class AttributeManager {
         persistentDataContainer.set(playerAttributeKeyByAttribute, PersistentDataType.INTEGER, attributeLevel + 1);
     }
 
-    public static void setAttributeLevel(Player player, CombatAttribute attribute, int value) {
+    public static void setAttributeLevel(LivingEntity player, CombatAttribute attribute, int value) {
         PersistentDataContainer persistentDataContainer = player.getPersistentDataContainer();
         persistentDataContainer.set(getPlayerAttributeKeyByAttribute(attribute), PersistentDataType.INTEGER, value);
     }
 
-    public static int getAttributeLevel(Player player, CombatAttribute attribute) {
+    public static int getAttributeLevel(LivingEntity player, CombatAttribute attribute) {
         PersistentDataContainer persistentDataContainer = player.getPersistentDataContainer();
         return persistentDataContainer.getOrDefault(getPlayerAttributeKeyByAttribute(attribute), PersistentDataType.INTEGER, 0);
     }
@@ -48,8 +50,10 @@ public class AttributeManager {
 
     public static void setAttributeRequirement(ItemStack item, CombatAttribute attribute, int value) {
         if(item == null || item.getItemMeta() == null) return;
-        PersistentDataContainer persistentDataContainer = item.getItemMeta().getPersistentDataContainer();
+        ItemMeta itemMeta = item.getItemMeta();
+        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
         persistentDataContainer.set(getRequirementKeyByAttribute(attribute), PersistentDataType.INTEGER, value);
+        item.setItemMeta(itemMeta);
     }
 
     private static NamespacedKey getPlayerAttributeKeyByAttribute(CombatAttribute attribute) {

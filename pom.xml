@@ -96,16 +96,16 @@
 
   <dependencies>
 
-<!--      <dependency>-->
-<!--          <groupId>dev.triumphteam</groupId>-->
-<!--          <artifactId>triumph-gui</artifactId>-->
-<!--          <version>3.1.7</version>-->
-<!--      </dependency>-->
+      <dependency>
+          <groupId>dev.triumphteam</groupId>
+          <artifactId>triumph-gui</artifactId>
+          <version>3.1.7</version>
+      </dependency>
 
       <dependency>
-          <groupId>org.spigotmc</groupId>
-          <artifactId>spigot-api</artifactId>
-          <version>1.20.4-R0.1-SNAPSHOT</version>
+          <groupId>com.destroystokyo.paper</groupId>
+          <artifactId>paper-api</artifactId>
+          <version>1.16.5-R0.1-SNAPSHOT</version>
           <scope>provided</scope>
       </dependency>
   </dependencies>
