@@ -1,9 +1,7 @@
 package me.xxgradzix.gradzixcombatsystem.managers;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -96,4 +94,24 @@ public class AttributeManager {
         }
     }
 
+    public static boolean hasRequiredAttribute(ItemStack item, Player player) {
+
+        for (CombatAttribute attribute : CombatAttribute.values()) {
+            int requiredLevel = getAttributeRequirement(item, attribute);
+
+            int playerLevel = getAttributeLevel(player, attribute);
+
+            if (playerLevel < requiredLevel) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public static void resetAttributes(Player player) {
+        for (CombatAttribute attribute : CombatAttribute.values()) {
+            setAttributeLevel(player, attribute, 0);
+        }
+    }
 }

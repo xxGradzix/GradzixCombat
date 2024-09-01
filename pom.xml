@@ -85,6 +85,10 @@
 
   <repositories>
       <repository>
+          <id>okaeri-repo</id>
+          <url>https://storehouse.okaeri.eu/repository/maven-public/</url>
+      </repository>
+      <repository>
           <id>spigotmc-repo</id>
           <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
       </repository>
@@ -95,6 +99,17 @@
   </repositories>
 
   <dependencies>
+      <dependency>
+          <groupId>eu.okaeri</groupId>
+          <artifactId>okaeri-configs-yaml-bukkit</artifactId>
+          <version>5.0.3</version>
+
+      </dependency>
+      <dependency>
+          <groupId>eu.okaeri</groupId>
+          <artifactId>okaeri-configs-serdes-bukkit</artifactId>
+          <version>5.0.3</version>
+      </dependency>
 
       <dependency>
           <groupId>dev.triumphteam</groupId>

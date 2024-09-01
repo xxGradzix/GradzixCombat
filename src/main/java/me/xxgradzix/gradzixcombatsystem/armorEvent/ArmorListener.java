@@ -17,10 +17,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-/**
- * @author Arnah
- * @since Jul 30, 2015
- */
 public class ArmorListener implements Listener{
 
 	private final List<String> blockedMaterials;

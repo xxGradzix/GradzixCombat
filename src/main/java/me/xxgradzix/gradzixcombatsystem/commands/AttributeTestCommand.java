@@ -7,11 +7,14 @@ import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.map.MapView;
 
 public class AttributeTestCommand implements CommandExecutor {
 
@@ -27,10 +30,19 @@ public class AttributeTestCommand implements CommandExecutor {
 
         if(arg.equalsIgnoreCase("1")) {
             player.sendMessage("Sila: " + AttributeManager.getAttributeLevel(player, CombatAttribute.STRENGTH));
-
-        } else if(arg.equalsIgnoreCase("2")) {
-
+            player.sendMessage("Zrecznosc: " + AttributeManager.getAttributeLevel(player, CombatAttribute.AGILITY));
+            player.sendMessage("Wytrzymalosc: " + AttributeManager.getAttributeLevel(player, CombatAttribute.DEXTERITY));
+            player.sendMessage("Inteligencja: " + AttributeManager.getAttributeLevel(player, CombatAttribute.INTELLIGENCE));
+        } else if(arg.equalsIgnoreCase("11")) {
             AttributeManager.incrementAttributeLevel(player, CombatAttribute.STRENGTH);
+        } else if(arg.equalsIgnoreCase("12")) {
+            AttributeManager.incrementAttributeLevel(player, CombatAttribute.AGILITY);
+        } else if(arg.equalsIgnoreCase("13")) {
+            AttributeManager.incrementAttributeLevel(player, CombatAttribute.DEXTERITY);
+        } else if(arg.equalsIgnoreCase("14")) {
+            AttributeManager.incrementAttributeLevel(player, CombatAttribute.INTELLIGENCE);
+        } else if(arg.equalsIgnoreCase("15")) {
+            AttributeManager.resetAttributes(player);
         } else if(arg.equalsIgnoreCase("31")) {
 
             StorageGui storageGui = Gui.storage()
@@ -50,6 +62,8 @@ public class AttributeTestCommand implements CommandExecutor {
                     .rows(6)
                     .create();
 
+            player.getInventory().addItem(ItemManager.getWeapon(ItemManager.WeaponType.JAVELIN, 1));
+
             for(ItemStack itemStack : ItemManager.getAllItems(ArmorTierManager.ArmorWeight.MEDIUM)) {
                 storageGui.addItem(itemStack);
             }
@@ -67,8 +81,12 @@ public class AttributeTestCommand implements CommandExecutor {
             }
 
             storageGui.open(player);
-        }
+        } else if(arg.equalsIgnoreCase("4")) {
 
+            MapView mapView = Bukkit.createMap(player.getWorld());
+
+            player.sendMap(mapView);
+        }
 
 
         return false;

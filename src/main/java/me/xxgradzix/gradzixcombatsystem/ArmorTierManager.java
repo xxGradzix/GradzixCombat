@@ -105,55 +105,37 @@ public class ArmorTierManager {
 
 
         switch (type) {
-            case HELMET -> {
-                equipmentSlot = EquipmentSlot.HEAD;
-            }
-            case CHESTPLATE -> {
-                equipmentSlot = EquipmentSlot.CHEST;
-            }
-            case LEGGINGS -> {
-                equipmentSlot = EquipmentSlot.LEGS;
-
-            }
-            case BOOTS -> {
-                equipmentSlot = EquipmentSlot.FEET;
-            }
+            case HELMET -> equipmentSlot = EquipmentSlot.HEAD;
+            case CHESTPLATE -> equipmentSlot = EquipmentSlot.CHEST;
+            case LEGGINGS -> equipmentSlot = EquipmentSlot.LEGS;
+            case BOOTS -> equipmentSlot = EquipmentSlot.FEET;
         }
 
         itemMeta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_ARMOR.name(), getLightArmorGenericArmorAttribute(weight, type, tier), AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
 
         if(weight == ArmorWeight.LIGHT) {
-
-            switch (tier) {
-                case 2, 3 -> {
-                    itemMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_MOVEMENT_SPEED.name(), 0.003, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
-                }
-                case 4, 5 -> {
-                    itemMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_MOVEMENT_SPEED.name(), 0.005, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
-                }
+            if(tier > 3) {
+                itemMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_MOVEMENT_SPEED.name(), 0.005, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
+            } else if(tier > 1) {
+                itemMeta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_MOVEMENT_SPEED.name(), 0.003, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
             }
-
         }
+
         if(weight == ArmorWeight.MEDIUM) {
-
-            switch (tier) {
-                case 2, 3 -> {
-                    itemMeta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_ARMOR_TOUGHNESS.name(), 1, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
-                }
-                case 4, 5 -> {
-                    itemMeta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_KNOCKBACK_RESISTANCE.name(), 0.05, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
-                }
+            if(tier > 1) {
+                itemMeta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_ARMOR_TOUGHNESS.name(), 1, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
+            }
+            if(tier > 3) {
+                itemMeta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_KNOCKBACK_RESISTANCE.name(), 0.05, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
             }
         }
-        if (weight == ArmorWeight.HEAVY) {
 
-            switch (tier) {
-                case 2, 3 -> {
-                    itemMeta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_ARMOR_TOUGHNESS.name(), 3, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
-                }
-                case 4, 5 -> {
-                    itemMeta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_KNOCKBACK_RESISTANCE.name(), 0.15, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
-                }
+        if (weight == ArmorWeight.HEAVY) {
+            if(tier > 1) {
+                itemMeta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_ARMOR_TOUGHNESS.name(), 3, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
+            }
+            if(tier > 3) {
+                itemMeta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), Attribute.GENERIC_KNOCKBACK_RESISTANCE.name(), 0.15, AttributeModifier.Operation.ADD_NUMBER, equipmentSlot));
             }
         }
         item.setItemMeta(itemMeta);
