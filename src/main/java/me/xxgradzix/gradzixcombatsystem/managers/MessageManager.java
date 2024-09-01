@@ -93,4 +93,20 @@ public class MessageManager extends OkaeriConfig {
 
         return sb.toString();
     }
+    public static String getRomanNumerals(int num) {
+        String romeNum = "";
+        switch (num) {
+            case 1 -> romeNum = "&7ɪ";
+            case 2 -> romeNum = "#877239ɪɪ";
+            case 3 -> romeNum = "#68c473ɪɪɪ";
+            case 4 -> romeNum = "#4c7ca1ɪᴠ";
+            case 5 -> romeNum = "#a30005ᴠ";
+            case 6 -> romeNum = "&fᴠɪ";
+            case 7 -> romeNum = "ᴠɪɪ";
+            case 8 -> romeNum = "ᴠɪɪɪ";
+            case 9 -> romeNum = "ɪx";
+            case 10 -> romeNum = "x";
+        }
+        return romeNum;
+    }
 }

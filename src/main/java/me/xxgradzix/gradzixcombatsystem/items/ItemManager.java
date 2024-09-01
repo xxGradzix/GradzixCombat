@@ -5,6 +5,7 @@ import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
 import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
+import me.xxgradzix.gradzixcombatsystem.weapons.instances.BattleAxe;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -17,6 +18,8 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+
+import static me.xxgradzix.gradzixcombatsystem.managers.MessageManager.getRomanNumerals;
 
 
 public class ItemManager {
@@ -85,7 +88,7 @@ public class ItemManager {
             }
         }
         HashMap<Integer, ItemStack> tierMap = weaponsPerTier.getOrDefault(WeaponType.JAVELIN, new HashMap<>());
-        tierMap.put(1, createAxeWithParameters(WeaponType.JAVELIN, 1));
+        tierMap.put(1, createWeaponWithParameters(WeaponType.JAVELIN, 1));
         weaponsPerTier.put(WeaponType.JAVELIN, tierMap);
 
     }
@@ -304,7 +307,7 @@ public class ItemManager {
         return item;
     }
 
-    private static ItemStack createAxeWithParameters(WeaponType weaponType, int tier) {
+    private static ItemStack createWeaponWithParameters(WeaponType weaponType, int tier) {
 
         Material material;
         String displayName;
@@ -324,11 +327,11 @@ public class ItemManager {
             }
             case BOW -> {
                 material = Material.BOW;
-                displayName = ColorFixer.addColors("#3e4040ʁʏᴄᴢᴀ");
+                displayName = ColorFixer.addColors("#3e4040ᴌᴜ");
             }
             case SHIELD -> {
                 material = Material.SHIELD;
-                displayName = ColorFixer.addColors("#3e4040ᴛᴀɢᴀ");
+                displayName = ColorFixer.addColors("#3e4040ᴛᴀʀᴄᴢᴀ");
             }
             case CROSSBOW -> {
                 material = Material.CROSSBOW;
@@ -338,19 +341,16 @@ public class ItemManager {
         }
 
         String romeNum = getRomanNumerals(tier);
-
         ItemStack item = new ItemStack(material);
 
         int strAttributeRequirement = 0;
         int dexAttributeRequirement = 0;
         int another = 0;
 
-
-
         if(dexAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.DEXTERITY, baseMediumArmorDexRequirement + tier);
         if(strAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.STRENGTH, strAttributeRequirement);
 
-//        ArmorTierManager.setAttributesPerTierAndWeight(item, weaponType, armorWeight, tier);
+        ArmorTierManager.setAttributesPerWeaponTierAndType(item, weaponType, tier);
 
         ItemMeta itemMeta = item.getItemMeta();
 
@@ -360,7 +360,6 @@ public class ItemManager {
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add(ColorFixer.addColors(" "));
-
 
         Multimap<Attribute, AttributeModifier> attributeModifiers = itemMeta.getAttributeModifiers();
 
@@ -400,21 +399,6 @@ public class ItemManager {
         return item;
     }
 
-    private static String getRomanNumerals(int num) {
-        String romeNum = "";
-        switch (num) {
-            case 1 -> romeNum = "&7ɪ";
-            case 2 -> romeNum = "#877239ɪɪ";
-            case 3 -> romeNum = "#68c473ɪɪɪ";
-            case 4 -> romeNum = "#4c7ca1ɪᴠ";
-            case 5 -> romeNum = "#a30005ᴠ";
-            case 6 -> romeNum = "&fᴠɪ";
-            case 7 -> romeNum = "ᴠɪɪ";
-            case 8 -> romeNum = "ᴠɪɪɪ";
-            case 9 -> romeNum = "ɪx";
-            case 10 -> romeNum = "x";
-        }
-        return romeNum;
-    }
+
 
 }
