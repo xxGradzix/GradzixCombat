@@ -109,4 +109,28 @@ public class MessageManager extends OkaeriConfig {
         }
         return romeNum;
     }
+    public static String getAttributeFormatedName(CombatAttribute attribute, int value) {
+        switch (attribute) {
+
+            case STRENGTH -> {
+                return "&cꜱɪᴌᴀ &4⚔&8: #a18b3d" + value;
+            }
+            case ENDURANCE -> {
+                return "&7ᴡʏᴛʀᴢʏᴍᴀᴌᴏść &8☄&8:  #a18b3d" + value;
+            }
+            case DEXTERITY -> {
+                return "#c3f075ᴢʀęᴄᴢɴᴏść #a8eb34⚡&8: #a18b3d" + value;
+            }
+            case INTELLIGENCE -> {
+                return "#81ecf0ɪɴᴛᴇʟɪɢᴇɴᴄᴊᴀ #20ced4 &8:" + value;
+            }
+        }
+        return "";
+    }
+    public static String weaponDamageWithWords(double damage) {
+        return ColorFixer.addColors("&7ᴏʙʀᴀżᴇɴɪᴀ&8: #a18b3d" + damage);
+    }
+    public static String weaponSpeedWithWords(double speed) {
+        return ColorFixer.addColors("&7ᴘʀęᴅᴋᴏść&8: #a18b3d" + speed);
+    }
 }

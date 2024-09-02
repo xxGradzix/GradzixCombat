@@ -30,19 +30,50 @@ public class AttributeTestCommand implements CommandExecutor {
 
         if(arg.equalsIgnoreCase("1")) {
             player.sendMessage("Sila: " + AttributeManager.getAttributeLevel(player, CombatAttribute.STRENGTH));
-            player.sendMessage("Zrecznosc: " + AttributeManager.getAttributeLevel(player, CombatAttribute.AGILITY));
+            player.sendMessage("Zrecznosc: " + AttributeManager.getAttributeLevel(player, CombatAttribute.ENDURANCE));
             player.sendMessage("Wytrzymalosc: " + AttributeManager.getAttributeLevel(player, CombatAttribute.DEXTERITY));
             player.sendMessage("Inteligencja: " + AttributeManager.getAttributeLevel(player, CombatAttribute.INTELLIGENCE));
         } else if(arg.equalsIgnoreCase("11")) {
             AttributeManager.incrementAttributeLevel(player, CombatAttribute.STRENGTH);
         } else if(arg.equalsIgnoreCase("12")) {
-            AttributeManager.incrementAttributeLevel(player, CombatAttribute.AGILITY);
+            AttributeManager.incrementAttributeLevel(player, CombatAttribute.ENDURANCE);
         } else if(arg.equalsIgnoreCase("13")) {
             AttributeManager.incrementAttributeLevel(player, CombatAttribute.DEXTERITY);
         } else if(arg.equalsIgnoreCase("14")) {
             AttributeManager.incrementAttributeLevel(player, CombatAttribute.INTELLIGENCE);
         } else if(arg.equalsIgnoreCase("15")) {
             AttributeManager.resetAttributes(player);
+        } else if (arg.equalsIgnoreCase("21")) {
+
+            for (int i = 1; i<=5; i++) {
+                player.getInventory().addItem(ItemManager.getWeapon(ItemManager.WeaponType.SWORD, i));
+            }
+
+        } else if (arg.equalsIgnoreCase("22")) {
+
+            for (int i = 1; i<=5; i++) {
+                player.getInventory().addItem(ItemManager.getWeapon(ItemManager.WeaponType.AXE, i));
+            }
+        }  else if (arg.equalsIgnoreCase("23")) {
+
+            for (int i = 1; i<=5; i++) {
+                player.getInventory().addItem(ItemManager.getWeapon(ItemManager.WeaponType.JAVELIN, i));
+            }
+        }  else if (arg.equalsIgnoreCase("24")) {
+
+            for (int i = 1; i<=5; i++) {
+                player.getInventory().addItem(ItemManager.getWeapon(ItemManager.WeaponType.SHIELD, i));
+            }
+        } else if (arg.equalsIgnoreCase("25")) {
+
+            for (int i = 1; i<=5; i++) {
+                player.getInventory().addItem(ItemManager.getWeapon(ItemManager.WeaponType.CROSSBOW, i));
+            }
+        } else if (arg.equalsIgnoreCase("26")) {
+
+            for (int i = 1; i<=5; i++) {
+                player.getInventory().addItem(ItemManager.getWeapon(ItemManager.WeaponType.BOW, i));
+            }
         } else if(arg.equalsIgnoreCase("31")) {
 
             StorageGui storageGui = Gui.storage()

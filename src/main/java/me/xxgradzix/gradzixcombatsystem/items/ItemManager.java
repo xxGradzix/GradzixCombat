@@ -5,7 +5,11 @@ import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
 import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
+import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
 import me.xxgradzix.gradzixcombatsystem.weapons.instances.BattleAxe;
+import me.xxgradzix.gradzixcombatsystem.weapons.instances.BattleBow;
+import me.xxgradzix.gradzixcombatsystem.weapons.instances.BattleShield;
+import me.xxgradzix.gradzixcombatsystem.weapons.instances.BattleSword;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -24,6 +28,26 @@ import static me.xxgradzix.gradzixcombatsystem.managers.MessageManager.getRomanN
 
 public class ItemManager {
 
+    /** WEAPONS **/
+
+    private static final BattleAxe battleAxe = new BattleAxe();
+    private static final BattleBow battleBow = new BattleBow();
+    private static final BattleBow battleCrossBow = new BattleBow();
+    private static final BattleBow battleSpear = new BattleBow();
+    private static final BattleShield battleShield = new BattleShield();
+    private static final BattleSword battleSword = new BattleSword();
+
+    // fill these to a map
+
+    private static final Map<WeaponType, CustomWeapon> weapons = Map.ofEntries(
+            Map.entry(WeaponType.AXE, battleAxe),
+            Map.entry(WeaponType.BOW, battleBow),
+            Map.entry(WeaponType.CROSSBOW, battleCrossBow),
+            Map.entry(WeaponType.JAVELIN, battleSpear),
+            Map.entry(WeaponType.SHIELD, battleShield),
+            Map.entry(WeaponType.SWORD, battleSword)
+    );
+    /*************/
     private static final int baseHeavyArmorStrRequirement = 6;
     private static final int baseMediumArmorStrRequirement = 3;
     private static final int baseLightArmorStrRequirement = 0;
@@ -87,9 +111,14 @@ public class ItemManager {
                 }
             }
         }
-        HashMap<Integer, ItemStack> tierMap = weaponsPerTier.getOrDefault(WeaponType.JAVELIN, new HashMap<>());
-        tierMap.put(1, createWeaponWithParameters(WeaponType.JAVELIN, 1));
-        weaponsPerTier.put(WeaponType.JAVELIN, tierMap);
+        for (WeaponType weaponType : weapons.keySet()) {
+            for (int i = 1; i <= 5; i++) {
+                ItemStack weaponWithParameters = weapons.get(weaponType).getItemStack(i);
+                HashMap<Integer, ItemStack> tierMap = weaponsPerTier.getOrDefault(weaponType, new HashMap<>());
+                tierMap.put(i, weaponWithParameters);
+                weaponsPerTier.put(weaponType, tierMap);
+            }
+        }
 
     }
     private static ItemStack createArmorPieceWithParameters(ArmorTierManager.ArmorType armorType, int tier, ArmorTierManager.ArmorWeight armorWeight) {
@@ -398,7 +427,4 @@ public class ItemManager {
 
         return item;
     }
-
-
-
 }

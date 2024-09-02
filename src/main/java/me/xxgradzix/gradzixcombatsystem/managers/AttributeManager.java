@@ -12,12 +12,12 @@ import org.bukkit.persistence.PersistentDataType;
 public class AttributeManager {
 
     private static final NamespacedKey STRENGTH_ATTRIBUTE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "strength_attribute");
-    private static final NamespacedKey AGILITY_ATTRIBUTE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "agility_attribute");
+    private static final NamespacedKey ENDURANCE_ATTRIBUTE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "endurance_attribute");
     private static final NamespacedKey DEXTERITY_ATTRIBUTE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "dexterity_attribute");
     private static final NamespacedKey INTELLIGENCE_ATTRIBUTE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "intelligence_attribute");
 
     private static final NamespacedKey STRENGTH_REQUIREMENT_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "strength_requirement");
-    private static final NamespacedKey AGILITY_REQUIREMENT_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "agility_requirement");
+    private static final NamespacedKey ENDURANCE_REQUIREMENT_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "endurance_requirement");
     private static final NamespacedKey DEXTERITY_REQUIREMENT_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "dexterity_requirement");
     private static final NamespacedKey INTELLIGENCE_REQUIREMENT_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "intelligence_requirement");
 
@@ -59,8 +59,8 @@ public class AttributeManager {
             case STRENGTH -> {
                 return STRENGTH_ATTRIBUTE_KEY;
             }
-            case AGILITY -> {
-                return AGILITY_ATTRIBUTE_KEY;
+            case ENDURANCE -> {
+                return ENDURANCE_ATTRIBUTE_KEY;
             }
             case DEXTERITY -> {
                 return DEXTERITY_ATTRIBUTE_KEY;
@@ -79,8 +79,8 @@ public class AttributeManager {
             case STRENGTH -> {
                 return STRENGTH_REQUIREMENT_KEY;
             }
-            case AGILITY -> {
-                return AGILITY_REQUIREMENT_KEY;
+            case ENDURANCE -> {
+                return ENDURANCE_REQUIREMENT_KEY;
             }
             case DEXTERITY -> {
                 return DEXTERITY_REQUIREMENT_KEY;
