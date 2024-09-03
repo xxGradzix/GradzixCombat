@@ -15,6 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -22,6 +23,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.regex.MatchResult;
 
 import static me.xxgradzix.gradzixcombatsystem.managers.MessageManager.getRomanNumerals;
 
@@ -63,6 +65,48 @@ public class ItemManager {
 
     public static @NotNull ItemStack getWeapon(WeaponType weaponType, int i) {
         return weaponsPerTier.getOrDefault(weaponType, new HashMap<>()).get(i);
+    }
+
+    public static @NotNull ItemStack getAttributeItem(Player player, CombatAttribute attribute, int attributeLevel) {
+        Material material;
+        String displayName;
+        switch (attribute) {
+            case STRENGTH -> {
+                material = Material.RED_DYE;
+                displayName = ColorFixer.addColors("#3e4040&lꜱɪᴌᴀ");
+            }
+            case ENDURANCE -> {
+                material = Material.CYAN_DYE;
+                displayName = ColorFixer.addColors("#3e4040&lᴡʏᴛʀᴢʏᴍᴀᴌᴏść");
+            }
+            case DEXTERITY -> {
+                material = Material.LIME_DYE;
+                displayName = ColorFixer.addColors("#3e4040&lᴢʀęᴄᴢɴᴏść");
+            }
+            case INTELLIGENCE -> {
+                material = Material.PURPLE_DYE;
+                displayName = ColorFixer.addColors("#3e4040&lɪɴᴛᴇʟɪɢᴇɴᴄᴊᴀ");
+            }
+            default -> {
+                material = Material.BARRIER;
+                displayName = "Unknown";
+            }
+        }
+        ItemStack itemStack = new ItemStack(material);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        itemMeta.setDisplayName(displayName);
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(" ");
+        lore.add(ColorFixer.addColors("&7ᴀᴋᴛᴜᴀʟɴɪᴇ ᴘᴏꜱɪᴀᴅᴀꜱᴢ&8: &b" + attributeLevel));
+        lore.add(ColorFixer.addColors("&7ᴡᴏʟɴʏᴄʜ ᴘᴜɴᴋᴛóᴡ&8: &b" + AttributeManager.getFreeAttributePoints(player)));
+        lore.add(" ");
+        lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴜʟᴇᴘꜱᴢʏć"));
+        itemMeta.setLore(lore);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+
     }
 
     public enum WeaponType {

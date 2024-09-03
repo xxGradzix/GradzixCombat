@@ -1,11 +1,14 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
 import dev.triumphteam.gui.guis.Gui;
+import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.StorageGui;
 import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
+import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
+import me.xxgradzix.gradzixcombatsystem.managers.MessageType;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -15,6 +18,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.map.MapView;
+
+import java.util.HashMap;
 
 public class AttributeTestCommand implements CommandExecutor {
 
@@ -28,21 +33,8 @@ public class AttributeTestCommand implements CommandExecutor {
 
         String arg = strings[0];
 
-        if(arg.equalsIgnoreCase("1")) {
-            player.sendMessage("Sila: " + AttributeManager.getAttributeLevel(player, CombatAttribute.STRENGTH));
-            player.sendMessage("Zrecznosc: " + AttributeManager.getAttributeLevel(player, CombatAttribute.ENDURANCE));
-            player.sendMessage("Wytrzymalosc: " + AttributeManager.getAttributeLevel(player, CombatAttribute.DEXTERITY));
-            player.sendMessage("Inteligencja: " + AttributeManager.getAttributeLevel(player, CombatAttribute.INTELLIGENCE));
-        } else if(arg.equalsIgnoreCase("11")) {
-            AttributeManager.incrementAttributeLevel(player, CombatAttribute.STRENGTH);
-        } else if(arg.equalsIgnoreCase("12")) {
-            AttributeManager.incrementAttributeLevel(player, CombatAttribute.ENDURANCE);
-        } else if(arg.equalsIgnoreCase("13")) {
-            AttributeManager.incrementAttributeLevel(player, CombatAttribute.DEXTERITY);
-        } else if(arg.equalsIgnoreCase("14")) {
-            AttributeManager.incrementAttributeLevel(player, CombatAttribute.INTELLIGENCE);
-        } else if(arg.equalsIgnoreCase("15")) {
-            AttributeManager.resetAttributes(player);
+        if(arg.equalsIgnoreCase("0")) {
+            openAttributeGui(player);
         } else if (arg.equalsIgnoreCase("21")) {
 
             for (int i = 1; i<=5; i++) {
@@ -112,14 +104,40 @@ public class AttributeTestCommand implements CommandExecutor {
             }
 
             storageGui.open(player);
-        } else if(arg.equalsIgnoreCase("4")) {
-
-            MapView mapView = Bukkit.createMap(player.getWorld());
-
-            player.sendMap(mapView);
-        }
+        } 
 
 
         return false;
+    }
+
+    private void openAttributeGui(Player player) {
+        Gui gui = Gui.gui()
+                .title(Component.text("Atrybuty"))
+                .rows(3)
+                .disableAllInteractions()
+                .create();
+
+        int slot = 10;
+
+        for (CombatAttribute attribute : CombatAttribute.values()) {
+            GuiItem attributeGuiItem = new GuiItem(ItemManager.getAttributeItem(player, attribute, AttributeManager.getAttributeLevel(player, attribute)));
+
+            attributeGuiItem.setAction((e) -> {
+
+                boolean isSuccessful = AttributeManager.incrementAttributeLevel(player, attribute);
+
+                if(isSuccessful) {
+                    openAttributeGui(player);
+                } else {
+                    MessageManager.sendMessageFormated(player, MessageManager.NOT_ENOUGH_FREE_POINTS, MessageType.CHAT);
+                }
+
+            });
+            gui.setItem(slot, attributeGuiItem);
+            slot+=2;
+
+        }
+
+        gui.open(player);
     }
 }

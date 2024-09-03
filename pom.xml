@@ -24,12 +24,11 @@
             <version>3.5.0</version>
             <configuration>
                 <createDependencyReducedPom>false</createDependencyReducedPom>
-                <!-- <outputFile>C:\Users\kuba\Desktop\serwery\BoxPvp_1\plugins\Gradzix-Core.jar</outputFile> -->
                 <outputFile>C:\Users\kuba\Desktop\spigot1_17_1\plugins\GradzixCombatSystem.jar</outputFile>
                 <relocations>
                     <relocation>
                         <pattern>dev.triumphteam.gui</pattern>
-                        <shadedPattern>me.xxgradzix.gradzixcore.gui</shadedPattern>
+                        <shadedPattern>me.xxgradzix.gradzixcombatsystem.gui</shadedPattern>
                     </relocation>
                     <relocation>
                         <pattern>de.tr7zw</pattern>

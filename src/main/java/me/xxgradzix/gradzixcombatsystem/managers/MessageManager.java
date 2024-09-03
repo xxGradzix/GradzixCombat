@@ -18,6 +18,8 @@ public class MessageManager extends OkaeriConfig {
 
     @Comment("Not Strong Enough")
     public static String NOT_STRONG_ENOUGH = "&7ɴɪᴇ ᴊᴇꜱᴛᴇś ᴡʏꜱᴛᴀʀᴄᴢᴀᴊąᴄᴏ ꜱɪʟɴʏ ʙʏ ᴛᴏ ᴢᴀᴌᴏżʏć";
+    @Comment("Not Enough Free Points")
+    public static String NOT_ENOUGH_FREE_POINTS = "&7ɴɪᴇ ᴍᴀꜱᴢ ᴡʏꜱᴛᴀʀᴄᴢᴀᴊąᴄᴏ ᴘᴜɴᴋᴛóᴡ";
 
     public static void sendMessageFormated(Player player, String message, MessageType type) {
         message = ColorFixer.addColors(message);
