@@ -6,10 +6,7 @@ import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.instances.BattleAxe;
-import me.xxgradzix.gradzixcombatsystem.weapons.instances.BattleBow;
-import me.xxgradzix.gradzixcombatsystem.weapons.instances.BattleShield;
-import me.xxgradzix.gradzixcombatsystem.weapons.instances.BattleSword;
+import me.xxgradzix.gradzixcombatsystem.weapons.instances.*;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -23,7 +20,6 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.regex.MatchResult;
 
 import static me.xxgradzix.gradzixcombatsystem.managers.MessageManager.getRomanNumerals;
 
@@ -34,8 +30,8 @@ public class ItemManager {
 
     private static final BattleAxe battleAxe = new BattleAxe();
     private static final BattleBow battleBow = new BattleBow();
-    private static final BattleBow battleCrossBow = new BattleBow();
-    private static final BattleBow battleSpear = new BattleBow();
+    private static final BattleCrossBow battleCrossBow = new BattleCrossBow();
+    private static final BattleSpear battleSpear = new BattleSpear();
     private static final BattleShield battleShield = new BattleShield();
     private static final BattleSword battleSword = new BattleSword();
 
@@ -54,7 +50,7 @@ public class ItemManager {
     private static final int baseMediumArmorStrRequirement = 3;
     private static final int baseLightArmorStrRequirement = 0;
 
-    private static final int baseMediumArmorDexRequirement = 3;
+    private static final int baseMediumArmorEnduranceRequirement = 3;
 
 
     private static final HashMap<ArmorTierManager.ArmorType, HashMap<Integer, HashMap<ArmorTierManager.ArmorWeight, ItemStack>>> armorsPerTierAndWeight = new HashMap<>();
@@ -318,10 +314,10 @@ public class ItemManager {
 
 
         if(armorWeight == ArmorTierManager.ArmorWeight.MEDIUM) {
-            dexAttributeRequirement = baseMediumArmorDexRequirement + tier;
+            dexAttributeRequirement = baseMediumArmorEnduranceRequirement + tier;
         }
 
-        if(dexAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.DEXTERITY, baseMediumArmorDexRequirement + tier);
+        if(dexAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.ENDURANCE, baseMediumArmorEnduranceRequirement + tier);
         if(strAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.STRENGTH, strAttributeRequirement);
 
         ArmorTierManager.setAttributesPerTierAndWeight(item, armorType, armorWeight, tier);
@@ -419,7 +415,7 @@ public class ItemManager {
         int dexAttributeRequirement = 0;
         int another = 0;
 
-        if(dexAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.DEXTERITY, baseMediumArmorDexRequirement + tier);
+        if(dexAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.DEXTERITY, baseMediumArmorEnduranceRequirement + tier);
         if(strAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.STRENGTH, strAttributeRequirement);
 
         ArmorTierManager.setAttributesPerWeaponTierAndType(item, weaponType, tier);

@@ -19,7 +19,7 @@ public class ArmorBlock implements Listener {
         ItemStack newArmorPiece = event.getNewArmorPiece();
 
             if (!AttributeManager.hasRequiredAttribute(newArmorPiece, player)) {
-                MessageManager.sendMessageFormated(player, MessageManager.NOT_STRONG_ENOUGH, MessageType.TITLE);
+                MessageManager.sendMessageFormated(player, MessageManager.NOT_SUFFICIENT_ATTRIBUTES, MessageType.TITLE);
                 event.setCancelled(true);
             }
     }

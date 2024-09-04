@@ -104,7 +104,9 @@ public class AttributeTestCommand implements CommandExecutor {
             }
 
             storageGui.open(player);
-        } 
+        }  else if(arg.equalsIgnoreCase("4")) {
+            AttributeManager.resetAttributes(player, 26);
+        }
 
 
         return false;
