@@ -330,7 +330,6 @@ public class ItemManager {
 
         if(itemMeta instanceof LeatherArmorMeta leatherArmorMeta) {
             optionalColor.ifPresent(leatherArmorMeta::setColor);
-//            leatherArmorMeta.setColor(Color.MAROON);
         }
 
         itemMeta.setDisplayName(ColorFixer.addColors(displayName + " " + romeNum));
@@ -437,24 +436,6 @@ public class ItemManager {
         Multimap<Attribute, AttributeModifier> attributeModifiers = itemMeta.getAttributeModifiers();
 
         lore.add(ColorFixer.addColors(" "));
-//        switch (armorWeight) {
-//            case HEAVY -> {
-//                lore.add(ColorFixer.addColors("&7ᴛᴀ ᴄɪężᴋᴀ ᴢʙʀᴏᴊᴀ ᴢᴀᴘᴇᴡɴɪᴀ ᴡʏꜱᴏᴋą ᴏʙʀᴏɴę"));
-//            }
-//            case LIGHT -> {
-//                lore.add(ColorFixer.addColors("&7ᴛᴀ ʟᴇᴋᴋᴀ ᴢʙʀᴏᴊᴀ ᴢᴀᴘᴇᴡɴɪᴀ ᴘᴏᴅꜱᴛᴀᴡᴏᴡą ᴏʙʀᴏɴę"));
-//            }
-//            default -> {
-//                lore.add(ColorFixer.addColors("&7ᴛᴀ śʀᴇᴅɴɪᴀ ᴢʙʀᴏᴊᴀ ᴢᴀᴘᴇᴡɴɪᴀ śʀᴇᴅɴɪą ᴏʙʀᴏɴę"));
-//            }
-//        }
-
-//        if(attributeModifiers != null) {
-//            Collection<AttributeModifier> attributeModifiers1 = attributeModifiers.get(Attribute.GENERIC_ARMOR);
-//            attributeModifiers1.forEach(attributeModifier -> {
-//                lore.add(ColorFixer.addColors(" &7&o+" + (int) attributeModifier.getAmount() + " &8pancerza"));
-//            });
-//        }
 
         lore.add(ColorFixer.addColors(" ")); // ⚡☄⚔🗡
         lore.add(ColorFixer.addColors("&7ᴀʙʏ ᴋᴏʀᴢʏꜱᴛᴀć ᴢ ᴛᴇɢᴏ ᴘʀᴢᴇᴅᴍɪᴏᴛᴜ ᴘᴏᴛʀᴢᴇʙᴜᴊᴇꜱᴢ:"));

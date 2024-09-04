@@ -5,6 +5,8 @@ import me.xxgradzix.gradzixcombatsystem.commands.AttributeTestCommand;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.listeners.ArmorBlock;
 import me.xxgradzix.gradzixcombatsystem.listeners.CriticalDamageListener;
+import me.xxgradzix.gradzixcombatsystem.listeners.ShieldBlock;
+import me.xxgradzix.gradzixcombatsystem.listeners.SpearRange;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class GradzixCombatSystem extends JavaPlugin {
@@ -21,8 +23,10 @@ public final class GradzixCombatSystem extends JavaPlugin {
         getCommand("atrybut").setExecutor(new AttributeTestCommand());
 
         getServer().getPluginManager().registerEvents(new ArmorBlock(), this);
-
         getServer().getPluginManager().registerEvents(new CriticalDamageListener(), this);
+        getServer().getPluginManager().registerEvents(new ShieldBlock(), this);
+        getServer().getPluginManager().registerEvents(new SpearRange(), this);
+
         getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
 
     }
