@@ -1,6 +1,7 @@
 package me.xxgradzix.gradzixcombatsystem.managers;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -179,5 +180,11 @@ public class AttributeManager {
         setTotalAttributePoints(player, initialPoints);
         setFreeAttributePointsKey(player, initialPoints);
         updateTimeStamp(player);
+    }
+
+    public static void resetAllAttributes() {
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            resetAttributes(player, 0);
+        }
     }
 }

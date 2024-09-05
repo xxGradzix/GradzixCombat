@@ -17,6 +17,9 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -25,6 +28,10 @@ import static me.xxgradzix.gradzixcombatsystem.managers.MessageManager.getRomanN
 
 
 public class ItemManager {
+
+    /**  ITEMS. **/
+
+    public static ItemStack restartPotion;
 
     /** WEAPONS **/
 
@@ -138,6 +145,9 @@ public class ItemManager {
 
 
     public static void init() {
+
+        createRestartPotion();
+
         for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
 
             for (int tier = 1; tier <= 5; tier++) {
@@ -375,77 +385,29 @@ public class ItemManager {
         return item;
     }
 
-    private static ItemStack createWeaponWithParameters(WeaponType weaponType, int tier) {
+    private static void createRestartPotion() {
 
-        Material material;
-        String displayName;
 
-        switch (weaponType) {
-            case AXE-> {
-                material = Material.IRON_AXE;
-                displayName = ColorFixer.addColors("#3e4040ᴛᴏᴘóʀ ʙᴏᴊᴏᴡʏ");
-            }
-            case SWORD -> {
-                material = Material.IRON_SWORD;
-                displayName = ColorFixer.addColors("#3e4040ᴅᴌᴜɢɪ ᴍɪᴇᴄᴢ");
-            }
-            case JAVELIN -> {
-                material = Material.TRIDENT;
-                displayName = ColorFixer.addColors("#3e4040ᴡᴌóᴄᴢɴɪᴀ");
-            }
-            case BOW -> {
-                material = Material.BOW;
-                displayName = ColorFixer.addColors("#3e4040ᴌᴜ");
-            }
-            case SHIELD -> {
-                material = Material.SHIELD;
-                displayName = ColorFixer.addColors("#3e4040ᴛᴀʀᴄᴢᴀ");
-            }
-            case CROSSBOW -> {
-                material = Material.CROSSBOW;
-                displayName = ColorFixer.addColors("#3e4040ᴡʏꜱᴛʀᴢᴇᴌɴɪᴄᴀ");
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + weaponType);
-        }
+        ItemStack item = new ItemStack(Material.POTION);
 
-        String romeNum = getRomanNumerals(tier);
-        ItemStack item = new ItemStack(material);
+        PotionMeta itemMeta = (PotionMeta) item.getItemMeta();
 
-        int strAttributeRequirement = 0;
-        int dexAttributeRequirement = 0;
-        int another = 0;
-
-        if(dexAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.DEXTERITY, baseMediumArmorEnduranceRequirement + tier);
-        if(strAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.STRENGTH, strAttributeRequirement);
-
-        ArmorTierManager.setAttributesPerWeaponTierAndType(item, weaponType, tier);
-
-        ItemMeta itemMeta = item.getItemMeta();
-
-        itemMeta.setDisplayName(ColorFixer.addColors(displayName + " " + romeNum));
-
-        item.setItemMeta(itemMeta);
+        itemMeta.setBasePotionData(new PotionData(PotionType.AWKWARD));
+        itemMeta.setColor(Color.WHITE);
+        itemMeta.setDisplayName(ColorFixer.addColors("&bᴍɪᴋꜱᴛᴜʀᴀ ᴏᴄᴢʏꜱᴢᴄᴢᴇɴɪᴀ"));
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add(ColorFixer.addColors(" "));
 
-        Multimap<Attribute, AttributeModifier> attributeModifiers = itemMeta.getAttributeModifiers();
-
-        lore.add(ColorFixer.addColors(" "));
-
-        lore.add(ColorFixer.addColors(" ")); // ⚡☄⚔🗡
-        lore.add(ColorFixer.addColors("&7ᴀʙʏ ᴋᴏʀᴢʏꜱᴛᴀć ᴢ ᴛᴇɢᴏ ᴘʀᴢᴇᴅᴍɪᴏᴛᴜ ᴘᴏᴛʀᴢᴇʙᴜᴊᴇꜱᴢ:"));
-        if(strAttributeRequirement > 0) lore.add(ColorFixer.addColors("&cꜱɪᴌᴀ &4⚔:  #a18b3d" + strAttributeRequirement));
-        if(dexAttributeRequirement > 0) lore.add(ColorFixer.addColors("&7ᴡʏᴛʀᴢʏᴍᴀᴌᴏść &8☄:  #a18b3d" + dexAttributeRequirement));
+        lore.add(ColorFixer.addColors("&7ᴛᴀ ᴍɪᴋꜱᴛᴜʀᴀ ᴢᴡʀóᴄɪ ᴡꜱᴢʏꜱᴛᴋɪᴇ ᴘᴜɴᴋᴛʏ ᴀᴛʀʏʙᴜᴛóᴡ ɪ ᴘᴏᴢᴡᴏʟɪ ᴊᴇ ᴘᴏɴᴏᴡɴɪᴇ ʀᴏᴢᴅʏꜱᴘᴏɴᴏᴡᴀć"));
 
         itemMeta.setLore(lore);
 
-        itemMeta.addEnchant(Enchantment.LOYALTY, 1, false);
-
-        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(itemMeta);
 
-        return item;
+        restartPotion = item;
     }
 }

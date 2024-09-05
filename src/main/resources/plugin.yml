@@ -6,4 +6,7 @@ api-version: '1.17'
 commands:
   atrybut:
     description: Pokazuje atrybuty gracza
+
+  atributeItem:
+    description: daje itemki
     permission: gradzixcombatsystem.atrybuty
