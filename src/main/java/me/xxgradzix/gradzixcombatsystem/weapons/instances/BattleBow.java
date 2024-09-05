@@ -1,10 +1,8 @@
 package me.xxgradzix.gradzixcombatsystem.weapons.instances;
 
-import me.xxgradzix.gradzixcombatsystem.managers.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.MelleWeapon;
 import me.xxgradzix.gradzixcombatsystem.weapons.ShootableWeapon;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -61,7 +59,7 @@ public class BattleBow implements CustomWeapon, ShootableWeapon {
     }
 
     @Override
-    public void addEnchantments(int tier, ItemMeta meta) {
+    public void addBukkitEnchantments(int tier, ItemMeta meta) {
         switch (tier) {
             case 1 -> {
                 meta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);

@@ -1,16 +1,12 @@
 package me.xxgradzix.gradzixcombatsystem.weapons.instances;
 
-import me.xxgradzix.gradzixcombatsystem.managers.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.MelleWeapon;
 import org.bukkit.Material;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-
-import static me.xxgradzix.gradzixcombatsystem.managers.MessageManager.getRomanNumerals;
 
 public class BattleShield implements CustomWeapon {
 
@@ -38,7 +34,7 @@ public class BattleShield implements CustomWeapon {
     }
 
     @Override
-    public void addEnchantments(int tier, ItemMeta meta) {
+    public void addBukkitEnchantments(int tier, ItemMeta meta) {
 
     }
 

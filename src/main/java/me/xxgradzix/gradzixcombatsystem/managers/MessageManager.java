@@ -3,6 +3,7 @@ package me.xxgradzix.gradzixcombatsystem.managers;
 
 import eu.okaeri.configs.OkaeriConfig;
 import eu.okaeri.configs.annotation.Comment;
+import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,6 +26,7 @@ public class MessageManager extends OkaeriConfig {
         message = ColorFixer.addColors(message);
         switch (type) {
             case TITLE:
+
                 player.sendTitle(message, null, 5, 30, 5);
                 break;
             case SUBTITLE:

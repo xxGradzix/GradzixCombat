@@ -5,7 +5,6 @@ import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -13,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 public interface CustomWeapon {
+
 
     int getRequiredAttribute(int tier, CombatAttribute attribute);
 
@@ -22,7 +22,7 @@ public interface CustomWeapon {
 
     Material getMaterial(int tier);
 
-    void addEnchantments(int tier, ItemMeta meta);
+    void addBukkitEnchantments(int tier, ItemMeta meta);
 
     default ItemStack getItemStack(int tier) {
         ItemStack itemStack = new ItemStack(getMaterial(tier));
@@ -31,7 +31,7 @@ public interface CustomWeapon {
         setLoreAndName(meta, tier);
         hideAll(meta);
         itemStack.setItemMeta(meta);
-        addEnchantments(tier, meta);
+        addBukkitEnchantments(tier, meta);
         setAttributes(itemStack, tier);
 
         return itemStack;

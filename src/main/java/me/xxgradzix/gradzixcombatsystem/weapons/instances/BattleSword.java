@@ -1,12 +1,10 @@
 package me.xxgradzix.gradzixcombatsystem.weapons.instances;
 
-import me.xxgradzix.gradzixcombatsystem.managers.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
 import me.xxgradzix.gradzixcombatsystem.weapons.MelleWeapon;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -89,7 +87,7 @@ public class BattleSword implements CustomWeapon, MelleWeapon {
     }
 
     @Override
-    public void addEnchantments(int tier, ItemMeta meta) {
+    public void addBukkitEnchantments(int tier, ItemMeta meta) {
 
     }
 

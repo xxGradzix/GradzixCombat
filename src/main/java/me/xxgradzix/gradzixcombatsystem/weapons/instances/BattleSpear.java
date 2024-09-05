@@ -1,6 +1,5 @@
 package me.xxgradzix.gradzixcombatsystem.weapons.instances;
 
-import me.xxgradzix.gradzixcombatsystem.managers.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
@@ -99,7 +98,7 @@ public class BattleSpear implements CustomWeapon, MelleWeapon, ThrowableWeapon {
     }
 
     @Override
-    public void addEnchantments(int tier, ItemMeta meta) {
+    public void addBukkitEnchantments(int tier, ItemMeta meta) {
         meta.addEnchant(Enchantment.LOYALTY, 1, true);
     }
 
