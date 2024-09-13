@@ -52,4 +52,22 @@ public class ColorFixer {
         return res;
     }
 
+    public static String convertColorText(String text) {
+        StringBuilder convertedText = new StringBuilder();
+        String[] parts = text.split("&#");
+
+        for (String part : parts) {
+            if (!part.isEmpty()) {
+                String colorCode = part.substring(0, 6);
+                String letter = part.substring(6);
+
+                ChatColor color = ChatColor.of("#" + colorCode);
+
+                convertedText.append(color).append(letter);
+            }
+        }
+
+        return convertedText.toString();
+    }
+
 }

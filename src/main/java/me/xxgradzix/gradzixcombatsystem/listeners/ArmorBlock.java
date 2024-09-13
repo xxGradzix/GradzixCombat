@@ -1,9 +1,9 @@
 package me.xxgradzix.gradzixcombatsystem.listeners;
 
 import me.xxgradzix.gradzixcombatsystem.armorEvent.ArmorEquipEvent;
-import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageType;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
+import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

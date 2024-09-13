@@ -2,8 +2,10 @@ package me.xxgradzix.gradzixcombatsystem.items;
 
 import com.google.common.collect.Multimap;
 import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
-import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
-import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
+import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
+import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
 import me.xxgradzix.gradzixcombatsystem.weapons.instances.*;
@@ -11,20 +13,19 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-import static me.xxgradzix.gradzixcombatsystem.managers.MessageManager.getRomanNumerals;
+import static me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager.getRomanNumerals;
 
 
 public class ItemManager {
@@ -32,6 +33,7 @@ public class ItemManager {
     /**  ITEMS. **/
 
     public static ItemStack restartPotion;
+    public static ItemStack stoneOfAggression;
 
     /** WEAPONS **/
 
@@ -43,6 +45,60 @@ public class ItemManager {
     private static final BattleSword battleSword = new BattleSword();
 
     // fill these to a map
+
+    public static CustomWeapon getWeaponType(ItemStack itemStack) {
+
+        String weaponCustomId = CustomWeapon.getWeaponCustomId(itemStack);
+
+        if(weaponCustomId == null) return null;
+
+        switch (weaponCustomId){
+            case BattleSword.CUSTOM_ID -> {
+                return battleSword;
+            }
+            case BattleBow.CUSTOM_ID -> {
+                return battleBow;
+            }
+            case BattleCrossBow.CUSTOM_ID -> {
+                return battleCrossBow;
+            }
+            case BattleSpear.CUSTOM_ID -> {
+                return battleSpear;
+            }
+            case BattleShield.CUSTOM_ID -> {
+                return battleShield;
+            }
+            case BattleAxe.CUSTOM_ID -> {
+                return battleAxe;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
+    public static boolean upgradeWeapon(ItemStack itemStack) {
+
+        int newTier = CustomWeapon.getTier(itemStack) + 1;
+
+        if(newTier > 5) return false;
+
+        CustomWeapon customWeapon = getWeaponType(itemStack);
+        if(customWeapon == null) return false;
+
+        ItemStack newItem = customWeapon.getItemStack(newTier);
+
+        ItemMeta newMeta = newItem.getItemMeta();
+
+        EnchantManager.copyEnchantsFromMetaToMeta(itemStack.getItemMeta(), newMeta);
+        ModifiersManager.copyModifiers(itemStack.getItemMeta(), newMeta);
+
+        customWeapon.setLoreAndName(newMeta, newTier);
+
+        itemStack.setItemMeta(newMeta);
+
+        return true;
+    }
 
     private static final Map<WeaponType, CustomWeapon> weapons = Map.ofEntries(
             Map.entry(WeaponType.AXE, battleAxe),
@@ -58,6 +114,7 @@ public class ItemManager {
     private static final int baseLightArmorStrRequirement = 0;
 
     private static final int baseMediumArmorEnduranceRequirement = 3;
+    private static final int baseLightArmorDexRequirement = 0;
 
 
     private static final HashMap<ArmorTierManager.ArmorType, HashMap<Integer, HashMap<ArmorTierManager.ArmorWeight, ItemStack>>> armorsPerTierAndWeight = new HashMap<>();
@@ -122,31 +179,11 @@ public class ItemManager {
         return armorsPerTierAndWeight.getOrDefault(armorType, new HashMap<>()).getOrDefault(tier, new HashMap<>()).get(armorWeight);
     }
 
-    public static List<ItemStack> getAllItems() {
-        List<ItemStack> items = new ArrayList<>();
-        for (HashMap<Integer, HashMap<ArmorTierManager.ArmorWeight, ItemStack>> tierMap : armorsPerTierAndWeight.values()) {
-            for (HashMap<ArmorTierManager.ArmorWeight, ItemStack> weightMap : tierMap.values()) {
-                items.addAll(weightMap.values());
-            }
-        }
-        return items;
-    }
-
-    public static List<ItemStack> getAllItems(ArmorTierManager.ArmorWeight armorWeight) {
-        List<ItemStack> items = new ArrayList<>();
-        for (HashMap<Integer, HashMap<ArmorTierManager.ArmorWeight, ItemStack>> tierMap : armorsPerTierAndWeight.values()) {
-            for (HashMap<ArmorTierManager.ArmorWeight, ItemStack> weightMap : tierMap.values()) {
-                items.add(weightMap.get(armorWeight));
-            }
-        }
-        return items;
-    }
-
-
 
     public static void init() {
 
         createRestartPotion();
+        createAggressionStone();
 
         for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
 
@@ -307,6 +344,7 @@ public class ItemManager {
 
         int strAttributeRequirement = 0;
         int dexAttributeRequirement = 0;
+        int enduranceAttributeRequirement = 0;
         int another = 0;
 
 
@@ -323,11 +361,15 @@ public class ItemManager {
         }
 
 
+        if(armorWeight == ArmorTierManager.ArmorWeight.LIGHT) {
+            dexAttributeRequirement = baseLightArmorDexRequirement + tier;
+        }
         if(armorWeight == ArmorTierManager.ArmorWeight.MEDIUM) {
-            dexAttributeRequirement = baseMediumArmorEnduranceRequirement + tier;
+            enduranceAttributeRequirement = baseMediumArmorEnduranceRequirement + tier;
         }
 
-        if(dexAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.ENDURANCE, baseMediumArmorEnduranceRequirement + tier);
+        if(dexAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.DEXTERITY, dexAttributeRequirement);
+        if(enduranceAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.ENDURANCE, enduranceAttributeRequirement);
         if(strAttributeRequirement > 0) AttributeManager.setAttributeRequirement(item, CombatAttribute.STRENGTH, strAttributeRequirement);
 
         ArmorTierManager.setAttributesPerTierAndWeight(item, armorType, armorWeight, tier);
@@ -378,7 +420,6 @@ public class ItemManager {
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
         itemMeta.addItemFlags(ItemFlag.HIDE_DESTROYS);
-        itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         item.setItemMeta(itemMeta);
 
@@ -392,7 +433,7 @@ public class ItemManager {
 
         PotionMeta itemMeta = (PotionMeta) item.getItemMeta();
 
-        itemMeta.setBasePotionData(new PotionData(PotionType.AWKWARD));
+        itemMeta.setBasePotionType(PotionType.AWKWARD);
         itemMeta.setColor(Color.WHITE);
         itemMeta.setDisplayName(ColorFixer.addColors("&bᴍɪᴋꜱᴛᴜʀᴀ ᴏᴄᴢʏꜱᴢᴄᴢᴇɴɪᴀ"));
 
@@ -403,11 +444,37 @@ public class ItemManager {
 
         itemMeta.setLore(lore);
 
-        itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+
         item.setItemMeta(itemMeta);
 
         restartPotion = item;
     }
+
+    private static void createAggressionStone() {
+
+
+        ItemStack item = new ItemStack(Material.FIREWORK_STAR);
+
+        ItemMeta itemMeta = item.getItemMeta();
+
+        itemMeta.setDisplayName(ColorFixer.addColors("&4ᴋᴀᴍɪᴇɴɪᴇ ᴀɢʀᴇꜱᴊɪ"));
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ColorFixer.addColors(" "));
+
+//        lore.add(ColorFixer.addColors("&7ᴛᴀ ᴍɪᴋꜱᴛᴜʀᴀ ᴢᴡʀóᴄɪ ᴡꜱᴢʏꜱᴛᴋɪᴇ ᴘᴜɴᴋᴛʏ ᴀᴛʀʏʙᴜᴛóᴡ ɪ ᴘᴏᴢᴡᴏʟɪ ᴊᴇ ᴘᴏɴᴏᴡɴɪᴇ ʀᴏᴢᴅʏꜱᴘᴏɴᴏᴡᴀć"));
+
+        itemMeta.setLore(lore);
+
+        itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        item.setItemMeta(itemMeta);
+
+        stoneOfAggression = item;
+    }
+
+
 }

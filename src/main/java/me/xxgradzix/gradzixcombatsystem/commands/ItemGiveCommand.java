@@ -1,16 +1,7 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
-import dev.triumphteam.gui.guis.Gui;
-import dev.triumphteam.gui.guis.GuiItem;
-import dev.triumphteam.gui.guis.StorageGui;
 import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
-import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
-import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageType;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -48,16 +39,11 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
             itemCategory = strings[1];
         }
 
-        StorageGui gui = Gui.storage()
-                .rows(6)
-                .title(Component.text(itemCategory + " " + itemVariant + " " + tier))
-                .create();
         if(itemCategory.equalsIgnoreCase("armor")) {
             ArmorTierManager.ArmorWeight armorWeight;
             try {
                 armorWeight = ArmorTierManager.ArmorWeight.valueOf(itemVariant.toUpperCase());
             } catch (IllegalArgumentException e) {
-                throw new RuntimeException(e);
                 player.sendMessage(" nie poprawna wartość: " + itemVariant);
                 return true;
             }
@@ -72,6 +58,7 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
             ItemStack weapon = ItemManager.getWeapon(weaponType, tier);
             player.getInventory().addItem(weapon);
         }
+
 
         return false;
     }

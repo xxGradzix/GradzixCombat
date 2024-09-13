@@ -1,7 +1,7 @@
 package me.xxgradzix.gradzixcombatsystem.listeners;
 
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
-import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

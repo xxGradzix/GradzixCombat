@@ -1,15 +1,22 @@
 package me.xxgradzix.gradzixcombatsystem.weapons.instances;
 
-import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
+import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
+import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
 import org.bukkit.Material;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 
 public class BattleShield implements CustomWeapon {
+    public static final String CUSTOM_ID = "gradzixcombat_battle_shield";
 
+    @Override
+    public void setWeaponCustomId(ItemMeta meta) {
+        meta.getPersistentDataContainer().set(weaponCustomIdKey, PersistentDataType.STRING, CUSTOM_ID);
+    }
     @Override
     public int getRequiredAttribute(int tier, CombatAttribute attribute) {
 
@@ -20,7 +27,7 @@ public class BattleShield implements CustomWeapon {
 
     @Override
     public String getName(int tier) {
-        return ColorFixer.addColors("#3e4040ᴛᴀʀᴄᴢᴀ");
+        return ColorFixer.addColors("ᴛᴀʀᴄᴢᴀ ");
     }
 
     @Override
@@ -38,19 +45,4 @@ public class BattleShield implements CustomWeapon {
 
     }
 
-    @Override
-    public void setLoreAndName(ItemMeta meta, int tier) {
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(" ");
-        lore.add(me.xxgradzix.gradzixcombatsystem.utils.ColorFixer.addColors("&7ᴀʙʏ ᴋᴏʀᴢʏꜱᴛᴀć ᴢ ᴛᴇɢᴏ ᴘʀᴢᴇᴅᴍɪᴏᴛᴜ ᴘᴏᴛʀᴢᴇʙᴜᴊᴇꜱᴢ:"));
-        for (CombatAttribute combatAttribute : CombatAttribute.values()) {
-            int requiredAttribute = getRequiredAttribute(tier, combatAttribute);
-            if(requiredAttribute != 0) {
-                lore.add(me.xxgradzix.gradzixcombatsystem.utils.ColorFixer.addColors(MessageManager.getAttributeFormatedName(combatAttribute, requiredAttribute)));
-            }
-        }
-        meta.setLore(lore);
-        meta.setDisplayName(getName(tier));
-
-    }
 }

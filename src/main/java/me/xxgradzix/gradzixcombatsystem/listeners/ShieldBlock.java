@@ -1,8 +1,8 @@
 package me.xxgradzix.gradzixcombatsystem.listeners;
 
-import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageType;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
+import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageType;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 public class ShieldBlock implements Listener {
@@ -40,8 +39,10 @@ public class ShieldBlock implements Listener {
         if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             ItemStack item = event.getItem();
 
+            if(item == null) return;
+
             Player player = event.getPlayer();
-            if(item.getType().equals(Material.SHIELD)) {
+            if(Material.SHIELD.equals(item.getType())) {
                 if(!AttributeManager.hasRequiredAttribute(item, event.getPlayer())) {
                     player.setShieldBlockingDelay(99999);
                     MessageManager.sendMessageFormated(player, MessageManager.BLOCKING_UNSUCCESSFUL, MessageType.SUBTITLE);

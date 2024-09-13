@@ -1,7 +1,7 @@
 name: GradzixCombatSystem
 version: '${project.version}'
 main: me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem
-api-version: '1.17'
+api-version: '1.21'
 
 commands:
   atrybut:
@@ -9,4 +9,8 @@ commands:
 
   atributeItem:
     description: daje itemki
+    permission: gradzixcombatsystem.atrybuty
+
+  upgradeItem:
+    description: ulepsza itemki
     permission: gradzixcombatsystem.atrybuty

@@ -1,4 +1,4 @@
-package me.xxgradzix.gradzixcombatsystem.managers;
+package me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import org.bukkit.Bukkit;

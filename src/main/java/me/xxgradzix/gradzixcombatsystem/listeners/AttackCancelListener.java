@@ -1,15 +1,13 @@
 package me.xxgradzix.gradzixcombatsystem.listeners;
 
-import me.xxgradzix.gradzixcombatsystem.managers.AttributeManager;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageType;
-import org.bukkit.Material;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
+import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageType;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 

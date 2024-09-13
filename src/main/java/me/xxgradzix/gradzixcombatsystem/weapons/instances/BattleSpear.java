@@ -1,33 +1,43 @@
 package me.xxgradzix.gradzixcombatsystem.weapons.instances;
 
-import me.xxgradzix.gradzixcombatsystem.managers.CombatAttribute;
-import me.xxgradzix.gradzixcombatsystem.managers.MessageManager;
-import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.MelleWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.ThrowableWeapon;
+import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
+import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
+import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
+import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
+import me.xxgradzix.gradzixcombatsystem.weapons.*;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.Set;
 
-import static me.xxgradzix.gradzixcombatsystem.managers.MessageManager.getRomanNumerals;
+import static me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager.getRomanNumerals;
 
-public class BattleSpear implements CustomWeapon, MelleWeapon, ThrowableWeapon {
+public class BattleSpear implements CustomWeapon, MelleWeapon, ThrowableWeapon, EnchantableWeapon, ModifiableWeapon, RangeChangeWeapon {
 
+    public static final String CUSTOM_ID = "gradzixcombat_battle_spear";
+
+    @Override
+    public void setWeaponCustomId(ItemMeta meta) {
+        meta.getPersistentDataContainer().set(weaponCustomIdKey, PersistentDataType.STRING, CUSTOM_ID);
+    }
     @Override
     public double getAttackDamage(int tier) {
         switch (tier) {
             case 1:
-                return 6;
+                return 4;
             case 2:
-                return 7;
+                return 5;
             case 3:
-                return 8;
+                return 6;
             case 4:
-                return 8;
+                return 7;
             case 5:
-                return 9;
+                return 8;
             default:
                 return 0;
         }
@@ -84,7 +94,7 @@ public class BattleSpear implements CustomWeapon, MelleWeapon, ThrowableWeapon {
 
     @Override
     public String getName(int tier) {
-        return ColorFixer.addColors("#3e4040ᴡᴌóᴄᴢɴɪᴀ" + getRomanNumerals(tier));
+        return ColorFixer.addColors("ᴡᴌóᴄᴢɴɪᴀ " + getRomanNumerals(tier));
     }
 
     @Override
@@ -103,21 +113,22 @@ public class BattleSpear implements CustomWeapon, MelleWeapon, ThrowableWeapon {
     }
 
     @Override
-    public void setLoreAndName(ItemMeta meta, int tier) {
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(" ");
-        lore.add(MessageManager.weaponDamageWithWords(getAttackDamage(tier)));
-        lore.add(MessageManager.weaponSpeedWithWords(getAttackSpeed(tier)));
-        lore.add(" ");
-        lore.add(me.xxgradzix.gradzixcombatsystem.utils.ColorFixer.addColors("&7ᴀʙʏ ᴋᴏʀᴢʏꜱᴛᴀć ᴢ ᴛᴇɢᴏ ᴘʀᴢᴇᴅᴍɪᴏᴛᴜ ᴘᴏᴛʀᴢᴇʙᴜᴊᴇꜱᴢ:"));
-        for (CombatAttribute combatAttribute : CombatAttribute.values()) {
-            int requiredAttribute = getRequiredAttribute(tier, combatAttribute);
-            if(requiredAttribute != 0) {
-                lore.add(me.xxgradzix.gradzixcombatsystem.utils.ColorFixer.addColors(MessageManager.getAttributeFormatedName(combatAttribute, requiredAttribute)));
-            }
-        }
-        meta.setLore(lore);
-        meta.setDisplayName(getName(tier));
+    public void setEnchantSlots(ItemStack itemStack, int tier) {
+        if(tier >= 3) EnchantManager.setMaxSlots(itemStack, 1);
+    }
 
+    @Override
+    public Set<EnchantManager.Enchant> getApplicableEnchants(int tier) {
+        return Set.of(EnchantManager.Enchant.LIFE_STEAL, EnchantManager.Enchant.FREEZE, EnchantManager.Enchant.ATTACK_COMBO);
+    }
+
+    @Override
+    public Set<Class> getApplicableModifications() {
+        return Set.of(ModifiersManager.MelleModifier.class, ModifiersManager.UniversalModifier.class, ModifiersManager.CommonModifier.class);
+    }
+
+    @Override
+    public double getRange(int tier) {
+        return 1;
     }
 }

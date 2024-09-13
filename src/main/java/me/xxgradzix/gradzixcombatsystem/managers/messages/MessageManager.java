@@ -1,8 +1,9 @@
-package me.xxgradzix.gradzixcombatsystem.managers;
+package me.xxgradzix.gradzixcombatsystem.managers.messages;
 
 
 import eu.okaeri.configs.OkaeriConfig;
 import eu.okaeri.configs.annotation.Comment;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -33,7 +34,7 @@ public class MessageManager extends OkaeriConfig {
                 player.sendTitle(null, message, 5, 30, 5);
                 break;
             case ACTIONBAR:
-                player.sendActionBar(TextComponent.fromLegacyText(message));
+                player.sendMessage(TextComponent.fromLegacyText(message));
                 break;
             case CHAT:
                 player.sendMessage(message);

@@ -3,11 +3,12 @@ package me.xxgradzix.gradzixcombatsystem;
 import me.xxgradzix.gradzixcombatsystem.armorEvent.ArmorListener;
 import me.xxgradzix.gradzixcombatsystem.commands.AttributeCommand;
 import me.xxgradzix.gradzixcombatsystem.commands.ItemGiveCommand;
+import me.xxgradzix.gradzixcombatsystem.commands.ItemUpgradeGuiCommand;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
-import me.xxgradzix.gradzixcombatsystem.listeners.ArmorBlock;
-import me.xxgradzix.gradzixcombatsystem.listeners.AttackCancelListener;
-import me.xxgradzix.gradzixcombatsystem.listeners.RestartPotionDrink;
-import me.xxgradzix.gradzixcombatsystem.listeners.ShieldBlock;
+import me.xxgradzix.gradzixcombatsystem.listeners.*;
+import me.xxgradzix.gradzixcombatsystem.listeners.enchants.AttackComboListener;
+import me.xxgradzix.gradzixcombatsystem.listeners.enchants.FreezeAttackListener;
+import me.xxgradzix.gradzixcombatsystem.listeners.enchants.LifeStealAttackListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class GradzixCombatSystem extends JavaPlugin {
@@ -23,13 +24,22 @@ public final class GradzixCombatSystem extends JavaPlugin {
 
         getCommand("atrybut").setExecutor(new AttributeCommand());
         getCommand("atributeItem").setExecutor(new ItemGiveCommand());
+        getCommand("upgradeItem").setExecutor(new ItemUpgradeGuiCommand());
 
         getServer().getPluginManager().registerEvents(new ArmorBlock(), this);
         getServer().getPluginManager().registerEvents(new AttackCancelListener(), this);
         getServer().getPluginManager().registerEvents(new ShieldBlock(), this);
         getServer().getPluginManager().registerEvents(new RestartPotionDrink(), this);
+        getServer().getPluginManager().registerEvents(new StoneOFAggressionUse(), this);
+        getServer().getPluginManager().registerEvents(new AttackRangeListener(), this);
+        getServer().getPluginManager().registerEvents(new KnockBackListener(), this);
+
+        getServer().getPluginManager().registerEvents(new FreezeAttackListener(), this);
+        getServer().getPluginManager().registerEvents(new AttackComboListener(), this);
+        getServer().getPluginManager().registerEvents(new LifeStealAttackListener(), this);
 
         getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
+
 
     }
 
