@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerAnimationType;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
@@ -69,10 +70,6 @@ public class AttackRangeListener implements Listener {
 //
 //    }
 //
-//    @EventHandler
-//    public void dadd(PlayerInteractEvent e) {
-//        Bukkit.broadcastMessage("ATT " + e.getAction().name());
-//    }
 //
 //    @EventHandler
 //    public void dadadadd(PlayerInteractEvent e) {

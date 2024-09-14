@@ -30,7 +30,9 @@ public interface CustomWeapon {
     NamespacedKey BONUS_ATTACK_RANGE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_bonus_weapon_range");
 
     static String getWeaponCustomId(ItemStack itemStack) {
+        if(itemStack == null) return null;
         ItemMeta meta = itemStack.getItemMeta();
+        if(meta == null) return null;
         return meta.getPersistentDataContainer().get(weaponCustomIdKey, PersistentDataType.STRING);
     }
 

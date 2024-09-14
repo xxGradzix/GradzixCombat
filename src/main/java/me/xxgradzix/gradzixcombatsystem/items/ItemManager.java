@@ -9,6 +9,7 @@ import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManag
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
 import me.xxgradzix.gradzixcombatsystem.weapons.instances.*;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -476,12 +477,12 @@ public class ItemManager {
         stoneOfAggression = item;
     }
 
-    public static ItemStack createReforgeItem(int price) {
+    public static ItemStack createReforgeItem(int price, String quality, ArrayList<String> modifierLore) {
         ItemStack item = new ItemStack(Material.MAP);
 
         ItemMeta itemMeta = item.getItemMeta();
 
-        itemMeta.setCustomModelData(1010);
+//        itemMeta.setCustomModelData(1010);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
@@ -495,12 +496,31 @@ public class ItemManager {
         ArrayList<String> lore = new ArrayList<>();
 
         if(price > 0) {
+
+            lore.add(ColorFixer.addColors("&7ᴏʙᴇᴄɴʏ ᴍᴏᴅʏꜰɪᴋᴀᴛᴏʀ: " + quality));
+            lore.addAll(modifierLore);
+
+            lore.add(ColorFixer.addColors(" "));
             lore.add(ColorFixer.addColors("&7ᴄᴇɴᴀ: &b" + price + " ᴍᴏɴᴇᴛ"));
         } else {
             lore.add(ColorFixer.addColors("&7ᴘᴏᴌóż ᴘʀᴢᴇᴅᴍɪᴏᴛ ᴡ ᴘᴏʟᴜ ᴀʙʏ ᴘʀᴢᴇᴋᴜć"));
         }
 
         itemMeta.setLore(lore);
+        item.setItemMeta(itemMeta);
+        return item;
+    }
+
+    public static ItemStack testItem(boolean visible) {
+        ItemStack item = new ItemStack(Material.MAP);
+
+
+        ItemMeta itemMeta = item.getItemMeta();
+        if(!visible) {
+            itemMeta.setCustomModelData(1010);
+        }
+        itemMeta.setLore(null);
+        itemMeta.setDisplayName(ChatColor.RESET + "");
         item.setItemMeta(itemMeta);
         return item;
     }

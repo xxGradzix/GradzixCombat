@@ -292,7 +292,7 @@ public class ModifiersManager {
             put(Multiplier.KNOCK_BACK_MULTIPLIER, 0.9);
         }})),
 
-        TERRIBLE(new ModifierRecord("#857d71ᴏᴋʀᴏᴘɴʏ", new HashMap<>() {{
+        TERRIBLE(new ModifierRecord(ColorFixer.addColors("#857d71ᴏᴋʀᴏᴘɴʏ"), new HashMap<>() {{
             put(Multiplier.RANGE_MULTIPLIER, 0.87);
             put(Multiplier.DAMAGE_MULTIPLIER, 0.9);
             put(Multiplier.ATTACK_SPEED_MULTIPLIER, 0.9);
@@ -321,7 +321,16 @@ public class ModifiersManager {
 
         switch (multiplier) {
             case RANGE_MULTIPLIER -> {
-                return itemMeta.getPersistentDataContainer().getOrDefault(RANGE_MULTIPLIER_KEY, PersistentDataType.DOUBLE, 1.0);
+                if(!itemMeta.hasAttributeModifiers()) return 1;
+                Collection<AttributeModifier> attributeModifiers = itemMeta.getAttributeModifiers(Attribute.PLAYER_ENTITY_INTERACTION_RANGE);
+                if(attributeModifiers == null) return 1;
+
+                for (AttributeModifier attributeModifier : attributeModifiers) {
+                    if(AttributeModifier.Operation.MULTIPLY_SCALAR_1.equals(attributeModifier.getOperation())) {
+                        return attributeModifier.getAmount() + 1;
+                    }
+                }
+                return 1;
             }
             case DAMAGE_MULTIPLIER -> {
 
@@ -491,7 +500,8 @@ public class ModifiersManager {
     public static void setModifier(ItemMeta itemMeta, Modifier modifier) {
 
         itemMeta.getPersistentDataContainer().set(MODIFIER_NAME, PersistentDataType.STRING, modifier.getModifier().name());
-        setReforgePrice(itemMeta, getRandomPrice());
+        int randomPrice = getRandomPrice();
+        setReforgePrice(itemMeta, randomPrice);
 
         for (Multiplier multiplier : Multiplier.values()) {
             removeMultiplier(itemMeta, multiplier);

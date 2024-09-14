@@ -38,6 +38,7 @@ me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$Comm
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$MelleModifier$2.class
 me\xxgradzix\gradzixcombatsystem\GradzixCombatSystem.class
 me\xxgradzix\gradzixcombatsystem\listeners\ArmorBlock.class
+me\xxgradzix\gradzixcombatsystem\commands\OpenReforgeGuiCommand.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$RangeModifier.class
 me\xxgradzix\gradzixcombatsystem\ArmorTierManager.class
 me\xxgradzix\gradzixcombatsystem\weapons\ModifiableWeapon.class
@@ -80,6 +81,7 @@ me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$Univ
 me\xxgradzix\gradzixcombatsystem\listeners\enchants\LifeStealAttackListener.class
 me\xxgradzix\gradzixcombatsystem\weapons\ThrowableWeapon.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$CommonModifier$6.class
+me\xxgradzix\gradzixcombatsystem\upgradeGuis\ReforgeGuiManager.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$MelleModifier$1.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$CommonModifier$9.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$RangeModifier$2.class
