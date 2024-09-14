@@ -25,6 +25,8 @@ public class ModifiersManager {
     private static final NamespacedKey DAMAGE_MULTIPLIER_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_damage_multiplier");
     private static final NamespacedKey SPEED_MULTIPLIER_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_speed_multiplier");
 
+    private static final NamespacedKey REFORGE_PRICE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_reforge_price");
+
 
     private static final NamespacedKey KNOCK_BACK_MULTIPLIER_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_knockback_multiplier");
     private static final NamespacedKey CRIT_CHANCE_MULTIPLIER_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_crit_chance_multiplier");
@@ -489,6 +491,7 @@ public class ModifiersManager {
     public static void setModifier(ItemMeta itemMeta, Modifier modifier) {
 
         itemMeta.getPersistentDataContainer().set(MODIFIER_NAME, PersistentDataType.STRING, modifier.getModifier().name());
+        setReforgePrice(itemMeta, getRandomPrice());
 
         for (Multiplier multiplier : Multiplier.values()) {
             removeMultiplier(itemMeta, multiplier);
@@ -558,6 +561,31 @@ public class ModifiersManager {
         ItemMeta toMeta = to.getItemMeta();
         copyModifiers(fromMeta, toMeta);
         to.setItemMeta(toMeta);
+    }
+
+
+    public static int getReforgePrice(ItemMeta itemMeta) {
+        return itemMeta.getPersistentDataContainer().getOrDefault(REFORGE_PRICE_KEY, PersistentDataType.INTEGER, 10);
+    }
+
+    public static int getReforgePrice(ItemStack itemStack) {
+        if(itemStack == null) return 0;
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        return getReforgePrice(itemMeta);
+    }
+
+    public static void setReforgePrice(ItemMeta itemMeta, int price) {
+        itemMeta.getPersistentDataContainer().set(REFORGE_PRICE_KEY, PersistentDataType.INTEGER, price);
+    }
+    public static void setReforgePrice(ItemStack itemStack, int price) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        setReforgePrice(itemMeta, price);
+        itemStack.setItemMeta(itemMeta);
+    }
+
+    private static int getRandomPrice() {
+        Random random = new Random();
+        return random.nextInt(15, 50);
     }
 
 

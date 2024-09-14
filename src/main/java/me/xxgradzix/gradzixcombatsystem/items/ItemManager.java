@@ -476,5 +476,34 @@ public class ItemManager {
         stoneOfAggression = item;
     }
 
+    public static ItemStack createReforgeItem(int price) {
+        ItemStack item = new ItemStack(Material.MAP);
+
+        ItemMeta itemMeta = item.getItemMeta();
+
+        itemMeta.setCustomModelData(1010);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        itemMeta.addItemFlags(ItemFlag.HIDE_DESTROYS);
+        itemMeta.addItemFlags(ItemFlag.HIDE_PLACED_ON);
+        itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+
+        itemMeta.setDisplayName(ColorFixer.addColors("&7ᴘʀᴢᴇᴋᴜᴊ"));
+
+        ArrayList<String> lore = new ArrayList<>();
+
+        if(price > 0) {
+            lore.add(ColorFixer.addColors("&7ᴄᴇɴᴀ: &b" + price + " ᴍᴏɴᴇᴛ"));
+        } else {
+            lore.add(ColorFixer.addColors("&7ᴘᴏᴌóż ᴘʀᴢᴇᴅᴍɪᴏᴛ ᴡ ᴘᴏʟᴜ ᴀʙʏ ᴘʀᴢᴇᴋᴜć"));
+        }
+
+        itemMeta.setLore(lore);
+        item.setItemMeta(itemMeta);
+        return item;
+    }
+
 
 }
