@@ -1,10 +1,7 @@
 package me.xxgradzix.gradzixcombatsystem;
 
 import me.xxgradzix.gradzixcombatsystem.armorEvent.ArmorListener;
-import me.xxgradzix.gradzixcombatsystem.commands.AttributeCommand;
-import me.xxgradzix.gradzixcombatsystem.commands.ItemGiveCommand;
-import me.xxgradzix.gradzixcombatsystem.commands.ItemUpgradeGuiCommand;
-import me.xxgradzix.gradzixcombatsystem.commands.OpenReforgeGuiCommand;
+import me.xxgradzix.gradzixcombatsystem.commands.*;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.listeners.*;
 import me.xxgradzix.gradzixcombatsystem.listeners.enchants.AttackComboListener;
@@ -27,6 +24,7 @@ public final class GradzixCombatSystem extends JavaPlugin {
         getCommand("atributeItem").setExecutor(new ItemGiveCommand());
         getCommand("upgradeItem").setExecutor(new ItemUpgradeGuiCommand());
         getCommand("openReforgeGui").setExecutor(new OpenReforgeGuiCommand());
+        getCommand("openUpgradeGui").setExecutor(new OpenUpgradeGuiCommand());
 
         getServer().getPluginManager().registerEvents(new ArmorBlock(), this);
         getServer().getPluginManager().registerEvents(new AttackCancelListener(), this);

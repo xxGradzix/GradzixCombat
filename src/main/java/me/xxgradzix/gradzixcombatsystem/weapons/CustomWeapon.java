@@ -112,53 +112,25 @@ public interface CustomWeapon {
         meta.addItemFlags(ItemFlag.HIDE_DYE);
     }
 
-//    default void setMetaPerTier(ItemStack itemStack, int tier) {
-//        ItemMeta meta = itemStack.getItemMeta();
-//        meta.setCustomModelData(getModelData(tier));
-//        setWeaponCustomId(meta);
-//        setLoreAndName(meta, tier);
-//        hideAll(meta);
-//        itemStack.setItemMeta(meta);
-//        addBukkitEnchantments(tier, meta);
-//        setAttributes(itemStack, tier);
-//        if(this instanceof EnchantableWeapon enchantableWeapon) {
-//            enchantableWeapon.setEnchantSlots(itemStack, tier);
-//        }
-//
-//    }
-
     default void setLoreAndName(ItemMeta meta, int tier) {
-//        ArrayList<String> lore = new ArrayList<>();
-//        lore.add(" ");
-//        lore.add(ColorFixer.addColors("&7ᴀʙʏ ᴋᴏʀᴢʏꜱᴛᴀć ᴢ ᴛᴇɢᴏ ᴘʀᴢᴇᴅᴍɪᴏᴛᴜ ᴘᴏᴛʀᴢᴇʙᴜᴊᴇꜱᴢ:"));
-//        for (CombatAttribute combatAttribute : CombatAttribute.values()) {
-//            int requiredAttribute = getRequiredAttribute(tier, combatAttribute);
-//            if(requiredAttribute != 0) {
-//                lore.add(ColorFixer.addColors(MessageManager.getAttributeFormatedName(combatAttribute, requiredAttribute)));
-//            }
-//        }
-//        meta.setLore(lore);
-//        meta.setDisplayName(getName(tier));
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
+
         if(this instanceof MelleWeapon melleWeapon) {
             lore.add(MessageManager.weaponDamageWithWords(melleWeapon.getAttackDamage(tier)));
             lore.add(MessageManager.weaponSpeedWithWords(melleWeapon.getAttackSpeed(tier)));
         }
+
         String qualityName = "";
+
         if(this instanceof ModifiableWeapon modifiableWeapon) {
             qualityName = modifiableWeapon.getQualityName(meta);
             lore.addAll(modifiableWeapon.getQualityLore(meta));
         }
-        lore.add(" ");
-        lore.add(ColorFixer.addColors("&7ᴀʙʏ ᴋᴏʀᴢʏꜱᴛᴀć ᴢ ᴛᴇɢᴏ ᴘʀᴢᴇᴅᴍɪᴏᴛᴜ ᴘᴏᴛʀᴢᴇʙᴜᴊᴇꜱᴢ:"));
-        for (CombatAttribute combatAttribute : CombatAttribute.values()) {
-            int requiredAttribute = getRequiredAttribute(tier, combatAttribute);
-            if(requiredAttribute > 0) {
-                lore.add(ColorFixer.addColors(MessageManager.getAttributeFormatedName(combatAttribute, requiredAttribute)));
-            }
-        }
+
+        lore.addAll(AttributeManager.getRequirementLore(meta));
+
         if(this instanceof EnchantableWeapon enchantableWeapon) {
             lore.addAll(enchantableWeapon.getEnchantLore(meta));
         }

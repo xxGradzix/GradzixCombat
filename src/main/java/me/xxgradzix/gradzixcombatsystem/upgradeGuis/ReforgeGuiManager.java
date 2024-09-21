@@ -7,6 +7,8 @@ import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
+import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
+import me.xxgradzix.gradzixcombatsystem.weapons.ModifiableWeapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -24,7 +26,7 @@ public class ReforgeGuiManager {
 
     public static void openReforgeGui(Player player, double priceModifier) {
 
-        Gui gui = new Gui(3, "Reforge");
+        Gui gui = new Gui(3, ColorFixer.addColors("&f七七七七七七七七≅"));
 
         gui.setDragAction(event -> event.setCancelled(true));
         gui.disableItemSwap();
@@ -94,8 +96,11 @@ public class ReforgeGuiManager {
 
             guiItem.setAction(event -> {
                 event.setCancelled(true);
-                ModifiersManager.applyRandomModifier(reforgeItem);
-                ((Player) event.getWhoClicked()).playSound(event.getWhoClicked(), Sound.BLOCK_ANVIL_USE, 1.0f, 1.0f);
+                CustomWeapon weaponType = ItemManager.getWeaponType(reforgeItem);
+                if(weaponType instanceof ModifiableWeapon) {
+                    ModifiersManager.applyRandomModifier(reforgeItem);
+                    ((Player) event.getWhoClicked()).playSound(event.getWhoClicked(), Sound.BLOCK_ANVIL_USE, 1.0f, 1.0f);
+                }
                 updateGuiItem(gui, priceModifier);
             });
             gui.updateItem(15, guiItem);

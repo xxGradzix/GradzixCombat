@@ -30,6 +30,15 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
 
         String itemVariant = "medium";
 
+
+//        ItemManager.getLightArmor(player, 1);
+//        ItemManager.getLightArmor(player, 2);
+//        ItemManager.getLightArmor(player, 3);
+//        ItemManager.getLightArmor(player, 4);
+//        ItemManager.getLightArmor(player, 5);
+
+
+
         if(strings.length == 3) {
             tier = Integer.parseInt(strings[0]);
             itemCategory = strings[1];
@@ -48,10 +57,21 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
 
-            for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
-                ItemStack armorPiece = ItemManager.getArmorPiece(armorType, tier, armorWeight);
-                player.getInventory().addItem(armorPiece);
+            switch (armorWeight) {
+                case LIGHT -> {
+                    ItemManager.getLightArmor(player, tier);
+                }
+                case MEDIUM -> {
+                    ItemManager.getMediumArmor(player, tier);
+                }
+                case HEAVY -> {
+                    ItemManager.getHeavyArmor(player, tier);
+                }
             }
+//            for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
+//                ItemStack armorPiece = ItemManager.getArmorPiece(armorType, tier, armorWeight);
+//                player.getInventory().addItem(armorPiece);
+//            }
 
         } else if(itemCategory.equalsIgnoreCase("weapon")) {
             ItemManager.WeaponType weaponType = ItemManager.WeaponType.valueOf(itemVariant.toUpperCase());

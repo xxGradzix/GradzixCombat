@@ -1,5 +1,6 @@
 me\xxgradzix\gradzixcombatsystem\managers\EnchantManager\EnchantDto.class
 me\xxgradzix\gradzixcombatsystem\weapons\MelleWeapon.class
+me\xxgradzix\gradzixcombatsystem\armors\CustomArmor.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$RangeModifier$3.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$RangeModifier$12.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$CommonModifier$7.class
@@ -23,6 +24,7 @@ me\xxgradzix\gradzixcombatsystem\managers\EnchantManager\EnchantManager.class
 me\xxgradzix\gradzixcombatsystem\listeners\StoneOFAggressionUse.class
 me\xxgradzix\gradzixcombatsystem\listeners\AttackRangeListener.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$UniversalModifier$13.class
+me\xxgradzix\gradzixcombatsystem\armors\instances\HeavyArmor$1.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$MelleModifier$8.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$Modifier.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$UniversalModifier$3.class
@@ -42,13 +44,16 @@ me\xxgradzix\gradzixcombatsystem\commands\OpenReforgeGuiCommand.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$RangeModifier.class
 me\xxgradzix\gradzixcombatsystem\ArmorTierManager.class
 me\xxgradzix\gradzixcombatsystem\weapons\ModifiableWeapon.class
+me\xxgradzix\gradzixcombatsystem\commands\ItemGiveCommand$1.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$RangeModifier$4.class
+me\xxgradzix\gradzixcombatsystem\armors\instances\MediumArmor.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$UniversalModifier$2.class
 me\xxgradzix\gradzixcombatsystem\managers\attributesMainManager\AttributeManager.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$CommonModifier$1.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$MelleModifier$9.class
 me\xxgradzix\gradzixcombatsystem\managers\EnchantManager\EnchantManager$Enchant.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$MelleModifier$12.class
+me\xxgradzix\gradzixcombatsystem\armors\instances\HeavyArmor.class
 me\xxgradzix\gradzixcombatsystem\managers\EnchantManager\EnchantPersistentDataType.class
 me\xxgradzix\gradzixcombatsystem\commands\AttributeCommand.class
 me\xxgradzix\gradzixcombatsystem\managers\attributesMainManager\CombatAttribute.class
@@ -57,6 +62,7 @@ me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$Univ
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$MelleModifier$3.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$RangeModifier$11.class
 me\xxgradzix\gradzixcombatsystem\weapons\instances\BattleSword.class
+me\xxgradzix\gradzixcombatsystem\commands\OpenUpgradeGuiCommand.class
 me\xxgradzix\gradzixcombatsystem\armorEvent\ArmorType.class
 me\xxgradzix\gradzixcombatsystem\weapons\EnchantableWeapon.class
 me\xxgradzix\gradzixcombatsystem\weapons\instances\BattleAxe.class
@@ -67,6 +73,7 @@ me\xxgradzix\gradzixcombatsystem\weapons\instances\BattleShield.class
 me\xxgradzix\gradzixcombatsystem\armorEvent\ArmorEquipEvent.class
 me\xxgradzix\gradzixcombatsystem\items\ItemManager$WeaponType.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$UniversalModifier$5.class
+me\xxgradzix\gradzixcombatsystem\armors\instances\MediumArmor$1.class
 me\xxgradzix\gradzixcombatsystem\items\ItemManager$1.class
 me\xxgradzix\gradzixcombatsystem\listeners\KnockBackListener.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$CommonModifier$3.class
@@ -90,6 +97,8 @@ me\xxgradzix\gradzixcombatsystem\managers\messages\MessageManager$1.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$MelleModifier.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$MelleModifier$5.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$CommonModifier$5.class
+me\xxgradzix\gradzixcombatsystem\armors\instances\LightArmor$1.class
+me\xxgradzix\gradzixcombatsystem\upgradeGuis\UpgradeGuiManager.class
 me\xxgradzix\gradzixcombatsystem\weapons\RangeChangeWeapon.class
 me\xxgradzix\gradzixcombatsystem\armorEvent\ArmorEquipEvent$EquipMethod.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$RangeModifier$1.class
@@ -103,6 +112,7 @@ me\xxgradzix\gradzixcombatsystem\items\ItemManager.class
 me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager$UniversalModifier$14.class
 me\xxgradzix\gradzixcombatsystem\commands\ItemUpgradeGuiCommand.class
 me\xxgradzix\gradzixcombatsystem\listeners\enchants\AttackComboListener.class
+me\xxgradzix\gradzixcombatsystem\armors\instances\LightArmor.class
 me\xxgradzix\gradzixcombatsystem\weapons\CustomWeapon.class
 me\xxgradzix\gradzixcombatsystem\listeners\enchants\AttackComboListener$ComboData.class
 me\xxgradzix\gradzixcombatsystem\weapons\instances\BattleBow.class

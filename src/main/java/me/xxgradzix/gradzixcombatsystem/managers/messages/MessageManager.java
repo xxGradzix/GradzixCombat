@@ -112,8 +112,10 @@ public class MessageManager extends OkaeriConfig {
             case 9 -> romeNum = "ɪx";
             case 10 -> romeNum = "x";
         }
-        return romeNum;
+        return ColorFixer.addColors(romeNum);
     }
+
+
     public static String getAttributeFormatedName(CombatAttribute attribute, int value) {
         switch (attribute) {
 

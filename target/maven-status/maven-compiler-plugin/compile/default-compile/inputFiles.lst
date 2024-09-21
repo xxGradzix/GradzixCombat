@@ -11,6 +11,7 @@ C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcomb
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\listeners\enchants\AttackComboListener.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\weapons\ThrowableWeapon.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\weapons\instances\BattleBow.java
+C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\upgradeGuis\UpgradeGuiManager.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\commands\AttributeCommand.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\weapons\instances\BattleAxe.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\managers\messages\MessageType.java
@@ -30,6 +31,7 @@ C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcomb
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\commands\ItemUpgradeGuiCommand.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\managers\modifiersManager\ModifiersManager.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\weapons\EnchantableWeapon.java
+C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\commands\OpenUpgradeGuiCommand.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\upgradeGuis\ReforgeGuiManager.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\managers\EnchantManager\EnchantDto.java
 C:\Users\kuba\Desktop\GradzixCombatSystem\src\main\java\me\xxgradzix\gradzixcombatsystem\weapons\instances\BattleSword.java

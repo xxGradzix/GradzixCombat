@@ -1,6 +1,8 @@
 package me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
+import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
+import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LivingEntity;
@@ -9,6 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.ArrayList;
 
 public class AttributeManager {
 
@@ -103,11 +107,14 @@ public class AttributeManager {
             }
         }
     }
-
-    public static int getAttributeRequirement(ItemStack item, CombatAttribute attribute) {
-        if(item == null || item.getItemMeta() == null) return 0;
-        PersistentDataContainer persistentDataContainer = item.getItemMeta().getPersistentDataContainer();
+    public static int getAttributeRequirement(ItemMeta meta, CombatAttribute attribute) {
+        if(meta == null) return 0;
+        PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
         return persistentDataContainer.getOrDefault(getRequirementKeyByAttribute(attribute), PersistentDataType.INTEGER, 0);
+    }
+    public static int getAttributeRequirement(ItemStack item, CombatAttribute attribute) {
+        if(item == null) return 0;
+        return getAttributeRequirement(item.getItemMeta(), attribute);
     }
 
     public static void setAttributeRequirement(ItemStack item, CombatAttribute attribute, int value) {
@@ -180,6 +187,28 @@ public class AttributeManager {
         setTotalAttributePoints(player, initialPoints);
         setFreeAttributePointsKey(player, initialPoints);
         updateTimeStamp(player);
+    }
+
+
+    public static ArrayList<String> getRequirementLore(ItemMeta meta) {
+        ArrayList<String> lore = new ArrayList<>();
+
+        if(meta == null) return lore;
+
+
+        lore.add(" ");
+        lore.add(ColorFixer.addColors("&7ᴀʙʏ ᴋᴏʀᴢʏꜱᴛᴀć ᴢ ᴛᴇɢᴏ ᴘʀᴢᴇᴅᴍɪᴏᴛᴜ ᴘᴏᴛʀᴢᴇʙᴜᴊᴇꜱᴢ:"));
+        for (CombatAttribute combatAttribute : CombatAttribute.values()) {
+            int requiredAttribute = getAttributeRequirement(meta, combatAttribute);
+            if(requiredAttribute != 0) {
+                lore.add(ColorFixer.addColors(MessageManager.getAttributeFormatedName(combatAttribute, requiredAttribute)));
+            }
+        }
+        return lore;
+    }
+    public static ArrayList<String> getRequirementLore(ItemStack itemStack) {
+        if(itemStack == null || itemStack.getItemMeta() == null) return new ArrayList<>();
+        return getRequirementLore(itemStack.getItemMeta());
     }
 
     public static void resetAllAttributes() {

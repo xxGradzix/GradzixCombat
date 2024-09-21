@@ -18,3 +18,7 @@ commands:
   openReforgeGui:
     description: otwiera gui do reforgowania itemów
     permission: gradzixcombatsystem.atrybuty
+
+  openUpgradeGui:
+    description: otwiera gui do reforgowania itemów
+    permission: gradzixcombatsystem.atrybuty

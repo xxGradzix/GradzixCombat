@@ -2,6 +2,10 @@ package me.xxgradzix.gradzixcombatsystem.items;
 
 import com.google.common.collect.Multimap;
 import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
+import me.xxgradzix.gradzixcombatsystem.armorEvent.ArmorType;
+import me.xxgradzix.gradzixcombatsystem.armors.instances.HeavyArmor;
+import me.xxgradzix.gradzixcombatsystem.armors.instances.LightArmor;
+import me.xxgradzix.gradzixcombatsystem.armors.instances.MediumArmor;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
@@ -45,7 +49,30 @@ public class ItemManager {
     private static final BattleShield battleShield = new BattleShield();
     private static final BattleSword battleSword = new BattleSword();
 
-    // fill these to a map
+    private static final LightArmor lightArmor = new LightArmor();
+    private static final MediumArmor mediumArmor = new MediumArmor();
+    private static final HeavyArmor heavyArmor = new HeavyArmor();
+
+    public static void getLightArmor(Player player, int tier) {
+        for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
+            ItemStack armorPiece = lightArmor.getItemStack(tier, armorType);
+            player.getInventory().addItem(armorPiece);
+        }
+
+    }
+    public static void getMediumArmor(Player player, int tier) {
+        for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
+            ItemStack armorPiece = mediumArmor.getItemStack(tier, armorType);
+            player.getInventory().addItem(armorPiece);
+        }
+    }
+    public static void getHeavyArmor(Player player, int tier) {
+        for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
+            ItemStack armorPiece = heavyArmor.getItemStack(tier, armorType);
+            player.getInventory().addItem(armorPiece);
+        }
+    }
+
 
     public static CustomWeapon getWeaponType(ItemStack itemStack) {
 
@@ -128,6 +155,17 @@ public class ItemManager {
         return weaponsPerTier.getOrDefault(weaponType, new HashMap<>()).get(i);
     }
 
+    public static ArrayList<ItemStack> getArmorPiecesOfWeightAndTier(ArmorTierManager.ArmorWeight armorWeight, int tier) {
+        ArrayList<ItemStack> armorPieces = new ArrayList<>();
+
+        for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
+            ItemStack armorPiece = getArmorPiece(armorType, tier, armorWeight);
+            armorPieces.add(armorPiece);
+        }
+
+        return armorPieces;
+    }
+
     public static @NotNull ItemStack getAttributeItem(Player player, CombatAttribute attribute, int attributeLevel) {
         Material material;
         String displayName;
@@ -168,6 +206,33 @@ public class ItemManager {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
 
+    }
+
+    public static ItemStack getTierItem(int tier) {
+        ItemStack item = new ItemStack(Material.GHAST_TEAR);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(ColorFixer.addColors("&7ᴛɪᴇʀ " + getRomanNumerals(tier)));
+        itemMeta.setCustomModelData(10000 + tier);
+        item.setItemMeta(itemMeta);
+        return item;
+    }
+
+    public static ItemStack getLeftArrowItem(boolean isActive) {
+        ItemStack item = new ItemStack(Material.GHAST_TEAR);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(ColorFixer.addColors("&7lewo "));
+        itemMeta.setCustomModelData(7777 + (isActive ? 1 : 0));
+        item.setItemMeta(itemMeta);
+        return item;
+    }
+
+    public static ItemStack getRightArrowItem(boolean isActive) {
+        ItemStack item = new ItemStack(Material.GHAST_TEAR);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setDisplayName(ColorFixer.addColors("&7prawo "));
+        itemMeta.setCustomModelData(8888 + (isActive ? 1 : 0));
+        item.setItemMeta(itemMeta);
+        return item;
     }
 
     public enum WeaponType {
@@ -346,7 +411,6 @@ public class ItemManager {
         int strAttributeRequirement = 0;
         int dexAttributeRequirement = 0;
         int enduranceAttributeRequirement = 0;
-        int another = 0;
 
 
         switch (armorWeight) {
@@ -390,7 +454,6 @@ public class ItemManager {
 
         Multimap<Attribute, AttributeModifier> attributeModifiers = itemMeta.getAttributeModifiers();
 
-        lore.add(ColorFixer.addColors(" "));
         switch (armorWeight) {
             case HEAVY -> {
                 lore.add(ColorFixer.addColors("&7ᴛᴀ ᴄɪężᴋᴀ ᴢʙʀᴏᴊᴀ ᴢᴀᴘᴇᴡɴɪᴀ ᴡʏꜱᴏᴋą ᴏʙʀᴏɴę"));
@@ -410,10 +473,12 @@ public class ItemManager {
             });
         }
 
-        lore.add(ColorFixer.addColors(" ")); // ⚡☄⚔🗡
-        lore.add(ColorFixer.addColors("&7ᴀʙʏ ᴋᴏʀᴢʏꜱᴛᴀć ᴢ ᴛᴇɢᴏ ᴘʀᴢᴇᴅᴍɪᴏᴛᴜ ᴘᴏᴛʀᴢᴇʙᴜᴊᴇꜱᴢ:"));
-        if(strAttributeRequirement > 0) lore.add(ColorFixer.addColors("&cꜱɪᴌᴀ &4⚔:  #a18b3d" + strAttributeRequirement));
-        if(dexAttributeRequirement > 0) lore.add(ColorFixer.addColors("&7ᴡʏᴛʀᴢʏᴍᴀᴌᴏść &8☄:  #a18b3d" + dexAttributeRequirement));
+        lore.addAll(AttributeManager.getRequirementLore(itemMeta));
+//        lore.add(ColorFixer.addColors(" ")); // ⚡☄⚔🗡
+//        lore.add(ColorFixer.addColors("&7ᴀʙʏ ᴋᴏʀᴢʏꜱᴛᴀć ᴢ ᴛᴇɢᴏ ᴘʀᴢᴇᴅᴍɪᴏᴛᴜ ᴘᴏᴛʀᴢᴇʙᴜᴊᴇꜱᴢ:"));
+//        if(strAttributeRequirement > 0) lore.add(ColorFixer.addColors("&cꜱɪᴌᴀ &4⚔:  #a18b3d" + strAttributeRequirement));
+//        if(enduranceAttributeRequirement > 0) lore.add(ColorFixer.addColors("&7ᴡʏᴛʀᴢʏᴍᴀᴌᴏść &8☄:  #a18b3d" + enduranceAttributeRequirement));
+//        if(dexAttributeRequirement > 0) lore.add(ColorFixer.addColors("&a &8:  #a18b3d" + dexAttributeRequirement));
 
         itemMeta.setLore(lore);
 
@@ -466,8 +531,6 @@ public class ItemManager {
         ArrayList<String> lore = new ArrayList<>();
         lore.add(ColorFixer.addColors(" "));
 
-//        lore.add(ColorFixer.addColors("&7ᴛᴀ ᴍɪᴋꜱᴛᴜʀᴀ ᴢᴡʀóᴄɪ ᴡꜱᴢʏꜱᴛᴋɪᴇ ᴘᴜɴᴋᴛʏ ᴀᴛʀʏʙᴜᴛóᴡ ɪ ᴘᴏᴢᴡᴏʟɪ ᴊᴇ ᴘᴏɴᴏᴡɴɪᴇ ʀᴏᴢᴅʏꜱᴘᴏɴᴏᴡᴀć"));
-
         itemMeta.setLore(lore);
 
         itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
@@ -482,7 +545,7 @@ public class ItemManager {
 
         ItemMeta itemMeta = item.getItemMeta();
 
-//        itemMeta.setCustomModelData(1010);
+        itemMeta.setCustomModelData(1010);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
@@ -507,20 +570,6 @@ public class ItemManager {
         }
 
         itemMeta.setLore(lore);
-        item.setItemMeta(itemMeta);
-        return item;
-    }
-
-    public static ItemStack testItem(boolean visible) {
-        ItemStack item = new ItemStack(Material.MAP);
-
-
-        ItemMeta itemMeta = item.getItemMeta();
-        if(!visible) {
-            itemMeta.setCustomModelData(1010);
-        }
-        itemMeta.setLore(null);
-        itemMeta.setDisplayName(ChatColor.RESET + "");
         item.setItemMeta(itemMeta);
         return item;
     }
