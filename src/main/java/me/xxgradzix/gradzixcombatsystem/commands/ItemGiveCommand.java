@@ -57,7 +57,6 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
             try {
                 armorWeight = ArmorTierManager.ArmorWeight.valueOf(itemVariant.toUpperCase());
             } catch (IllegalArgumentException e) {
-                throw new RuntimeException(e);
                 player.sendMessage(" nie poprawna wartość: " + itemVariant);
                 return true;
             }
