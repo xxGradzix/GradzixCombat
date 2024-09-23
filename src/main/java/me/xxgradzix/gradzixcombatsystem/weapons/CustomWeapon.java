@@ -1,6 +1,7 @@
 package me.xxgradzix.gradzixcombatsystem.weapons;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
@@ -9,44 +10,34 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
-public interface CustomWeapon {
+public interface CustomWeapon extends CustomItem {
 
-    NamespacedKey weaponCustomIdKey = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_weapon_custom_id");
+//    NamespacedKey weaponCustomIdKey = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_weapon_custom_id");
     NamespacedKey weaponTierKey = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_weapon_tier");
 
     NamespacedKey DEFAULT_ATTACK_DAMAGE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_default_weapon_damage");
     NamespacedKey DEFAULT_ATTACK_SPEED_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_default_weapon_speed");
     NamespacedKey BONUS_ATTACK_RANGE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_bonus_weapon_range");
 
-    static String getWeaponCustomId(ItemStack itemStack) {
-        if(itemStack == null) return null;
-        ItemMeta meta = itemStack.getItemMeta();
-        if(meta == null) return null;
-        return meta.getPersistentDataContainer().get(weaponCustomIdKey, PersistentDataType.STRING);
-    }
+    @Override
+    String getCustomId();
+
+//    @Override
+//    default ItemStack getDefaultItemStack() {
+//        return getItemStack(1);
+//    }
 
     static int getTier(ItemStack itemStack) {
         return itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(weaponTierKey, PersistentDataType.INTEGER, 0);
     }
-    default void setTier(ItemStack itemStack, int tier) {
-        ItemMeta meta = itemStack.getItemMeta();
-        meta.getPersistentDataContainer().set(weaponTierKey, PersistentDataType.INTEGER, tier);
-        itemStack.setItemMeta(meta);
-    }
-
-
-    void setWeaponCustomId(ItemMeta meta);
 
     int getRequiredAttribute(int tier, CombatAttribute attribute);
 
@@ -56,9 +47,26 @@ public interface CustomWeapon {
 
     Material getMaterial(int tier);
 
+    /** ITEM CREATION **/
+
+    default void setTier(ItemStack itemStack, int tier) {
+        ItemMeta meta = itemStack.getItemMeta();
+        meta.getPersistentDataContainer().set(weaponTierKey, PersistentDataType.INTEGER, tier);
+        itemStack.setItemMeta(meta);
+    }
+
     void addBukkitEnchantments(int tier, ItemMeta meta);
 
-    default ItemStack getItemStack(int tier) {
+    @Override
+    default ItemStack getDefaultItemStack(Object... optionalArgs) {
+
+        int tier = 1;
+        if(optionalArgs.length == 1) {
+            if(optionalArgs[0] instanceof Integer) {
+                tier = (int) optionalArgs[0];
+            }
+        }
+
         ItemStack itemStack = new ItemStack(getMaterial(tier));
 
         if(this instanceof EnchantableWeapon enchantableWeapon) {
@@ -86,7 +94,8 @@ public interface CustomWeapon {
         }
 
         meta.setCustomModelData(getModelData(tier));
-        setWeaponCustomId(meta);
+//        setWeaponCustomId(meta);
+        defaultSetItemCustomId(meta);
         setLoreAndName(meta, tier);
         hideAll(meta);
 

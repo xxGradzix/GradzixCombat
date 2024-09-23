@@ -24,9 +24,10 @@ public class BattleCrossBow implements CustomWeapon, ShootableWeapon, Enchantabl
 
     public static final String CUSTOM_ID = "gradzixcombat_battle_crossbow";
 
+
     @Override
-    public void setWeaponCustomId(ItemMeta meta) {
-        meta.getPersistentDataContainer().set(weaponCustomIdKey, PersistentDataType.STRING, CUSTOM_ID);
+    public String getCustomId() {
+        return CUSTOM_ID;
     }
 
     @Override

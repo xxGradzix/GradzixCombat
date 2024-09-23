@@ -24,11 +24,6 @@ public class BattleSword implements CustomWeapon, MelleWeapon, EnchantableWeapon
     public static final String CUSTOM_ID = "gradzixcombat_battle_sword";
 
     @Override
-    public void setWeaponCustomId(ItemMeta meta) {
-        meta.getPersistentDataContainer().set(weaponCustomIdKey, PersistentDataType.STRING, CUSTOM_ID);
-    }
-
-    @Override
     public double getAttackDamage(int tier) {
         switch (tier) {
             case 1:
@@ -64,6 +59,10 @@ public class BattleSword implements CustomWeapon, MelleWeapon, EnchantableWeapon
         }
     }
 
+    @Override
+    public String getCustomId() {
+        return CUSTOM_ID;
+    }
 
     @Override
     public int getRequiredAttribute(int tier, CombatAttribute attribute) {
@@ -122,4 +121,5 @@ public class BattleSword implements CustomWeapon, MelleWeapon, EnchantableWeapon
     public Set<Class> getApplicableModifications() {
         return Set.of(ModifiersManager.MelleModifier.class, ModifiersManager.UniversalModifier.class, ModifiersManager.CommonModifier.class);
     }
+
 }

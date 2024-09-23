@@ -45,13 +45,17 @@ public interface CustomArmor {
         return meta.getPersistentDataContainer().get(armorCustomId, PersistentDataType.STRING);
     }
 
-    static int getArmorTier(ItemStack itemStack) {
-        return itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(armorTierKey, PersistentDataType.INTEGER, 0);
-    }
+//    static int getArmorTier(ItemStack itemStack) {
+//        return itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(armorTierKey, PersistentDataType.INTEGER, 0);
+//    }
     default void setArmorTier(ItemStack itemStack, int tier) {
         ItemMeta meta = itemStack.getItemMeta();
         meta.getPersistentDataContainer().set(armorTierKey, PersistentDataType.INTEGER, tier);
         itemStack.setItemMeta(meta);
+    }
+
+    default int getArmorTier(ItemStack itemStack) {
+        return itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(armorTierKey, PersistentDataType.INTEGER, 0);
     }
 
     void setArmorCustomId(ItemMeta meta);

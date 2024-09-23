@@ -2,6 +2,7 @@ package me.xxgradzix.gradzixcombatsystem.commands;
 
 import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
+import me.xxgradzix.gradzixcombatsystem.weapons.WeaponType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -74,7 +75,7 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
 //            }
 
         } else if(itemCategory.equalsIgnoreCase("weapon")) {
-            ItemManager.WeaponType weaponType = ItemManager.WeaponType.valueOf(itemVariant.toUpperCase());
+            WeaponType weaponType = WeaponType.valueOf(itemVariant.toUpperCase());
             ItemStack weapon = ItemManager.getWeapon(weaponType, tier);
             player.getInventory().addItem(weapon);
         }
@@ -96,7 +97,7 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                 return Arrays.stream(ArmorTierManager.ArmorWeight.values()).map(Enum::name).map(String::toLowerCase).toList();
             }
             if(args[1].equalsIgnoreCase("weapon")) {
-                return Arrays.stream(ItemManager.WeaponType.values()).map(Enum::name).map(String::toLowerCase).toList();
+                return Arrays.stream(WeaponType.values()).map(Enum::name).map(String::toLowerCase).toList();
             }
         }
         return List.of();

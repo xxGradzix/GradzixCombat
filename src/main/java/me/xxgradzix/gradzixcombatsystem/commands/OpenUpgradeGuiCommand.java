@@ -38,7 +38,7 @@ public class OpenUpgradeGuiCommand implements CommandExecutor {
             return false;
         }
 
-        UpgradeGuiManager.openUpgradeGui(player, ArmorTierManager.ArmorWeight.MEDIUM, priceModifierDouble, 1);
+        UpgradeGuiManager.openArmorsGui(player, ArmorTierManager.ArmorWeight.MEDIUM, priceModifierDouble, 1);
 
 //        player.getInventory().addItem(ItemManager.testItem(true));
 //        player.getInventory().addItem(ItemManager.testItem(false));

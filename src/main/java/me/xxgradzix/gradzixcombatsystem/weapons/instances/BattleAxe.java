@@ -24,9 +24,11 @@ public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, 
     public static final String CUSTOM_ID = "gradzixcombat_battle_axe";
 
     @Override
-    public void setWeaponCustomId(ItemMeta meta) {
-        meta.getPersistentDataContainer().set(weaponCustomIdKey, PersistentDataType.STRING, CUSTOM_ID);
+    public String getCustomId() {
+        return CUSTOM_ID;
     }
+
+
     @Override
     public double getAttackDamage(int tier) {
         switch (tier) {

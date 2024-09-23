@@ -11,12 +11,14 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.ArrayList;
 
 public class BattleShield implements CustomWeapon {
+
     public static final String CUSTOM_ID = "gradzixcombat_battle_shield";
 
     @Override
-    public void setWeaponCustomId(ItemMeta meta) {
-        meta.getPersistentDataContainer().set(weaponCustomIdKey, PersistentDataType.STRING, CUSTOM_ID);
+    public String getCustomId() {
+        return CUSTOM_ID;
     }
+
     @Override
     public int getRequiredAttribute(int tier, CombatAttribute attribute) {
 

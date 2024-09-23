@@ -10,12 +10,13 @@ import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.*;
 
-public class LightArmor implements CustomArmor {
+public class LightArmor implements CustomArmor, UpgradableArmor {
 
     public static final String CUSTOM_ID = "gradzixcombat_light_armor";
 
@@ -170,5 +171,24 @@ public class LightArmor implements CustomArmor {
                 meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(genericArmorKey, LIGHT_ARMOR_BOOTS + bonus, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ARMOR));
             }
         }
+    }
+
+    @Override
+    public List<ItemStack> getRequiredItems(int tier) {
+        if(tier < 4) {
+            return List.of(new ItemStack(Material.RABBIT_HIDE, 16), new ItemStack(Material.IRON_INGOT, 4));
+        } else {
+            return List.of(new ItemStack(Material.LEATHER, 16), new ItemStack(Material.IRON_INGOT, 4));
+        }
+    }
+
+    @Override
+    public int getRequiredMoney(int tier) {
+        return 0;
+    }
+
+    @Override
+    public boolean isLowerTierItemRequired(int tier) {
+        return tier != 1;
     }
 }
