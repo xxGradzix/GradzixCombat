@@ -160,10 +160,10 @@ public class UpgradeGuiManager {
         GuiItem itemToUpgrade = new GuiItem(ItemManager.getItemToUpgrade(item));
 
         itemToUpgrade.setAction(event -> {
-            checkNeededItems(player, item, itemsNeeded, optionalNeededItem);
+            checkNeededItems(player, item, itemsNeeded, optionalNeededItem, requiredMoney);
         });
         upgradeButton.setAction(event -> {
-            checkNeededItems(player, item, itemsNeeded, optionalNeededItem);
+            checkNeededItems(player, item, itemsNeeded, optionalNeededItem, requiredMoney);
         });
 
 
