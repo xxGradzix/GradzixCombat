@@ -82,6 +82,15 @@
           <id>sonatype</id>
           <url>https://oss.sonatype.org/content/groups/public/</url>
       </repository>
+<!--      <repository>-->
+<!--          <id>jitpack.io</id>-->
+<!--          <url>https://jitpack.io</url>-->
+<!--      </repository>-->
+      <repository>
+          <id>spigot-vault-api</id>
+          <url>https://ci.ender.zone/plugin/repository/everything/</url>
+      </repository>
+
       <repository>
           <id>papermc</id>
           <url>https://repo.papermc.io/repository/maven-public/</url>
@@ -120,6 +129,18 @@
 <!--          &lt;!&ndash;            <classifier>remapped-mojang</classifier>&ndash;&gt;-->
 <!--          <scope>provided</scope>-->
 <!--      </dependency>-->
+
+<!--      <dependency>-->
+<!--          <groupId>com.github.MilkBowl</groupId>-->
+<!--          <artifactId>VaultAPI</artifactId>-->
+<!--          <version>1.7.1</version>-->
+<!--          <scope>provided</scope>-->
+<!--      </dependency>-->
+      <dependency>
+          <groupId>net.milkbowl.vault</groupId>
+          <artifactId>VaultAPI</artifactId>
+          <version>1.7</version>
+      </dependency>
       <dependency>
           <groupId>io.papermc.paper</groupId>
           <artifactId>paper-api</artifactId>

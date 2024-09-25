@@ -1,7 +1,9 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
 import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
+import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.upgradeGuis.UpgradeGuiManager;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,6 +41,7 @@ public class OpenUpgradeGuiCommand implements CommandExecutor {
         }
 
         UpgradeGuiManager.openArmorsGui(player, ArmorTierManager.ArmorWeight.MEDIUM, priceModifierDouble, 1);
+
 
 //        player.getInventory().addItem(ItemManager.testItem(true));
 //        player.getInventory().addItem(ItemManager.testItem(false));

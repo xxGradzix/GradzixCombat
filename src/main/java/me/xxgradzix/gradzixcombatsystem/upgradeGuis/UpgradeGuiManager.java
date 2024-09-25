@@ -3,6 +3,7 @@ package me.xxgradzix.gradzixcombatsystem.upgradeGuis;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
+import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.armors.CustomArmor;
 import me.xxgradzix.gradzixcombatsystem.armors.instances.UpgradableArmor;
 import me.xxgradzix.gradzixcombatsystem.items.ItemIsNotCustomItem;
@@ -10,6 +11,9 @@ import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.items.NbtItemUtil;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import net.kyori.adventure.text.Component;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -171,7 +175,7 @@ public class UpgradeGuiManager {
 
     }
 
-    private static void checkNeededItems(Player player, ItemStack item, List<ItemStack> itemsNeeded, Optional<ItemStack> optionalNeededItem) {
+    private static void checkNeededItems(Player player, ItemStack item, List<ItemStack> itemsNeeded, Optional<ItemStack> optionalNeededItem, int requiredMoney) {
         boolean haveAllItems = true;
 
         for (ItemStack itemNeeded : itemsNeeded) {
@@ -181,16 +185,29 @@ public class UpgradeGuiManager {
             }
         }
 
+        boolean haveMoney = true;
+        boolean havePreviousItem = true;
         if(optionalNeededItem.isPresent()) {
-            haveAllItems = NbtItemUtil.calcItemAmount(player, optionalNeededItem.get()) >= optionalNeededItem.get().getAmount();
+            havePreviousItem = NbtItemUtil.calcItemAmount(player, optionalNeededItem.get()) >= optionalNeededItem.get().getAmount();
         }
 
-        if (!haveAllItems) {
+        haveMoney = GradzixCombatSystem.getEconomy().getBalance(player) >= requiredMoney;
+
+
+        if (!(haveAllItems || haveMoney || havePreviousItem)) {
             player.sendMessage(ColorFixer.addColors("&cNie posiadasz wszystkich wymaganych przedmiotów"));
             return;
         }
 
-        // TODO money check
+
+        Economy economy = GradzixCombatSystem.getEconomy();
+
+        EconomyResponse economyResponse = economy.withdrawPlayer(player, requiredMoney);
+
+        if (!economyResponse.transactionSuccess()) {
+            player.sendMessage(ColorFixer.addColors("&cNie posiadasz wystarczająco pieniędzy"));
+            return;
+        }
 
         for (ItemStack itemNeeded : itemsNeeded) {
             NbtItemUtil.removeItemsWithCustomItemNBT(player, itemNeeded, itemNeeded.getAmount());

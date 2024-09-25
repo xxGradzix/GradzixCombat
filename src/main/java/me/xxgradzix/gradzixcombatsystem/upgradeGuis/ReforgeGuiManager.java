@@ -9,6 +9,8 @@ import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManag
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
 import me.xxgradzix.gradzixcombatsystem.weapons.ModifiableWeapon;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -45,7 +47,7 @@ public class ReforgeGuiManager {
                 if(currentItem != null) {
                     gui.getInventory().setItem(REFORGE_ITEM_SLOT, currentItem);
                     event.setCurrentItem(null);
-                    updateGuiItem(gui, priceModifier);
+                    updateGuiItem(gui, player, priceModifier);
                 }
             }
             if(!gui.getInventory().equals(event.getClickedInventory())) {
@@ -54,13 +56,13 @@ public class ReforgeGuiManager {
             int slot = event.getSlot();
             if(slot == REFORGE_ITEM_SLOT) {
                 event.setCancelled(false);
-                updateGuiItem(gui, priceModifier);
+                updateGuiItem(gui, player, priceModifier);
             } else {
                 event.setCancelled(true);
             }
         });
 
-        updateGuiItem(gui, priceModifier);
+        updateGuiItem(gui, player, priceModifier);
 
         gui.setCloseGuiAction(event -> {
             ItemStack item = gui.getInventory().getItem(REFORGE_ITEM_SLOT);
@@ -76,7 +78,7 @@ public class ReforgeGuiManager {
         gui.open(player);
     }
 
-    private static void updateGuiItem(Gui gui, double priceModifier) {
+    private static void updateGuiItem(Gui gui, Player player, double priceModifier) {
 
         Bukkit.getScheduler().runTaskLater(GradzixCombatSystem.plugin, () -> {
             ItemStack reforgeItem = gui.getInventory().getItem(REFORGE_ITEM_SLOT);
@@ -96,12 +98,22 @@ public class ReforgeGuiManager {
 
             guiItem.setAction(event -> {
                 event.setCancelled(true);
+
+                Economy economy = GradzixCombatSystem.getEconomy();
+
+                EconomyResponse economyResponse = economy.withdrawPlayer(player, price);
+
+                if (!economyResponse.transactionSuccess()) {
+                    player.sendMessage(ColorFixer.addColors("&cNie posiadasz wystarczająco pieniędzy"));
+                    return;
+                }
+
                 CustomWeapon weaponType = ItemManager.getWeaponType(reforgeItem);
                 if(weaponType instanceof ModifiableWeapon) {
                     ModifiersManager.applyRandomModifier(reforgeItem);
                     ((Player) event.getWhoClicked()).playSound(event.getWhoClicked(), Sound.BLOCK_ANVIL_USE, 1.0f, 1.0f);
                 }
-                updateGuiItem(gui, priceModifier);
+                updateGuiItem(gui, player, priceModifier);
             });
             gui.updateItem(15, guiItem);
 

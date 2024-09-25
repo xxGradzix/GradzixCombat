@@ -40,6 +40,7 @@ public class OpenReforgeGuiCommand implements CommandExecutor {
 
         ReforgeGuiManager.openReforgeGui(player, priceModifierDouble);
 
+
 //        player.getInventory().addItem(ItemManager.testItem(true));
 //        player.getInventory().addItem(ItemManager.testItem(false));
 
