@@ -133,7 +133,7 @@ public class UpgradeGuiManager {
         Gui gui = Gui.gui()
                 .disableAllInteractions()
                 .rows(4)
-                .title(Component.text(ColorFixer.addColors("&f七七七七七七七七TODOTODO")))
+                .title(Component.text(ColorFixer.addColors("&f七七七七七七七七≉")))
                 .create();
 
         for (ItemStack itemNeeded : itemsNeeded) {
@@ -153,43 +153,50 @@ public class UpgradeGuiManager {
         }
 
         GuiItem upgradeButton = new GuiItem(ItemManager.upgradeWeaponButton());
+        GuiItem itemToUpgrade = new GuiItem(ItemManager.getItemToUpgrade(item));
 
+        itemToUpgrade.setAction(event -> {
+            checkNeededItems(player, item, itemsNeeded, optionalNeededItem);
+        });
         upgradeButton.setAction(event -> {
-
-                    boolean haveAllItems = true;
-                    try {
-                        for (ItemStack itemNeeded : itemsNeeded) {
-                            if (NbtItemUtil.calcItemAmount(player, itemNeeded) < itemNeeded.getAmount()) {
-                                haveAllItems = false;
-                                break;
-                            }
-                        }
-                    } catch (ItemIsNotCustomItem e) {
-                        haveAllItems = false;
-                        System.out.println("Error while checking if player has all items needed for upgrade");
-                    }
-
-                    if (!haveAllItems) {
-                        player.sendMessage(ColorFixer.addColors("&cNie posiadasz wszystkich wymaganych przedmiotów"));
-                        return;
-                    }
-
-                    // TODO money check
-
-                        for (ItemStack itemNeeded : itemsNeeded) {
-                            NbtItemUtil.removeItemsWithCustomItemNBT(player, itemNeeded, itemNeeded.getAmount());
-                        }
-                        player.getInventory().addItem(item);
-
-                });
+            checkNeededItems(player, item, itemsNeeded, optionalNeededItem);
+        });
 
 
-        gui.getFiller().fillBetweenPoints(3, 4, 3, 7, upgradeButton);
+        gui.getFiller().fillBetweenPoints(4, 4, 4, 5, upgradeButton);
+        // Item to upgrade
+        gui.setItem(4, 6, itemToUpgrade);
 
         gui.open(player);
 
     }
 
+    private static void checkNeededItems(Player player, ItemStack item, List<ItemStack> itemsNeeded, Optional<ItemStack> optionalNeededItem) {
+        boolean haveAllItems = true;
+
+        for (ItemStack itemNeeded : itemsNeeded) {
+            if (NbtItemUtil.calcItemAmount(player, itemNeeded) < itemNeeded.getAmount()) {
+                haveAllItems = false;
+                break;
+            }
+        }
+
+        if(optionalNeededItem.isPresent()) {
+            haveAllItems = NbtItemUtil.calcItemAmount(player, optionalNeededItem.get()) >= optionalNeededItem.get().getAmount();
+        }
+
+        if (!haveAllItems) {
+            player.sendMessage(ColorFixer.addColors("&cNie posiadasz wszystkich wymaganych przedmiotów"));
+            return;
+        }
+
+        // TODO money check
+
+        for (ItemStack itemNeeded : itemsNeeded) {
+            NbtItemUtil.removeItemsWithCustomItemNBT(player, itemNeeded, itemNeeded.getAmount());
+        }
+        player.getInventory().addItem(item);
+    }
 
 
 }

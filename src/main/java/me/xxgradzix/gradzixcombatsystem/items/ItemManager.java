@@ -378,4 +378,22 @@ public class ItemManager {
             }
         }
     }
+
+    public static ItemStack getItemToUpgrade(ItemStack item) {
+
+        ItemMeta itemMeta = item.getItemMeta();
+
+        ArrayList<String> lore = new ArrayList<>();
+
+        lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ꜱᴛᴡᴏʀᴢʏć ᴛᴇɴ ᴘʀᴢᴇᴅᴍɪᴏᴛ"));
+
+        lore.add(" ");
+        lore.addAll(itemMeta.getLore());
+
+        itemMeta.setLore(lore);
+
+        item.setItemMeta(itemMeta);
+        return item;
+
+    }
 }

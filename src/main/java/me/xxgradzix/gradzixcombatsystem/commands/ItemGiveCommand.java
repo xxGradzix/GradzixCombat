@@ -32,13 +32,6 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
         String itemVariant = "medium";
 
 
-//        ItemManager.getLightArmor(player, 1);
-//        ItemManager.getLightArmor(player, 2);
-//        ItemManager.getLightArmor(player, 3);
-//        ItemManager.getLightArmor(player, 4);
-//        ItemManager.getLightArmor(player, 5);
-
-
 
         if(strings.length == 3) {
             tier = Integer.parseInt(strings[0]);
@@ -69,11 +62,6 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                     ItemManager.getHeavyArmor(player, tier);
                 }
             }
-//            for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
-//                ItemStack armorPiece = ItemManager.getArmorPiece(armorType, tier, armorWeight);
-//                player.getInventory().addItem(armorPiece);
-//            }
-
         } else if(itemCategory.equalsIgnoreCase("weapon")) {
             WeaponType weaponType = WeaponType.valueOf(itemVariant.toUpperCase());
             ItemStack weapon = ItemManager.getWeapon(weaponType, tier);

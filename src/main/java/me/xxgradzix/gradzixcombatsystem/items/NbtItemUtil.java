@@ -19,7 +19,7 @@ public class NbtItemUtil {
     public static boolean isCustomItem(ItemMeta meta) {
         return CustomItem.getCustomId(meta).isPresent();
     }
-    public static int calcItemAmount(Player player, ItemStack customItem) throws ItemIsNotCustomItem {
+    public static int calcItemAmount(Player player, ItemStack customItem) {
 
         int totalAmount = 0;
         for (ItemStack itemStack : player.getInventory()) {
