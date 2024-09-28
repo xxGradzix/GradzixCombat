@@ -1,28 +1,26 @@
-package me.xxgradzix.gradzixcombatsystem.weapons.instances;
+package me.xxgradzix.gradzixcombatsystem.items.weapons.instances;
 
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
-import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.EnchantableWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.ModifiableWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.ShootableWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.CustomWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.EnchantableWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.ShootableWeapon;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import static me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager.getRomanNumerals;
 
-public class BattleBow implements CustomWeapon, ShootableWeapon, EnchantableWeapon, ModifiableWeapon {
+public class BattleCrossBow implements CustomWeapon, ShootableWeapon, EnchantableWeapon, ModifiableWeapon {
 
-    public static final String CUSTOM_ID = "gradzixcombat_battle_bow";
+    public static final String CUSTOM_ID = "gradzixcombat_battle_crossbow";
+
 
     @Override
     public String getCustomId() {
@@ -33,25 +31,25 @@ public class BattleBow implements CustomWeapon, ShootableWeapon, EnchantableWeap
     public int getRequiredAttribute(int tier, CombatAttribute attribute) {
         switch (tier){
             case 1 -> {
-                if(attribute.equals(CombatAttribute.DEXTERITY)) return 3;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 3;
                 if(attribute.equals(CombatAttribute.ENDURANCE)) return 1;
             }
             case 2 -> {
-                if(attribute.equals(CombatAttribute.DEXTERITY)) return 4;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 4;
                 if(attribute.equals(CombatAttribute.ENDURANCE)) return 2;
 
             }
             case 3 -> {
-                if(attribute.equals(CombatAttribute.DEXTERITY)) return 6;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 6;
                 if(attribute.equals(CombatAttribute.ENDURANCE)) return 3;
 
             }
             case 4 -> {
-                if(attribute.equals(CombatAttribute.DEXTERITY)) return 8;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 8;
                 if(attribute.equals(CombatAttribute.ENDURANCE)) return 4;
             }
             case 5 -> {
-                if(attribute.equals(CombatAttribute.DEXTERITY)) return 10;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 10;
                 if(attribute.equals(CombatAttribute.ENDURANCE)) return 5;
             }
         }
@@ -60,7 +58,7 @@ public class BattleBow implements CustomWeapon, ShootableWeapon, EnchantableWeap
 
     @Override
     public String getName(int tier) {
-        return ColorFixer.addColors("ᴌᴜᴋ " + getRomanNumerals(tier));
+        return ColorFixer.addColors("ᴄɪężᴋᴀ ᴋᴜꜱᴢᴀ " + getRomanNumerals(tier));
     }
 
     @Override
@@ -70,7 +68,7 @@ public class BattleBow implements CustomWeapon, ShootableWeapon, EnchantableWeap
 
     @Override
     public Material getMaterial(int tier) {
-        return Material.BOW;
+        return Material.CROSSBOW;
     }
 
     @Override
@@ -93,7 +91,6 @@ public class BattleBow implements CustomWeapon, ShootableWeapon, EnchantableWeap
             }
         }
     }
-
     @Override
     public void setEnchantSlots(ItemStack itemStack, int tier) {
         if(tier >= 3) EnchantManager.setMaxSlots(itemStack, 1);
@@ -108,5 +105,59 @@ public class BattleBow implements CustomWeapon, ShootableWeapon, EnchantableWeap
     @Override
     public Set<Class> getApplicableModifications() {
         return Set.of(ModifiersManager.RangeModifier.class, ModifiersManager.UniversalModifier.class);
+    }
+    @Override
+    public ItemStack getDefaultItemStack(Object... optionalArgs) {
+
+        int tier = 1;
+        if(optionalArgs.length == 1) {
+            if(optionalArgs[0] instanceof Integer) {
+                tier = (int) optionalArgs[0];
+            }
+        }
+
+
+        ItemStack itemStack = new ItemStack(getMaterial(tier));
+
+        setAttributes(itemStack, tier);
+
+        setTier(itemStack, tier);
+
+        ItemMeta meta = itemStack.getItemMeta();
+
+        addBukkitEnchantments(tier, meta);
+        setWeaponDamage(meta, getWeaponDamage(tier));
+
+        meta.setCustomModelData(getModelData(tier));
+        defaultSetItemCustomId(meta);
+        setLoreAndName(meta, tier);
+        hideAll(meta);
+
+        itemStack.setItemMeta(meta);
+
+        return itemStack;
+    }
+    @Override
+    public double getWeaponDamage(int tier) {
+        switch (tier) {
+            case 1 -> {
+                return 2;
+            }
+            case 2 -> {
+                return 3;
+            }
+            case 3 -> {
+                return 4;
+            }
+            case 4 -> {
+                return 5;
+            }
+            case 5 -> {
+                return 6;
+            }
+            default -> {
+                return 0;
+            }
+        }
     }
 }

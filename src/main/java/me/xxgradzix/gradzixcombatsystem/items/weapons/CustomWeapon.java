@@ -1,4 +1,4 @@
-package me.xxgradzix.gradzixcombatsystem.weapons;
+package me.xxgradzix.gradzixcombatsystem.items.weapons;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
@@ -126,9 +126,8 @@ public interface CustomWeapon extends CustomItem {
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
 
-        if(this instanceof MelleWeapon melleWeapon) {
-            lore.add(MessageManager.weaponDamageWithWords(melleWeapon.getAttackDamage(tier)));
-            lore.add(MessageManager.weaponSpeedWithWords(melleWeapon.getAttackSpeed(tier)));
+        if(this instanceof ShootableWeapon weapon) {
+            lore.add(MessageManager.weaponDamageWithWords(weapon.getWeaponDamage(tier)));
         }
 
         String qualityName = "";

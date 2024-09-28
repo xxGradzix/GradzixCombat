@@ -1,4 +1,4 @@
-package me.xxgradzix.gradzixcombatsystem.weapons;
+package me.xxgradzix.gradzixcombatsystem.items.weapons;
 
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
 import org.bukkit.inventory.ItemStack;

@@ -1,18 +1,23 @@
 package me.xxgradzix.gradzixcombatsystem.items;
 
-import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
-import me.xxgradzix.gradzixcombatsystem.armors.CustomArmor;
-import me.xxgradzix.gradzixcombatsystem.armors.instances.HeavyArmor;
-import me.xxgradzix.gradzixcombatsystem.armors.instances.LightArmor;
-import me.xxgradzix.gradzixcombatsystem.armors.instances.MediumArmor;
+import me.xxgradzix.gradzixcombatsystem.items.armors.ArmorType;
+import me.xxgradzix.gradzixcombatsystem.items.armors.ArmorWeight;
+import me.xxgradzix.gradzixcombatsystem.items.armors.CustomArmor;
+import me.xxgradzix.gradzixcombatsystem.items.armors.instances.HeavyArmor;
+import me.xxgradzix.gradzixcombatsystem.items.armors.instances.LightArmor;
+import me.xxgradzix.gradzixcombatsystem.items.armors.instances.MediumArmor;
+import me.xxgradzix.gradzixcombatsystem.items.projectiles.CustomArrow;
+import me.xxgradzix.gradzixcombatsystem.items.projectiles.instances.CommonArrow;
+import me.xxgradzix.gradzixcombatsystem.items.projectiles.instances.GravitionalArrow;
+import me.xxgradzix.gradzixcombatsystem.items.projectiles.instances.KnockBackArrow;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.WeaponType;
-import me.xxgradzix.gradzixcombatsystem.weapons.instances.*;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.CustomWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.WeaponType;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.instances.*;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -44,6 +49,12 @@ public class ItemManager {
     private static final BattleShield battleShield = new BattleShield();
     private static final BattleSword battleSword = new BattleSword();
 
+    /** ARROWS **/
+
+    private static final CommonArrow commonArrow = new CommonArrow();
+    private static final GravitionalArrow gravitionalArrow = new GravitionalArrow();
+    private static final KnockBackArrow knockBackArrow = new KnockBackArrow();
+
     /** ARMORS **/
 
     private static final LightArmor lightArmor = new LightArmor();
@@ -52,7 +63,7 @@ public class ItemManager {
 
     /** ARMOR METHODS **/
 
-    public static CustomArmor getArmorTypeByWeight(ArmorTierManager.ArmorWeight armorWeight) {
+    public static CustomArmor getArmorTypeByWeight(ArmorWeight armorWeight) {
         switch (armorWeight) {
             case LIGHT -> {
                 return lightArmor;
@@ -70,21 +81,21 @@ public class ItemManager {
     }
 
     public static void getLightArmor(Player player, int tier) {
-        for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
+        for (ArmorType armorType : ArmorType.values()) {
             ItemStack armorPiece = lightArmor.getItemStack(tier, armorType);
             player.getInventory().addItem(armorPiece);
         }
 
     }
     public static void getMediumArmor(Player player, int tier) {
-        for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
+        for (ArmorType armorType : ArmorType.values()) {
             ItemStack armorPiece = mediumArmor.getItemStack(tier, armorType);
             player.getInventory().addItem(armorPiece);
         }
     }
 
     public static void getHeavyArmor(Player player, int tier) {
-        for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
+        for (ArmorType armorType : ArmorType.values()) {
             ItemStack armorPiece = heavyArmor.getItemStack(tier, armorType);
             player.getInventory().addItem(armorPiece);
         }
@@ -395,5 +406,35 @@ public class ItemManager {
         item.setItemMeta(itemMeta);
         return item;
 
+    }
+
+
+    /** ARROW METHODS **/
+
+    public static ItemStack getCommonArrow(int tier) {
+        return commonArrow.getDefaultItemStack(tier);
+    }
+
+    public static CustomArrow getCustomArrow(ItemStack itemStack) {
+        String customId = CustomItem.getCustomId(itemStack.getItemMeta()).orElse(null);
+        if(customId == null) return null;
+        switch (customId){
+            case CommonArrow.CUSTOM_ID -> {
+                return commonArrow;
+            }
+            case GravitionalArrow.CUSTOM_ID -> {
+                return gravitionalArrow;
+            }
+            case KnockBackArrow.CUSTOM_ID -> {
+                return knockBackArrow;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
+    public static ItemStack getGravitionalArrow(int tier) {
+        return gravitionalArrow.getDefaultItemStack(tier);
     }
 }

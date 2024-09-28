@@ -1,7 +1,8 @@
-package me.xxgradzix.gradzixcombatsystem.armors.instances;
+package me.xxgradzix.gradzixcombatsystem.items.armors.instances;
 
-import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
-import me.xxgradzix.gradzixcombatsystem.armors.CustomArmor;
+import me.xxgradzix.gradzixcombatsystem.items.armors.ArmorType;
+import me.xxgradzix.gradzixcombatsystem.items.armors.CustomArmor;
+import me.xxgradzix.gradzixcombatsystem.items.armors.UpgradableArmor;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
@@ -17,7 +18,6 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class MediumArmor implements CustomArmor, UpgradableArmor {
 
@@ -43,7 +43,7 @@ public class MediumArmor implements CustomArmor, UpgradableArmor {
     }
 
     @Override
-    public String getName(int tier, ArmorTierManager.ArmorType armorType) {
+    public String getName(int tier, ArmorType armorType) {
         String displayName = "";
         switch (armorType) {
             case HELMET -> {
@@ -63,7 +63,7 @@ public class MediumArmor implements CustomArmor, UpgradableArmor {
     }
 
     @Override
-    public Material getMaterial(int tier, ArmorTierManager.ArmorType armorType) {
+    public Material getMaterial(int tier, ArmorType armorType) {
         switch (armorType) {
             case HELMET -> {
                 return Material.CHAINMAIL_HELMET;
@@ -94,7 +94,7 @@ public class MediumArmor implements CustomArmor, UpgradableArmor {
     }
 
     @Override
-    public Optional<Color> getOptionalColor(int tier, ArmorTierManager.ArmorType armorType) {
+    public Optional<Color> getOptionalColor(int tier, ArmorType armorType) {
         return Optional.of(Color.GRAY);
     }
 
@@ -109,7 +109,7 @@ public class MediumArmor implements CustomArmor, UpgradableArmor {
     public static final int MEDIUM_ARMOR_BOOTS = 2;
 
     @Override
-    public void setModifiers(ItemMeta meta, ArmorTierManager.ArmorType armorType, int tier) {
+    public void setModifiers(ItemMeta meta, ArmorType armorType, int tier) {
 
         meta.removeAttributeModifier(Attribute.GENERIC_ARMOR);
         meta.removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);

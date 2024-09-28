@@ -1,47 +1,41 @@
-package me.xxgradzix.gradzixcombatsystem.weapons.instances;
+package me.xxgradzix.gradzixcombatsystem.items.weapons.instances;
 
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
-import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.EnchantableWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.MelleWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.ModifiableWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.*;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import static me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager.getRomanNumerals;
 
-public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, ModifiableWeapon {
+public class BattleSpear implements CustomWeapon, MelleWeapon, ThrowableWeapon, EnchantableWeapon, ModifiableWeapon, RangeChangeWeapon {
 
-    public static final String CUSTOM_ID = "gradzixcombat_battle_axe";
+    public static final String CUSTOM_ID = "gradzixcombat_battle_spear";
+
 
     @Override
     public String getCustomId() {
         return CUSTOM_ID;
     }
-
-
     @Override
     public double getAttackDamage(int tier) {
         switch (tier) {
             case 1:
-                return 6;
+                return 4;
             case 2:
-                return 7;
+                return 5;
             case 3:
-                return 8;
+                return 6;
             case 4:
-                return 9;
+                return 7;
             case 5:
-                return 10;
+                return 8;
             default:
                 return 0;
         }
@@ -51,15 +45,15 @@ public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, 
     public double getAttackSpeed(int tier) {
         switch (tier) {
             case 1:
-                return 0.6;
+                return 0.8;
             case 2:
-                return 0.6;
+                return 0.9;
             case 3:
-                return 0.65;
+                return 0.9;
             case 4:
-                return 0.7;
+                return 1.0;
             case 5:
-                return 0.75;
+                return 1.1;
             default:
                 return 0;
         }
@@ -69,19 +63,27 @@ public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, 
     public int getRequiredAttribute(int tier, CombatAttribute attribute) {
         switch (tier){
             case 1 -> {
-                if(attribute.equals(CombatAttribute.STRENGTH)) return 3;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 1;
+                if(attribute.equals(CombatAttribute.ENDURANCE)) return 2;
             }
             case 2 -> {
-                if(attribute.equals(CombatAttribute.STRENGTH)) return 4;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 2;
+                if(attribute.equals(CombatAttribute.ENDURANCE)) return 3;
+
             }
             case 3 -> {
-                if(attribute.equals(CombatAttribute.STRENGTH)) return 6;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 3;
+                if(attribute.equals(CombatAttribute.ENDURANCE)) return 4;
+
             }
             case 4 -> {
-                if(attribute.equals(CombatAttribute.STRENGTH)) return 8;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 4;
+                if(attribute.equals(CombatAttribute.ENDURANCE)) return 5;
+
             }
             case 5 -> {
-                if(attribute.equals(CombatAttribute.STRENGTH)) return 10;
+                if(attribute.equals(CombatAttribute.STRENGTH)) return 5;
+                if(attribute.equals(CombatAttribute.ENDURANCE)) return 6;
             }
         }
         return 0;
@@ -90,7 +92,7 @@ public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, 
 
     @Override
     public String getName(int tier) {
-        return ColorFixer.addColors("ᴛᴏᴘóʀ ʙᴏᴊᴏᴡʏ " + getRomanNumerals(tier));
+        return ColorFixer.addColors("ᴡᴌóᴄᴢɴɪᴀ " + getRomanNumerals(tier));
     }
 
     @Override
@@ -100,12 +102,14 @@ public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, 
 
     @Override
     public Material getMaterial(int tier) {
-        return Material.IRON_AXE;
+        return Material.TRIDENT;
     }
 
     @Override
     public void addBukkitEnchantments(int tier, ItemMeta meta) {
+        meta.addEnchant(Enchantment.LOYALTY, 1, true);
     }
+
     @Override
     public void setEnchantSlots(ItemStack itemStack, int tier) {
         if(tier >= 3) EnchantManager.setMaxSlots(itemStack, 1);
@@ -119,5 +123,10 @@ public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, 
     @Override
     public Set<Class> getApplicableModifications() {
         return Set.of(ModifiersManager.MelleModifier.class, ModifiersManager.UniversalModifier.class, ModifiersManager.CommonModifier.class);
+    }
+
+    @Override
+    public double getRange(int tier) {
+        return 1;
     }
 }

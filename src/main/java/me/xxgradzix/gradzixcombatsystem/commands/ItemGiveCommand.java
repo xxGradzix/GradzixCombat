@@ -1,8 +1,8 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
-import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
-import me.xxgradzix.gradzixcombatsystem.weapons.WeaponType;
+import me.xxgradzix.gradzixcombatsystem.items.armors.ArmorWeight;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.WeaponType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,9 +43,9 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
         }
 
         if(itemCategory.equalsIgnoreCase("armor")) {
-            ArmorTierManager.ArmorWeight armorWeight;
+            ArmorWeight armorWeight;
             try {
-                armorWeight = ArmorTierManager.ArmorWeight.valueOf(itemVariant.toUpperCase());
+                armorWeight = ArmorWeight.valueOf(itemVariant.toUpperCase());
             } catch (IllegalArgumentException e) {
                 player.sendMessage(" nie poprawna wartość: " + itemVariant);
                 return true;
@@ -66,6 +66,17 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
             WeaponType weaponType = WeaponType.valueOf(itemVariant.toUpperCase());
             ItemStack weapon = ItemManager.getWeapon(weaponType, tier);
             player.getInventory().addItem(weapon);
+        } else if (itemCategory.equalsIgnoreCase("arrow")) {
+            switch (itemVariant) {
+                case "common" -> {
+                    ItemStack commonArrow = ItemManager.getCommonArrow(tier);
+                    player.getInventory().addItem(commonArrow);
+                }
+                case "gravitional" -> {
+                    ItemStack gravitionalArrow = ItemManager.getGravitionalArrow(tier);
+                    player.getInventory().addItem(gravitionalArrow);
+                }
+            }
         }
 
 
@@ -82,10 +93,13 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
         }
         if(args.length == 3) {
             if(args[1].equalsIgnoreCase("armor")) {
-                return Arrays.stream(ArmorTierManager.ArmorWeight.values()).map(Enum::name).map(String::toLowerCase).toList();
+                return Arrays.stream(ArmorWeight.values()).map(Enum::name).map(String::toLowerCase).toList();
             }
             if(args[1].equalsIgnoreCase("weapon")) {
                 return Arrays.stream(WeaponType.values()).map(Enum::name).map(String::toLowerCase).toList();
+            }
+            if(args[1].equalsIgnoreCase("arrow")) {
+                return List.of("common", "gravitional");
             }
         }
         return List.of();

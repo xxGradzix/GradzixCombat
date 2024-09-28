@@ -3,13 +3,11 @@ package me.xxgradzix.gradzixcombatsystem.managers.modifiersManager;
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.ModifiableWeapon;
-import org.bukkit.Bukkit;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.CustomWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -168,19 +166,19 @@ public class ModifiersManager {
             put(Multiplier.CRIT_CHANCE_MULTIPLIER, 1.03);
         }})),
         RAPID(new ModifierRecord(ColorFixer.addColors("#5ce640ꜱᴢʏʙᴋɪ"), new HashMap<>() {{
-            put(Multiplier.ARROW_SPEED, 1.1);
-        }})),
-        HASTY(new ModifierRecord(ColorFixer.addColors("#e0d12bᴘᴏʀʏᴡᴄᴢʏ"), new HashMap<>() {{
             put(Multiplier.ARROW_SPEED, 1.15);
         }})),
+        HASTY(new ModifierRecord(ColorFixer.addColors("#e0d12bᴘᴏʀʏᴡᴄᴢʏ"), new HashMap<>() {{
+            put(Multiplier.ARROW_SPEED, 1.2);
+        }})),
         INTIMIDATING(new ModifierRecord(ColorFixer.addColors("#362396ꜱᴛʀᴀꜱᴢɴʏ"), new HashMap<>() {{
-            put(Multiplier.ARROW_SPEED, 1.05);
+            put(Multiplier.ARROW_SPEED, 1.10);
             put(Multiplier.KNOCK_BACK_MULTIPLIER, 1.15);
         }})),
         DEADLY(new ModifierRecord(ColorFixer.addColors("#631169śᴍɪᴇʀᴛᴇʟɴʏ"), new HashMap<>() {{
             put(Multiplier.DAMAGE_MULTIPLIER, 1.1);
             put(Multiplier.CRIT_CHANCE_MULTIPLIER, 1.02);
-            put(Multiplier.ARROW_SPEED, 1.05);
+            put(Multiplier.ARROW_SPEED, 1.1);
             put(Multiplier.KNOCK_BACK_MULTIPLIER, 1.05);
         }})),
         STAUNCH(new ModifierRecord(ColorFixer.addColors("#c7bc65ᴡɪᴇʀɴʏ"), new HashMap<>() {{
@@ -189,11 +187,11 @@ public class ModifiersManager {
         }})),
         AWFUL(new ModifierRecord(ColorFixer.addColors("#5f6e6cᴏᴋʀᴏᴘɴʏ"), new HashMap<>() {{
             put(Multiplier.DAMAGE_MULTIPLIER, 0.85);
-            put(Multiplier.ARROW_SPEED, 0.9);
+            put(Multiplier.ARROW_SPEED, 0.8);
             put(Multiplier.KNOCK_BACK_MULTIPLIER, 0.9);
         }})),
         LETHARGIC(new ModifierRecord(ColorFixer.addColors("#5f6e6cᴏꜱᴘᴀᴌʏ"), new HashMap<>() {{
-            put(Multiplier.ARROW_SPEED, 0.9);
+            put(Multiplier.ARROW_SPEED, 0.8);
         }})),
         AWKWARD(new ModifierRecord(ColorFixer.addColors("#966c75ɴɪᴇᴢʀęᴄᴢɴʏ"), new HashMap<>() {{
             put(Multiplier.KNOCK_BACK_MULTIPLIER, 0.8);
@@ -208,7 +206,7 @@ public class ModifiersManager {
         UNREAL(new ModifierRecord(ColorFixer.addColors("#29ccbeɴɪᴇʀᴇᴀʟɴʏ"), new HashMap<>() {{
             put(Multiplier.DAMAGE_MULTIPLIER, 1.15);
             put(Multiplier.CRIT_CHANCE_MULTIPLIER, 1.05);
-            put(Multiplier.ARROW_SPEED, 1.1);
+            put(Multiplier.ARROW_SPEED, 1.2);
             put(Multiplier.KNOCK_BACK_MULTIPLIER, 1.15);
         }}));
 

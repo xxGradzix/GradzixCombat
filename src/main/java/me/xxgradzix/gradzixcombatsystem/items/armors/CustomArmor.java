@@ -1,22 +1,15 @@
-package me.xxgradzix.gradzixcombatsystem.armors;
+package me.xxgradzix.gradzixcombatsystem.items.armors;
 
 import com.google.common.collect.Multimap;
-import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
-import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import me.xxgradzix.gradzixcombatsystem.weapons.EnchantableWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.MelleWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.ModifiableWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.RangeChangeWeapon;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -62,13 +55,13 @@ public interface CustomArmor {
 
     int getRequiredAttribute(int tier, CombatAttribute attribute);
 
-    String getName(int tier, ArmorTierManager.ArmorType armorType);
+    String getName(int tier, ArmorType armorType);
 
-    Material getMaterial(int tier, ArmorTierManager.ArmorType armorType);
+    Material getMaterial(int tier, ArmorType armorType);
 
-    Optional<Color> getOptionalColor(int tier, ArmorTierManager.ArmorType armorType);
+    Optional<Color> getOptionalColor(int tier, ArmorType armorType);
 
-    default ItemStack getItemStack(int tier, ArmorTierManager.ArmorType armorType) {
+    default ItemStack getItemStack(int tier, ArmorType armorType) {
 
         ItemStack itemStack = new ItemStack(getMaterial(tier, armorType));
 
@@ -115,9 +108,9 @@ public interface CustomArmor {
 
     List<String> getShortDescription(int tier);
 
-    void setModifiers(ItemMeta meta, ArmorTierManager.ArmorType armorType, int tier);
+    void setModifiers(ItemMeta meta, ArmorType armorType, int tier);
 
-    default void setLoreAndName(ItemMeta meta, int tier, ArmorTierManager.ArmorType armorType) {
+    default void setLoreAndName(ItemMeta meta, int tier, ArmorType armorType) {
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");

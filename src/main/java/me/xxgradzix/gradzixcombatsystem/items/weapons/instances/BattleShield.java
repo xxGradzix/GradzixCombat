@@ -1,14 +1,10 @@
-package me.xxgradzix.gradzixcombatsystem.weapons.instances;
+package me.xxgradzix.gradzixcombatsystem.items.weapons.instances;
 
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
-import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.CustomWeapon;
 import org.bukkit.Material;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
-
-import java.util.ArrayList;
 
 public class BattleShield implements CustomWeapon {
 

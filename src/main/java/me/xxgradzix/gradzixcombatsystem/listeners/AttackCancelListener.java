@@ -38,26 +38,26 @@ public class AttackCancelListener implements Listener {
     }
 
 
-    @EventHandler
-    public void bowShootEvent(EntityShootBowEvent event) {
-
-        if(!(event.getEntity() instanceof Player player)) {
-            return;
-        }
-
-        ItemStack bow = event.getBow();
-
-        boolean hasAttributes = AttributeManager.hasRequiredAttribute(bow, player);
-
-        if(!hasAttributes) {
-            event.setCancelled(true);
-            return;
-        }
-
-        Entity projectile = event.getProjectile();
-        Vector multiply = projectile.getVelocity().multiply(1.1);
-        event.getProjectile().setVelocity(multiply);
-    }
+//    @EventHandler
+//    public void bowShootEvent(EntityShootBowEvent event) {
+//
+//        if(!(event.getEntity() instanceof Player player)) {
+//            return;
+//        }
+//
+//        ItemStack bow = event.getBow();
+//
+//        boolean hasAttributes = AttributeManager.hasRequiredAttribute(bow, player);
+//
+//        if(!hasAttributes) {
+//            event.setCancelled(true);
+//            return;
+//        }
+//
+//        Entity projectile = event.getProjectile();
+//        Vector multiply = projectile.getVelocity().multiply(1.1);
+//        event.getProjectile().setVelocity(multiply);
+//    }
 
 
 }

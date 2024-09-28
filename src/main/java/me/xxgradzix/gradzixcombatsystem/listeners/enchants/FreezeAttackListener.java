@@ -40,17 +40,17 @@ public class FreezeAttackListener implements Listener {
         Entity damaged = event.getEntity();
 
         int ticksToAdd = switch (freezeLevel) {
-            case 1 -> random.nextInt(10, 25);
-            case 2 -> random.nextInt(20, 45);
-            case 3 -> random.nextInt(30, 65);
+            case 1 -> random.nextInt(25, 40);
+            case 2 -> random.nextInt(35, 60);
+            case 3 -> random.nextInt(45, 80);
             default -> 0;
         };
 
         int previousTicks = damaged.getFreezeTicks();
 
         int newTicks = previousTicks + ticksToAdd;
-        if(newTicks > 300) {
-            newTicks = 300;
+        if(newTicks > 400) {
+            newTicks = 400;
         }
 
         damaged.setFreezeTicks(newTicks);

@@ -2,18 +2,18 @@ package me.xxgradzix.gradzixcombatsystem.upgradeGuis;
 
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
-import me.xxgradzix.gradzixcombatsystem.ArmorTierManager;
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
-import me.xxgradzix.gradzixcombatsystem.armors.CustomArmor;
-import me.xxgradzix.gradzixcombatsystem.armors.instances.UpgradableArmor;
-import me.xxgradzix.gradzixcombatsystem.items.ItemIsNotCustomItem;
+import me.xxgradzix.gradzixcombatsystem.items.armors.ArmorType;
+import me.xxgradzix.gradzixcombatsystem.items.armors.ArmorWeight;
+import me.xxgradzix.gradzixcombatsystem.items.armors.CustomArmor;
+import me.xxgradzix.gradzixcombatsystem.items.armors.UpgradableArmor;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.items.NbtItemUtil;
+import me.xxgradzix.gradzixcombatsystem.managers.EconomyManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import net.kyori.adventure.text.Component;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -26,7 +26,7 @@ public class UpgradeGuiManager {
 
     private static final int MAX_TIER = 5;
 
-    public static void openArmorsGui(Player player, ArmorTierManager.ArmorWeight armorWeight, double priceModifier, int initialTier) {
+    public static void openArmorsGui(Player player, ArmorWeight armorWeight, double priceModifier, int initialTier) {
 
         if(initialTier < 1 || (initialTier + 3) > MAX_TIER) {
             return;
@@ -76,7 +76,7 @@ public class UpgradeGuiManager {
 //            ArrayList<ItemStack> armorPieces = ItemManager.getArmorPiecesOfWeightAndTier(armorWeight, tier);
             ArrayList<ItemStack> armorPieces = new ArrayList<>();
 
-            for (ArmorTierManager.ArmorType armorType : ArmorTierManager.ArmorType.values()) {
+            for (ArmorType armorType : ArmorType.values()) {
                 armorPieces.add(ItemManager.getArmorTypeByWeight(armorWeight).getItemStack(tier, armorType));
             }
 
@@ -112,15 +112,15 @@ public class UpgradeGuiManager {
 
         List<ItemStack> itemsNeeded = upgradableArmor.getRequiredItems(wantedItemTier);
 
-        ArmorTierManager.ArmorType armorType = null;
+        ArmorType armorType = null;
         if(item.getType().name().toUpperCase().contains("HELMET")) {
-            armorType = ArmorTierManager.ArmorType.HELMET;
+            armorType = ArmorType.HELMET;
         } else if(item.getType().name().toUpperCase().contains("CHESTPLATE")) {
-            armorType = ArmorTierManager.ArmorType.CHESTPLATE;
+            armorType = ArmorType.CHESTPLATE;
         } else if(item.getType().name().toUpperCase().contains("LEGGINGS") || item.getType().name().toUpperCase().contains("PANTS")) {
-            armorType = ArmorTierManager.ArmorType.LEGGINGS;
+            armorType = ArmorType.LEGGINGS;
         } else if(item.getType().name().toUpperCase().contains("BOOTS")) {
-            armorType = ArmorTierManager.ArmorType.BOOTS;
+            armorType = ArmorType.BOOTS;
         }
 
         Optional<ItemStack> optionalNeededItem = upgradableArmor.isLowerTierItemRequired(wantedItemTier) ? Optional.of(customArmorType.getItemStack(wantedItemTier - 1, armorType)) : Optional.empty();
@@ -191,23 +191,21 @@ public class UpgradeGuiManager {
             havePreviousItem = NbtItemUtil.calcItemAmount(player, optionalNeededItem.get()) >= optionalNeededItem.get().getAmount();
         }
 
-        haveMoney = GradzixCombatSystem.getEconomy().getBalance(player) >= requiredMoney;
+//        haveMoney = EconomyManager.getBalance(player) >= requiredMoney;
 
 
-        if (!(haveAllItems || haveMoney || havePreviousItem)) {
+        if (!(haveAllItems) || !haveMoney || (!havePreviousItem)) {
             player.sendMessage(ColorFixer.addColors("&cNie posiadasz wszystkich wymaganych przedmiotów"));
             return;
         }
 
 
-        Economy economy = GradzixCombatSystem.getEconomy();
-
-        EconomyResponse economyResponse = economy.withdrawPlayer(player, requiredMoney);
-
-        if (!economyResponse.transactionSuccess()) {
-            player.sendMessage(ColorFixer.addColors("&cNie posiadasz wystarczająco pieniędzy"));
-            return;
-        }
+//        boolean success = EconomyManager.withdrawMoney(player, requiredMoney);
+//
+//        if (!success) {
+//            player.sendMessage(ColorFixer.addColors("&cNie posiadasz wystarczająco pieniędzy"));
+//            return;
+//        }
 
         for (ItemStack itemNeeded : itemsNeeded) {
             NbtItemUtil.removeItemsWithCustomItemNBT(player, itemNeeded, itemNeeded.getAmount());

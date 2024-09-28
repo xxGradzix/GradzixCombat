@@ -1,26 +1,21 @@
 package me.xxgradzix.gradzixcombatsystem.upgradeGuis;
 
-import dev.triumphteam.gui.components.GuiType;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
+import me.xxgradzix.gradzixcombatsystem.managers.EconomyManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.ModifiableWeapon;
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.CustomWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryAction;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ReforgeGuiManager {
 
@@ -99,16 +94,15 @@ public class ReforgeGuiManager {
             guiItem.setAction(event -> {
                 event.setCancelled(true);
 
-                Economy economy = GradzixCombatSystem.getEconomy();
 
-                EconomyResponse economyResponse = economy.withdrawPlayer(player, price);
-
-                if (!economyResponse.transactionSuccess()) {
-                    player.sendMessage(ColorFixer.addColors("&cNie posiadasz wystarczająco pieniędzy"));
-                    return;
-                }
-
+//                boolean success = EconomyManager.withdrawMoney(player, price);
+//
+//                if (!success) {
+//                    player.sendMessage(ColorFixer.addColors("&cNie posiadasz wystarczająco pieniędzy"));
+//                    return;
+//                }
                 CustomWeapon weaponType = ItemManager.getWeaponType(reforgeItem);
+
                 if(weaponType instanceof ModifiableWeapon) {
                     ModifiersManager.applyRandomModifier(reforgeItem);
                     ((Player) event.getWhoClicked()).playSound(event.getWhoClicked(), Sound.BLOCK_ANVIL_USE, 1.0f, 1.0f);

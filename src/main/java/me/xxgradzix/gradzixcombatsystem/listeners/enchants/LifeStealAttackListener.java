@@ -44,7 +44,7 @@ public class LifeStealAttackListener implements Listener {
 
         double damagedHealth = damaged.getHealth();
 
-        double lifeToTransfer = damagedHealth / 10;
+        double lifeToTransfer = damagedHealth / 5;
 
 
         damager.setHealth(damager.getHealth() + lifeToTransfer);

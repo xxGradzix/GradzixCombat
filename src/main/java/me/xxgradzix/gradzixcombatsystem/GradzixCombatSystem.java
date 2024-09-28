@@ -7,6 +7,7 @@ import me.xxgradzix.gradzixcombatsystem.listeners.*;
 import me.xxgradzix.gradzixcombatsystem.listeners.enchants.AttackComboListener;
 import me.xxgradzix.gradzixcombatsystem.listeners.enchants.FreezeAttackListener;
 import me.xxgradzix.gradzixcombatsystem.listeners.enchants.LifeStealAttackListener;
+import me.xxgradzix.gradzixcombatsystem.managers.EconomyManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -18,12 +19,14 @@ public final class GradzixCombatSystem extends JavaPlugin {
 
     public static GradzixCombatSystem plugin;
 
-    private static Economy econ;
+//    private static Economy econ;
 
     @Override
     public void onEnable() {
         plugin = this;
         // Plugin startup logic
+
+        EconomyManager.setupEconomy();
 
         ItemManager.init();
 
@@ -38,7 +41,7 @@ public final class GradzixCombatSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ShieldBlock(), this);
         getServer().getPluginManager().registerEvents(new RestartPotionDrink(), this);
         getServer().getPluginManager().registerEvents(new StoneOFAggressionUse(), this);
-        getServer().getPluginManager().registerEvents(new AttackRangeListener(), this);
+        getServer().getPluginManager().registerEvents(new BowEvents(), this);
         getServer().getPluginManager().registerEvents(new KnockBackListener(), this);
 
         getServer().getPluginManager().registerEvents(new FreezeAttackListener(), this);
@@ -49,25 +52,25 @@ public final class GradzixCombatSystem extends JavaPlugin {
 
 
     }
-    private boolean setupEconomy() {
-        Bukkit.broadcastMessage("rsfdsfseef fe   f e              fefefefefefefefefefefefefes");
-        for (@NotNull Plugin plugin : getServer().getPluginManager().getPlugins()) {
-            Bukkit.broadcastMessage("Rlo - " + plugin.getName());
-        }
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
-            return false;
-        }
-        econ = rsp.getProvider();
-        return true;
-    }
-
-    public static Economy getEconomy() {
-        return econ;
-    }
+//    private boolean setupEconomy() {
+//        Bukkit.broadcastMessage("rsfdsfseef fe   f e              fefefefefefefefefefefefefes");
+//        for (@NotNull Plugin plugin : getServer().getPluginManager().getPlugins()) {
+//            Bukkit.broadcastMessage("Rlo - " + plugin.getName());
+//        }
+//        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+//            return false;
+//        }
+//        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+//        if (rsp == null) {
+//            return false;
+//        }
+//        econ = rsp.getProvider();
+//        return true;
+//    }
+//
+//    public static Economy getEconomy() {
+//        return econ;
+//    }
 
 
     @Override

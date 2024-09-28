@@ -1,8 +1,6 @@
-package me.xxgradzix.gradzixcombatsystem.weapons;
+package me.xxgradzix.gradzixcombatsystem.items.weapons;
 
-import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;

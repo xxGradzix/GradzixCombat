@@ -1,9 +1,8 @@
-package me.xxgradzix.gradzixcombatsystem.armors.instances;
+package me.xxgradzix.gradzixcombatsystem.items.armors;
 
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
-import java.util.Set;
 
 public interface UpgradableArmor {
 

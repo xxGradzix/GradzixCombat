@@ -1,20 +1,17 @@
-package me.xxgradzix.gradzixcombatsystem.weapons.instances;
+package me.xxgradzix.gradzixcombatsystem.items.weapons.instances;
 
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
-import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import me.xxgradzix.gradzixcombatsystem.weapons.CustomWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.EnchantableWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.MelleWeapon;
-import me.xxgradzix.gradzixcombatsystem.weapons.ModifiableWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.CustomWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.EnchantableWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.MelleWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import static me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager.getRomanNumerals;
