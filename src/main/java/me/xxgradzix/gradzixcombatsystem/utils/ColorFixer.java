@@ -21,8 +21,10 @@ public class ColorFixer {
         }
         return input;
     }
-    public static String addColors(String text)
-    {
+    public static String addColors(String text) {
+//        text = convertColorText(text);
+
+        text = text.replace("&#", "#");
         for (Matcher matcher = pattern.matcher(text); matcher.find(); matcher = pattern.matcher(text)) {
             String color = text.substring(matcher.start(), matcher.end());
             text = text.replace(color, ChatColor.of(color) + "");

@@ -2,7 +2,7 @@ package me.xxgradzix.gradzixcombatsystem.items.armors.instances;
 
 import me.xxgradzix.gradzixcombatsystem.items.armors.ArmorType;
 import me.xxgradzix.gradzixcombatsystem.items.armors.CustomArmor;
-import me.xxgradzix.gradzixcombatsystem.items.armors.UpgradableArmor;
+import me.xxgradzix.gradzixcombatsystem.items.Upgradable;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
@@ -12,25 +12,21 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ArmorMeta;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class MediumArmor implements CustomArmor, UpgradableArmor {
+public class Medium implements CustomArmor, Upgradable {
 
     public static final String CUSTOM_ID = "gradzixcombat_medium_armor";
 
-    @Override
-    public void setArmorCustomId(ItemMeta meta) {
-        meta.getPersistentDataContainer().set(armorCustomId, PersistentDataType.STRING, CUSTOM_ID);
-    }
 
     @Override
     public int getRequiredAttribute(int tier, CombatAttribute attribute) {
-
         switch (attribute) {
             case STRENGTH, DEXTERITY -> {
                 return (3 + tier);
@@ -39,7 +35,6 @@ public class MediumArmor implements CustomArmor, UpgradableArmor {
                 return 0;
             }
         }
-
     }
 
     @Override
@@ -111,32 +106,36 @@ public class MediumArmor implements CustomArmor, UpgradableArmor {
     @Override
     public void setModifiers(ItemMeta meta, ArmorType armorType, int tier) {
 
+        ArmorMeta armorMeta = (ArmorMeta) meta;
+
+
         meta.removeAttributeModifier(Attribute.GENERIC_ARMOR);
         meta.removeAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS);
         meta.removeAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
         meta.removeAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED);
 
+
         int bonus = tier == 3 ? 1 : tier == 5 ? 2 : 0;
 
         if(tier > 1) {
-            meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(genericArmorToughnessKey, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ARMOR));
+            meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(CustomArmor.genericArmorToughnessKey(armorType), 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ARMOR));
         }
         if(tier > 3) {
-            meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(genericKnockBackResistanceKey, 0.05, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ARMOR));
+            meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(CustomArmor.genericKnockBackResistanceKey(armorType), 0.05, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ARMOR));
         }
 
         switch (armorType) {
             case HELMET -> {
-                meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(genericArmorKey, MEDIUM_ARMOR_HELMET + bonus, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ARMOR));
+                meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(CustomArmor.genericArmorKey(armorType), MEDIUM_ARMOR_HELMET + bonus, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD));
             }
             case CHESTPLATE -> {
-                meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(genericArmorKey, MEDIUM_ARMOR_CHEST_PLATE + bonus, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ARMOR));
+                meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(CustomArmor.genericArmorKey(armorType), MEDIUM_ARMOR_CHEST_PLATE + bonus, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.CHEST));
             }
             case LEGGINGS -> {
-                meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(genericArmorKey, MEDIUM_ARMOR_LEGGINGS + bonus, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ARMOR));
+                meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(CustomArmor.genericArmorKey(armorType), MEDIUM_ARMOR_LEGGINGS + bonus, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.LEGS));
             }
             case BOOTS -> {
-                meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(genericArmorKey, MEDIUM_ARMOR_BOOTS + bonus, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.ARMOR));
+                meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(CustomArmor.genericArmorKey(armorType), MEDIUM_ARMOR_BOOTS + bonus, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.FEET));
             }
         }
     }
@@ -158,5 +157,30 @@ public class MediumArmor implements CustomArmor, UpgradableArmor {
     @Override
     public boolean isLowerTierItemRequired(int tier) {
         return tier != 1;
+    }
+
+    @Override
+    public String getCustomId() {
+        return CUSTOM_ID;
+    }
+
+    @Override
+    public String getName(int tier) {
+        return getName(tier, ArmorType.HELMET);
+    }
+
+    @Override
+    public int getModelData(int tier) {
+        return 0;
+    }
+
+    @Override
+    public Material getMaterial(int tier) {
+        return getMaterial(tier, ArmorType.HELMET);
+    }
+
+    @Override
+    public void addBukkitEnchantments(int tier, ItemMeta meta) {
+
     }
 }

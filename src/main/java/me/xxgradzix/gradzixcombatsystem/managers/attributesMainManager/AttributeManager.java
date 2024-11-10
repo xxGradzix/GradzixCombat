@@ -51,9 +51,9 @@ public class AttributeManager {
         updateTimeStamp(player);
     }
 
-    public static void givePointsToPlayer(Player player, int points) {
+    public static void givePointsToPlayer(Player player, int points, boolean override) {
         int totalAttributePoints = getTotalAttributePoints(player);
-        if(totalAttributePoints + points < 0 || totalAttributePoints + points > 25) {
+        if(totalAttributePoints + points < 0 || totalAttributePoints + points > 25 && !override) {
             return;
         }
         setTotalAttributePoints(player, totalAttributePoints + points);
@@ -118,11 +118,16 @@ public class AttributeManager {
     }
 
     public static void setAttributeRequirement(ItemStack item, CombatAttribute attribute, int value) {
-        if(item == null || item.getItemMeta() == null) return;
+        if(item == null) return;
         ItemMeta itemMeta = item.getItemMeta();
-        PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-        persistentDataContainer.set(getRequirementKeyByAttribute(attribute), PersistentDataType.INTEGER, value);
+        setAttributeRequirement(itemMeta, attribute, value);
         item.setItemMeta(itemMeta);
+    }
+
+    public static void setAttributeRequirement(ItemMeta meta, CombatAttribute attribute, int value) {
+        if(meta == null) return;
+        PersistentDataContainer persistentDataContainer = meta.getPersistentDataContainer();
+        persistentDataContainer.set(getRequirementKeyByAttribute(attribute), PersistentDataType.INTEGER, value);
     }
 
     private static NamespacedKey getPlayerAttributeKeyByAttribute(CombatAttribute attribute) {

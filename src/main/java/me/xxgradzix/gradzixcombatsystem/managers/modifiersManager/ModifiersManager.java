@@ -1,7 +1,10 @@
 package me.xxgradzix.gradzixcombatsystem.managers.modifiersManager;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItemManager;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.Tierable;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.CustomWeapon;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
@@ -25,13 +28,9 @@ public class ModifiersManager {
 
     private static final NamespacedKey REFORGE_PRICE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_reforge_price");
 
-
     private static final NamespacedKey KNOCK_BACK_MULTIPLIER_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_knockback_multiplier");
     private static final NamespacedKey CRIT_CHANCE_MULTIPLIER_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_crit_chance_multiplier");
     private static final NamespacedKey ARROW_SPEED_MULTIPLIER_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_arrow_speed_multiplier");
-
-    private static final String ATTACK_DAMAGE_MULTIPLIER_ATTRIBUTE_NAME = "gradzixcombat_attack_damage_multiplier";
-    private static final String ATTACK_SPEED_MULTIPLIER_ATTRIBUTE_NAME = "gradzixcombat_attack_speed_multiplier";
 
     public enum Multiplier {
         RANGE_MULTIPLIER, DAMAGE_MULTIPLIER, ATTACK_SPEED_MULTIPLIER, KNOCK_BACK_MULTIPLIER, CRIT_CHANCE_MULTIPLIER,
@@ -519,7 +518,7 @@ public class ModifiersManager {
 
     public static void applyRandomModifier(ItemStack itemStack) {
 
-        CustomWeapon weaponType = ItemManager.getWeaponType(itemStack);
+        CustomItem weaponType = CustomItemManager.getCustomItem(itemStack);
 
         if(!(weaponType instanceof ModifiableWeapon modifiableWeapon)) {
             return;
@@ -548,7 +547,7 @@ public class ModifiersManager {
 
 
         setModifier(itemMeta, modifier);
-        weaponType.setLoreAndName(itemMeta, CustomWeapon.getTier(itemStack));
+        weaponType.setLoreAndName(itemMeta, Tierable.getTier(itemStack));
 
         itemStack.setItemMeta(itemMeta);
     }

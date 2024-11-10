@@ -1,5 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
+import com.google.common.collect.Multimap;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
@@ -9,10 +10,15 @@ import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageType;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Collection;
 
 public class AttributeCommand implements CommandExecutor {
 
@@ -44,7 +50,7 @@ public class AttributeCommand implements CommandExecutor {
                         commandSender.sendMessage("Gracz " + arg2 + " nie jest na serwerze");
                         return true;
                     }
-                    AttributeManager.givePointsToPlayer(player, 1);
+                    AttributeManager.givePointsToPlayer(player, 1, true);
                     return true;
                 }
 

@@ -116,26 +116,6 @@
           <version>3.1.7</version>
       </dependency>
 
-<!--      <dependency>-->
-<!--          <groupId>com.destroystokyo.paper</groupId>-->
-<!--          <artifactId>paper-api</artifactId>-->
-<!--          <version>1.16.5-R0.1-SNAPSHOT</version>-->
-<!--          <scope>provided</scope>-->
-<!--      </dependency>-->
-<!--      <dependency>-->
-<!--          <groupId>org.spigotmc</groupId>-->
-<!--          <artifactId>spigot</artifactId>-->
-<!--          <version>1.17.1-R0.1-SNAPSHOT</version>-->
-<!--          &lt;!&ndash;            <classifier>remapped-mojang</classifier>&ndash;&gt;-->
-<!--          <scope>provided</scope>-->
-<!--      </dependency>-->
-
-<!--      <dependency>-->
-<!--          <groupId>com.github.MilkBowl</groupId>-->
-<!--          <artifactId>VaultAPI</artifactId>-->
-<!--          <version>1.7.1</version>-->
-<!--          <scope>provided</scope>-->
-<!--      </dependency>-->
       <dependency>
           <groupId>net.milkbowl.vault</groupId>
           <artifactId>VaultAPI</artifactId>
@@ -145,7 +125,6 @@
           <groupId>io.papermc.paper</groupId>
           <artifactId>paper-api</artifactId>
           <version>1.21.1-R0.1-SNAPSHOT</version>
-<!--          <version>1.19.4-R0.1-SNAPSHOT</version>-->
           <scope>provided</scope>
       </dependency>
   </dependencies>

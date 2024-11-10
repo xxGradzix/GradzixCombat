@@ -42,9 +42,7 @@ public class AttackComboListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDamage(EntityDamageByEntityEvent event) {
 
-        if(event.getEntity() instanceof Player damaged) {
-            playerCombos.remove(damaged.getUniqueId());
-        }
+        if(event.getEntity() instanceof Player damaged) playerCombos.remove(damaged.getUniqueId());
 
         if (event.isCancelled()) return;
         if (!(event.getDamager() instanceof Player damager)) return;
@@ -56,8 +54,6 @@ public class AttackComboListener implements Listener {
         if (enchantLevel == 0) return;
 
         ComboData combo = playerCombos.getOrDefault(damager.getUniqueId(), new ComboData(1, System.currentTimeMillis()));
-
-        Bukkit.broadcastMessage(combo.getHitCount() + " " + combo.getLastHit());
 
         if (System.currentTimeMillis() - combo.getLastHit() > 4000) {
             combo.setHitCount(1);

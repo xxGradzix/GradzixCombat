@@ -3,8 +3,9 @@ package me.xxgradzix.gradzixcombatsystem.upgradeGuis;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItemManager;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
-import me.xxgradzix.gradzixcombatsystem.managers.EconomyManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.CustomWeapon;
@@ -101,7 +102,7 @@ public class ReforgeGuiManager {
 //                    player.sendMessage(ColorFixer.addColors("&cNie posiadasz wystarczająco pieniędzy"));
 //                    return;
 //                }
-                CustomWeapon weaponType = ItemManager.getWeaponType(reforgeItem);
+                CustomItem weaponType = CustomItemManager.getCustomItem(reforgeItem);
 
                 if(weaponType instanceof ModifiableWeapon) {
                     ModifiersManager.applyRandomModifier(reforgeItem);

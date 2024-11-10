@@ -2,6 +2,10 @@ package me.xxgradzix.gradzixcombatsystem.items.armors;
 
 import com.google.common.collect.Multimap;
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
+import me.xxgradzix.gradzixcombatsystem.items.Upgradable;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.Attributable;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.Tierable;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
@@ -16,101 +20,69 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface CustomArmor {
+public interface CustomArmor extends CustomItem, Attributable, Upgradable, Tierable {
 
-    NamespacedKey armorCustomId = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_armor_custom_id");
-    NamespacedKey armorTierKey = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_armor_tier");
 
-    NamespacedKey genericArmorKey = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_generic_armor_value");
-    NamespacedKey genericArmorToughnessKey = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_generic_armor_toughness");
-    NamespacedKey genericKnockBackResistanceKey = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_generic_knockback_resistance");
-    NamespacedKey genericMovementSpeedKey = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_generic_movement_speed");
-
-    static String geArmorCustomId(ItemStack itemStack) {
-        if(itemStack == null) return null;
-        ItemMeta meta = itemStack.getItemMeta();
-        if(meta == null) return null;
-        return meta.getPersistentDataContainer().get(armorCustomId, PersistentDataType.STRING);
+    static NamespacedKey genericArmorKey(ArmorType armorType) {
+        return new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_generic_armor_value_" + armorType.name().toLowerCase());
     }
-
-//    static int getArmorTier(ItemStack itemStack) {
-//        return itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(armorTierKey, PersistentDataType.INTEGER, 0);
-//    }
-    default void setArmorTier(ItemStack itemStack, int tier) {
-        ItemMeta meta = itemStack.getItemMeta();
-        meta.getPersistentDataContainer().set(armorTierKey, PersistentDataType.INTEGER, tier);
-        itemStack.setItemMeta(meta);
+    static NamespacedKey genericArmorToughnessKey(ArmorType armorType) {
+        return new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_generic_armor_toughness_" + armorType.name().toLowerCase());
     }
-
-    default int getArmorTier(ItemStack itemStack) {
-        return itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(armorTierKey, PersistentDataType.INTEGER, 0);
+    static NamespacedKey genericKnockBackResistanceKey(ArmorType armorType) {
+        return new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_generic_knockback_resistance_" + armorType.name().toLowerCase());
     }
-
-    void setArmorCustomId(ItemMeta meta);
-
-    int getRequiredAttribute(int tier, CombatAttribute attribute);
-
-    String getName(int tier, ArmorType armorType);
+    static NamespacedKey genericMovementSpeedKey(ArmorType armorType) {
+        return new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_generic_movement_speed_" + armorType.name().toLowerCase());
+    }
 
     Material getMaterial(int tier, ArmorType armorType);
 
+    String getName(int tier, ArmorType armorType);
+
     Optional<Color> getOptionalColor(int tier, ArmorType armorType);
 
-    default ItemStack getItemStack(int tier, ArmorType armorType) {
 
-        ItemStack itemStack = new ItemStack(getMaterial(tier, armorType));
-
-        setAttributes(itemStack, tier);
-
-        setArmorTier(itemStack, tier);
-
-        ItemMeta meta = itemStack.getItemMeta();
-
-        setArmorCustomId(meta);
-
-        setModifiers(meta, armorType, tier);
-
-        if(this instanceof LeatherArmorMeta leatherArmorMeta) {
-            getOptionalColor(tier, armorType).ifPresent(leatherArmorMeta::setColor);
+    @Override
+    default ItemStack getDefaultItemStack(Object... optionalArgs) {
+        int tier = 1;
+        ArmorType armorType = ArmorType.HELMET;
+        if(optionalArgs.length == 2) {
+            if(optionalArgs[0] instanceof Integer) tier = (int) optionalArgs[0];
+            if(optionalArgs[1] instanceof ArmorType) armorType = (ArmorType) optionalArgs[1];
         }
-
+        ItemStack itemStack = new ItemStack(getMaterial(tier, armorType));
+        setAttributes(itemStack, tier);
+        setTier(itemStack, tier);
+        ItemMeta meta = itemStack.getItemMeta();
+        defaultSetItemCustomId(meta);
+        setModifiers(meta, armorType, tier);
+        if(meta instanceof LeatherArmorMeta leatherArmorMeta) getOptionalColor(tier, armorType).ifPresent(leatherArmorMeta::setColor);
         setLoreAndName(meta, tier, armorType);
-
         hideAll(meta);
-
         itemStack.setItemMeta(meta);
-
         return itemStack;
     }
 
-
-    default void setAttributes(ItemStack itemStack, int tier) {
-        for (CombatAttribute combatAttribute : CombatAttribute.values()) {
-            int requiredAttribute = getRequiredAttribute(tier, combatAttribute);
-            if(requiredAttribute != 0) {
-                AttributeManager.setAttributeRequirement(itemStack, combatAttribute, requiredAttribute);
-            }
-        }
-    }
-    default void hideAll(ItemMeta meta) {
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-        meta.addItemFlags(ItemFlag.HIDE_DESTROYS);
-        meta.addItemFlags(ItemFlag.HIDE_PLACED_ON);
-        meta.addItemFlags(ItemFlag.HIDE_DYE);
-    }
 
     List<String> getShortDescription(int tier);
 
     void setModifiers(ItemMeta meta, ArmorType armorType, int tier);
 
     default void setLoreAndName(ItemMeta meta, int tier, ArmorType armorType) {
+
+        if(tier == 0) {
+            meta.setDisplayName(ColorFixer.addColors("#3e4040") + getName(tier));
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴡʏʙʀᴀć ᴛᴇɴ ᴘʀᴢᴇᴅᴍɪᴏᴛ".replace("&", "§"));
+            return;
+        }
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");

@@ -1,5 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.items.weapons.instances;
 
+import me.xxgradzix.gradzixcombatsystem.items.Upgradable;
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
@@ -12,11 +13,12 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.List;
 import java.util.Set;
 
 import static me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager.getRomanNumerals;
 
-public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, ModifiableWeapon {
+public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, ModifiableWeapon, Upgradable {
 
     public static final String CUSTOM_ID = "gradzixcombat_battle_axe";
 
@@ -110,11 +112,28 @@ public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, 
 
     @Override
     public Set<EnchantManager.Enchant> getApplicableEnchants(int tier) {
-        return Set.of(EnchantManager.Enchant.LIFE_STEAL, EnchantManager.Enchant.FREEZE, EnchantManager.Enchant.ATTACK_COMBO);
+        return Set.of(EnchantManager.Enchant.LIFE_STEAL, EnchantManager.Enchant.FREEZE, EnchantManager.Enchant.WIND_CHARGE, EnchantManager.Enchant.ATTACK_COMBO, EnchantManager.Enchant.POISON);
     }
 
     @Override
     public Set<Class> getApplicableModifications() {
         return Set.of(ModifiersManager.MelleModifier.class, ModifiersManager.UniversalModifier.class, ModifiersManager.CommonModifier.class);
     }
+
+
+    @Override
+    public List<ItemStack> getRequiredItems(int tier) {
+        return List.of(new ItemStack(Material.IRON_INGOT, 4), new ItemStack(Material.OAK_LOG));
+    }
+
+    @Override
+    public int getRequiredMoney(int tier) {
+        return 100;
+    }
+
+    @Override
+    public boolean isLowerTierItemRequired(int tier) {
+        return tier != 1;
+    }
+
 }

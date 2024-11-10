@@ -1,7 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
-import me.xxgradzix.gradzixcombatsystem.items.armors.ArmorWeight;
-import me.xxgradzix.gradzixcombatsystem.upgradeGuis.UpgradeGuiManager;
+import me.xxgradzix.gradzixcombatsystem.upgradeGuis.MainBlacksmithGui;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +16,6 @@ public class OpenUpgradeGuiCommand implements CommandExecutor {
             sender.sendMessage("Usage: /openUpgradeGui <playerName> <priceModifier>");
             return false;
         }
-
         String playerName = args[0];
         String priceModifier = args[1];
 
@@ -38,8 +36,9 @@ public class OpenUpgradeGuiCommand implements CommandExecutor {
             return false;
         }
 
-        UpgradeGuiManager.openArmorsGui(player, ArmorWeight.MEDIUM, priceModifierDouble, 1);
+//        new WeaponUpgradeGuiManager(player);
 
+        new MainBlacksmithGui(player, 1);
 
 //        player.getInventory().addItem(ItemManager.testItem(true));
 //        player.getInventory().addItem(ItemManager.testItem(false));

@@ -1,5 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.items.weapons.instances;
 
+import me.xxgradzix.gradzixcombatsystem.items.Upgradable;
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
@@ -13,11 +14,12 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.List;
 import java.util.Set;
 
 import static me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager.getRomanNumerals;
 
-public class BattleCrossBow implements CustomWeapon, ShootableWeapon, EnchantableWeapon, ModifiableWeapon {
+public class BattleCrossBow implements CustomWeapon, ShootableWeapon, EnchantableWeapon, ModifiableWeapon, Upgradable {
 
     public static final String CUSTOM_ID = "gradzixcombat_battle_crossbow";
 
@@ -99,44 +101,44 @@ public class BattleCrossBow implements CustomWeapon, ShootableWeapon, Enchantabl
 
     @Override
     public Set<EnchantManager.Enchant> getApplicableEnchants(int tier) {
-        return Set.of(EnchantManager.Enchant.LIFE_STEAL, EnchantManager.Enchant.BLOOD_LOSS);
+        return Set.of(EnchantManager.Enchant.LIFE_STEAL, EnchantManager.Enchant.LIGHTNING, EnchantManager.Enchant.MULTI_SHOT);
     }
 
     @Override
     public Set<Class> getApplicableModifications() {
         return Set.of(ModifiersManager.RangeModifier.class, ModifiersManager.UniversalModifier.class);
     }
-    @Override
-    public ItemStack getDefaultItemStack(Object... optionalArgs) {
-
-        int tier = 1;
-        if(optionalArgs.length == 1) {
-            if(optionalArgs[0] instanceof Integer) {
-                tier = (int) optionalArgs[0];
-            }
-        }
-
-
-        ItemStack itemStack = new ItemStack(getMaterial(tier));
-
-        setAttributes(itemStack, tier);
-
-        setTier(itemStack, tier);
-
-        ItemMeta meta = itemStack.getItemMeta();
-
-        addBukkitEnchantments(tier, meta);
-        setWeaponDamage(meta, getWeaponDamage(tier));
-
-        meta.setCustomModelData(getModelData(tier));
-        defaultSetItemCustomId(meta);
-        setLoreAndName(meta, tier);
-        hideAll(meta);
-
-        itemStack.setItemMeta(meta);
-
-        return itemStack;
-    }
+//    @Override
+//    public ItemStack getDefaultItemStack(Object... optionalArgs) {
+//
+//        int tier = 1;
+//        if(optionalArgs.length == 1) {
+//            if(optionalArgs[0] instanceof Integer) {
+//                tier = (int) optionalArgs[0];
+//            }
+//        }
+//
+//
+//        ItemStack itemStack = new ItemStack(getMaterial(tier));
+//
+//        setAttributes(itemStack, tier);
+//
+//        setTier(itemStack, tier);
+//
+//        ItemMeta meta = itemStack.getItemMeta();
+//
+//        addBukkitEnchantments(tier, meta);
+//        setWeaponDamage(meta, getWeaponDamage(tier));
+//
+//        meta.setCustomModelData(getModelData(tier));
+//        defaultSetItemCustomId(meta);
+//        setLoreAndName(meta, tier);
+//        hideAll(meta);
+//
+//        itemStack.setItemMeta(meta);
+//
+//        return itemStack;
+//    }
     @Override
     public double getWeaponDamage(int tier) {
         switch (tier) {
@@ -159,5 +161,20 @@ public class BattleCrossBow implements CustomWeapon, ShootableWeapon, Enchantabl
                 return 0;
             }
         }
+    }
+
+    @Override
+    public List<ItemStack> getRequiredItems(int tier) {
+        return List.of(new ItemStack(Material.IRON_INGOT, 4), new ItemStack(Material.OAK_LOG));
+    }
+
+    @Override
+    public int getRequiredMoney(int tier) {
+        return 100;
+    }
+
+    @Override
+    public boolean isLowerTierItemRequired(int tier) {
+        return tier != 1;
     }
 }

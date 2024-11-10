@@ -3,11 +3,13 @@ package me.xxgradzix.gradzixcombatsystem.managers.messages;
 
 import eu.okaeri.configs.OkaeriConfig;
 import eu.okaeri.configs.annotation.Comment;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItemNbtItemUtil;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class MessageManager extends OkaeriConfig {
 
@@ -34,7 +36,8 @@ public class MessageManager extends OkaeriConfig {
                 player.sendTitle(null, message, 5, 30, 5);
                 break;
             case ACTIONBAR:
-                player.sendMessage(TextComponent.fromLegacyText(message));
+//                player.sendMessage(TextComponent.fromLegacyText(message));
+                player.sendActionBar(TextComponent.fromLegacyText(message));
                 break;
             case CHAT:
                 player.sendMessage(message);
@@ -101,6 +104,7 @@ public class MessageManager extends OkaeriConfig {
     public static String getRomanNumerals(int num) {
         String romeNum = "";
         switch (num) {
+            case 0 -> romeNum = "";
             case 1 -> romeNum = "&7ɪ";
             case 2 -> romeNum = "#877239ɪɪ";
             case 3 -> romeNum = "#68c473ɪɪɪ";
@@ -139,5 +143,50 @@ public class MessageManager extends OkaeriConfig {
     }
     public static String weaponSpeedWithWords(double speed) {
         return ColorFixer.addColors("&7ᴘʀęᴅᴋᴏść&8: #a18b3d" + speed);
+    }
+
+    public static String getRomanNumeralsForEnchant(int num) {
+        String romeNum = "";
+        switch (num) {
+            case 0 -> romeNum = "";
+            case 1 -> romeNum = "&7ɪ";
+            case 2 -> romeNum = "#877239ɪɪ";
+            case 3 -> romeNum = "#68c473ɪɪɪ";
+            case 4 -> romeNum = "#4c7ca1ɪᴠ";
+            case 5 -> romeNum = "#a30005ᴠ";
+            case 6 -> romeNum = "&fᴠɪ";
+            case 7 -> romeNum = "ᴠɪɪ";
+            case 8 -> romeNum = "ᴠɪɪɪ";
+            case 9 -> romeNum = "ɪx";
+            case 10 -> romeNum = "x";
+        }
+        return ColorFixer.addColors(romeNum);
+    }
+
+
+    public static String getHaveRequiredItemLoreString(Player player, ItemStack previousItem) {
+        int requiredAmount = previousItem.getAmount();
+        int playerAmount = CustomItemNbtItemUtil.calcItemAmount(player, previousItem);
+
+//
+//        if(previousItem.getItemMeta().hasDisplayName()) itemName = previousItem.getItemMeta().getDisplayName();
+
+        boolean hasItem = playerAmount >= requiredAmount;
+
+        StringBuilder string = new StringBuilder("&8• " + (hasItem ? "&a&l✓" : "&c&l✗") + (hasItem ? "&a " : "&c ") + Math.min(requiredAmount, playerAmount) + "&7/" + (hasItem ? "&a" : "&c") + requiredAmount);
+
+        while (string.length() < 22) {
+            string.append(" ");
+        }
+
+        String itemName = previousItem.getType().name();
+
+        if(previousItem.hasItemMeta() && previousItem.getItemMeta().hasDisplayName()) {
+            itemName = previousItem.getItemMeta().getDisplayName();
+        }
+
+        string.append(itemName);
+
+        return string.toString().replace(" ", "\u2007");
     }
 }

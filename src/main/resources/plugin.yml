@@ -15,10 +15,10 @@ commands:
     description: ulepsza itemki
     permission: gradzixcombatsystem.atrybuty
 
-  openReforgeGui:
-    description: otwiera gui do reforgowania itemów
-    permission: gradzixcombatsystem.atrybuty
-
   openUpgradeGui:
     description: otwiera gui do reforgowania itemów
-    permission: gradzixcombatsystem.atrybuty
+    permission: gradzixcombatsystem.upgrade
+
+  openEnchantGui:
+    description: otwiera gui do enchantowania itemów
+    permission: gradzixcombatsystem.enchant

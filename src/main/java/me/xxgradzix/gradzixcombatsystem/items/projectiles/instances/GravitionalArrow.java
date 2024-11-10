@@ -3,6 +3,8 @@ package me.xxgradzix.gradzixcombatsystem.items.projectiles.instances;
 import me.xxgradzix.gradzixcombatsystem.items.projectiles.CustomArrow;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
+import org.bukkit.Material;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import static me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager.getRomanNumerals;
 
@@ -35,6 +37,16 @@ public class GravitionalArrow implements CustomArrow {
     @Override
     public int getModelData(int tier) {
         return 0;
+    }
+
+    @Override
+    public Material getMaterial(int tier) {
+        return Material.ARROW;
+    }
+
+    @Override
+    public void addBukkitEnchantments(int tier, ItemMeta meta) {
+
     }
 
     @Override
