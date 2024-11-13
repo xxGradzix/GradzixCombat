@@ -63,9 +63,9 @@ public class CombatBottleFire implements CustomBottle {
     }
 
     @Override
-    public void affectedEffect(LivingEntity livingEntity, int tier) {
+    public void affectedEffect(Player caster, LivingEntity livingEntity, int tier) {
         //todo supercharged
-        MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVairant.BATTLE_BOTTLE_APPLY, null, tier, false, java.util.Optional.empty(), Optional.of(livingEntity));
+        MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, java.util.Optional.empty(), Optional.of(livingEntity));
     }
 
     @Override

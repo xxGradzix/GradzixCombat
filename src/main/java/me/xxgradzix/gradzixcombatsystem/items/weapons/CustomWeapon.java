@@ -2,23 +2,12 @@ package me.xxgradzix.gradzixcombatsystem.items.weapons;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
-import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
-import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlotGroup;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.components.ToolComponent;
-import org.bukkit.persistence.PersistentDataType;
-
-import java.util.ArrayList;
 
 public interface CustomWeapon extends CustomItem, Tierable, Attributable {
 

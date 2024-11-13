@@ -11,10 +11,7 @@ import me.xxgradzix.gradzixcombatsystem.items.battleBottles.CustomBottle;
 import me.xxgradzix.gradzixcombatsystem.items.battleBottles.instances.*;
 import me.xxgradzix.gradzixcombatsystem.items.combatPotion.CustomBattlePotion;
 import me.xxgradzix.gradzixcombatsystem.items.combatPotion.CustomBattlePotionOrb;
-import me.xxgradzix.gradzixcombatsystem.items.combatPotion.orbInstances.DashOrb;
-import me.xxgradzix.gradzixcombatsystem.items.combatPotion.orbInstances.HeartOrb;
-import me.xxgradzix.gradzixcombatsystem.items.combatPotion.orbInstances.TeleportOrb;
-import me.xxgradzix.gradzixcombatsystem.items.combatPotion.orbInstances.VolcanoOrb;
+import me.xxgradzix.gradzixcombatsystem.items.combatPotion.orbInstances.*;
 import me.xxgradzix.gradzixcombatsystem.items.enchantBooks.instances.*;
 import me.xxgradzix.gradzixcombatsystem.items.projectiles.instances.CommonArrow;
 import me.xxgradzix.gradzixcombatsystem.items.projectiles.instances.ExplosiveArrow;
@@ -69,6 +66,12 @@ public enum CustomItemManager {
     VOLCANO_ORB(new VolcanoOrb()),
     TELEPORT_ORB(new TeleportOrb()),
     HEART_ORB(new HeartOrb()),
+    SUPERCHARGE_ORB(new SuperChargeOrb()),
+    GIGANTYSM_ORB(new GigantysmOrb()),
+    FIRE_SUPER_CHARGE_ORB(new FireSuperChargeOrb()),
+    WIND_SUPER_CHARGE_ORB(new WindSuperChargeOrb()),
+    POISON_ORB(new PoisonSuperChargeOrb()),
+    FREEZE_ORB(new FreezeSuperChargeOrb()),
 
     FALLEN_HERO_POTION(new CustomBattlePotion())
     ;
@@ -93,6 +96,7 @@ public enum CustomItemManager {
     }
 
     public static CustomItem getEnchantBookCustomItemByEnchant(EnchantManager.Enchant enchant) {
+        if (enchant == null) return null;
         return switch (enchant) {
             case FREEZE -> FREEZE_ENCHANT_BOOK.getCustomItem();
             case SOUL_STEAL -> SOUL_STEAL_ENCHANT_BOOK.getCustomItem();

@@ -1,6 +1,5 @@
 package me.xxgradzix.gradzixcombatsystem.listeners.battleBottles;
 
-import com.destroystokyo.paper.ParticleBuilder;
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.items.CustomItemManager;
 import me.xxgradzix.gradzixcombatsystem.items.battleBottles.CombatPotionType;
@@ -13,14 +12,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.AreaEffectCloudApplyEvent;
 import org.bukkit.event.entity.LingeringPotionSplashEvent;
-import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.projectiles.ProjectileSource;
-import org.bukkit.util.Vector;
 
 import java.util.List;
 import java.util.Optional;
@@ -89,10 +84,10 @@ public class BottleListener implements Listener {
 
         switch (combatPotionType) {
             case FREEZE -> {
-                MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVairant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+                MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
             }
             case FIRE -> {
-                MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVairant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+                MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
 //                tutaj
 //                areaEffectCloud.setDuration(220);
 //
@@ -101,7 +96,7 @@ public class BottleListener implements Listener {
 //                center.getWorld().spawnParticle(Particle.LARGE_SMOKE, center, 20, radius, radius, radius, 0.05);
             }
             case WIND -> {
-                MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVairant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+                MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
 //
 //                areaEffectCloud.setDuration(80);
 //
@@ -109,7 +104,7 @@ public class BottleListener implements Listener {
 //                center.getWorld().spawnParticle(Particle.CLOUD, center, 20, radius, radius, radius, 0.05);
             }
             case POISON -> {
-                MagicEffectManager.usePoisonEffect(MagicEffectManager.MagicUseVairant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+                MagicEffectManager.usePoisonEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
 
 //                areaEffectCloud.setDuration(280);
 //
@@ -119,13 +114,8 @@ public class BottleListener implements Listener {
 //                center.getWorld().spawnParticle(Particle.EFFECT, center, 20, radius, radius, radius, 0.05);
             }
             case EXPLOSION -> {
-                areaEffectCloud.setDuration(1);
                 event.setCancelled(true);
-
-                center.getWorld().spawnParticle(Particle.FLAME, center, 40, radius, radius, radius, 0.5);
-                center.getWorld().spawnParticle(Particle.LARGE_SMOKE, center, 40, radius, radius, radius, 0.5);
-                center.createExplosion(2, false);
-
+                MagicEffectManager.useExplosionEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
             }
 
         }
@@ -133,23 +123,17 @@ public class BottleListener implements Listener {
     }
 
 
-
-
-
-
-
-
     @EventHandler
     public void onPotionSplash(AreaEffectCloudApplyEvent event) {
 
-
         AreaEffectCloud entity = event.getEntity();
+
+        if(!(entity.getSource() instanceof Player player)) return;
 
         int tier = entity.getPersistentDataContainer().getOrDefault(LINGERING_AREA_POTION_TIER, PersistentDataType.INTEGER, 0);
         if(tier == 0) return;
 
         String orDefault = entity.getPersistentDataContainer().getOrDefault(LINGERING_AREA_POTION_TYPE, PersistentDataType.STRING, "");
-
 
         CombatPotionType potionType;
         try {
@@ -163,7 +147,7 @@ public class BottleListener implements Listener {
 
         for (LivingEntity livingEntity : affectedEntities) {
 
-            bottle.affectedEffect(livingEntity, tier);
+            bottle.affectedEffect(player, livingEntity, tier);
 
         }
 

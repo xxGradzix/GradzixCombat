@@ -7,9 +7,8 @@ import me.xxgradzix.gradzixcombatsystem.managers.magicEffects.MagicEffectManager
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -64,11 +63,11 @@ public class CombatBottleFreeze implements CustomBottle {
         return ColorFixer.addColors("&7ᴍɪᴋꜱᴛᴜʀᴀ ᴍʀᴏᴢᴜ " + MessageManager.getRomanNumerals(tier));
     }
     @Override
-    public void affectedEffect(LivingEntity livingEntity, int tier) {
+    public void affectedEffect(Player caster, LivingEntity livingEntity, int tier) {
 
         // todo supercharge
 
-        MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVairant.BATTLE_BOTTLE_APPLY, Optional.empty(), tier, false, Optional.empty(), Optional.of(livingEntity));
+        MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, Optional.empty(), Optional.of(livingEntity));
 
 //        int ticksToAdd = switch (tier) {
 //            case 1 -> 75;

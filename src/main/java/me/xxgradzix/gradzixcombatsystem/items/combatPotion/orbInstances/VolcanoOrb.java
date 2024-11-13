@@ -17,7 +17,7 @@ public class VolcanoOrb implements CustomBattlePotionOrb {
 
     @Override
     public String getName(int tier) {
-        return "ᴏᴅłᴀᴍᴇᴋ ᴡᴜʟᴋᴀɴɪᴄᴢɴʏ";
+        return "ᴋʀʏꜱᴢᴛᴀł ᴡᴜʟᴋᴀɴɪᴄᴢɴʏ";
     }
 
     @Override

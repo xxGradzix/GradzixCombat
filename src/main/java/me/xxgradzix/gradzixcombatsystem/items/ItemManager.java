@@ -3,11 +3,10 @@ package me.xxgradzix.gradzixcombatsystem.items;
 import me.xxgradzix.gradzixcombatsystem.items.enchantBooks.CustomEnchantBook;
 import me.xxgradzix.gradzixcombatsystem.managers.EconomyManager;
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -98,7 +97,7 @@ public class ItemManager {
 
         lore.add(" ");
         lore.add(ColorFixer.addColors("&7ᴀᴋᴛᴜᴀʟɴɪᴇ ᴘᴏꜱɪᴀᴅᴀꜱᴢ&8: &b" + attributeLevel));
-        lore.add(ColorFixer.addColors("&7ᴡᴏʟɴʏᴄʜ ᴘᴜɴᴋᴛóᴡ&8: &b" + AttributeManager.getFreeAttributePoints(player)));
+        lore.add(ColorFixer.addColors("&7ᴡᴏʟɴʏᴄʜ ᴘᴜɴᴋᴛóᴡ&8: &b" + AttributePointsManager.getFreeAttributePoints(player)));
         lore.add(" ");
         lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴜʟᴇᴘꜱᴢʏć"));
         itemMeta.setLore(lore);
@@ -267,7 +266,7 @@ public class ItemManager {
             lore.add(" ");
             lore.add(ColorFixer.addColors("&7ᴡʏʙɪᴇʀᴢ ᴇɴᴄʜᴀɴᴛ ᴡᴇᴀᴘᴏɴᴜ"));
             lore.add(ColorFixer.addColors("&7ɪ ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴢᴀᴄᴢᴀʀᴏᴡᴀć"));
-            int atrr = AttributeManager.getAttributeRequirement(itemToGet, CombatAttribute.INTELLIGENCE);
+            int atrr = AttributePointsManager.getAttributeRequirement(itemToGet, CombatAttribute.INTELLIGENCE);
             if ( atrr != 0) {
                 lore.add(" ");
                 lore.add(ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ʙęᴅᴢɪᴇ ᴡʏᴍᴀɢᴀć: &b" + atrr + " ɪɴᴛᴇʟɪɢᴇɴᴄᴊɪ"));

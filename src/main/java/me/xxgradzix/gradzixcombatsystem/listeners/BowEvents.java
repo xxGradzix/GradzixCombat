@@ -9,7 +9,7 @@ import me.xxgradzix.gradzixcombatsystem.items.projectiles.instances.GravitionalA
 import me.xxgradzix.gradzixcombatsystem.items.projectiles.instances.KnockBackArrow;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.ShootableWeapon;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.Tierable;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Arrow;
@@ -113,7 +113,7 @@ public class BowEvents implements Listener {
 
         ItemStack bow = event.getBow();
 
-        boolean hasAttributes = AttributeManager.hasRequiredAttribute(bow, player);
+        boolean hasAttributes = AttributePointsManager.hasRequiredAttribute(bow, player);
 
         double multiplierValue = ModifiersManager.getMultiplierValue(bow, ModifiersManager.Multiplier.ARROW_SPEED);
 

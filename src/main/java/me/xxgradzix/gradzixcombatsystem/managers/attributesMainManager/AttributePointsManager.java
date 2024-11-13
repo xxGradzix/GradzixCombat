@@ -14,7 +14,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 
-public class AttributeManager {
+public class AttributePointsManager {
 
     private static final NamespacedKey TOTAL_ATTRIBUTE_POINTS_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "total_attribute_points");
     private static final NamespacedKey FREE_ATTRIBUTE_POINTS_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "free_attribute_points");
@@ -189,6 +189,7 @@ public class AttributeManager {
         for (CombatAttribute attribute : CombatAttribute.values()) {
             setAttributeLevel(player, attribute, 0);
         }
+        AbilitiesPointsManager.resetAbilities(player);
         setTotalAttributePoints(player, initialPoints);
         setFreeAttributePointsKey(player, initialPoints);
         updateTimeStamp(player);

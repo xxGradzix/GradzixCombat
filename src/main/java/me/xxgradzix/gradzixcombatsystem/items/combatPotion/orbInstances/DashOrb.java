@@ -16,7 +16,7 @@ public class DashOrb implements CustomBattlePotionOrb {
 
     @Override
     public String getName(int tier) {
-        return "ᴏᴅłᴀᴍᴇᴋ ᴘʀᴢᴇꜱᴋᴏᴋᴜ";
+        return "ᴋʀʏꜱᴢᴛᴀł ᴢʀʏᴡᴜ";
     }
 
     @Override

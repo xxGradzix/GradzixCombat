@@ -1,15 +1,13 @@
 package me.xxgradzix.gradzixcombatsystem.listeners;
 
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageType;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
 import java.util.Random;
 
@@ -25,7 +23,7 @@ public class AttackCancelListener implements Listener {
 
         ItemStack item = player.getInventory().getItemInMainHand();
 
-        boolean hasRequiredAttribute = AttributeManager.hasRequiredAttribute(item, player);
+        boolean hasRequiredAttribute = AttributePointsManager.hasRequiredAttribute(item, player);
 
         if(!hasRequiredAttribute) {
             if(new Random().nextDouble() < 0.75) {

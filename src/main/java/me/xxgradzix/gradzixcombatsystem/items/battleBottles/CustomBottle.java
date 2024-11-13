@@ -7,6 +7,7 @@ import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAtt
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -60,7 +61,7 @@ public interface CustomBottle extends CustomItem, Tierable, Upgradable {
 
     String getName(int tier);
 
-    void affectedEffect(LivingEntity livingEntity, int tier);
+    void affectedEffect(Player caster, LivingEntity livingEntity, int tier);
 
     CombatPotionType getCombatPotionType();
 }

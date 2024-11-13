@@ -45,10 +45,7 @@ public class FireAfflictionEnchant implements Listener {
 
         if(cooldown > 0) return;
 
-//        burstFire(player, enchantLevel);
-
-        //TODO Supercharged
-        MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVairant.ENCHANT, Optional.of(player), enchantLevel, false, Optional.empty(), Optional.empty());
+        MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(player), enchantLevel, false, Optional.empty(), Optional.empty());
 
 //        player.setCooldown(itemUsed.getType(), 20*7);
     }

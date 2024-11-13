@@ -3,6 +3,7 @@ package me.xxgradzix.gradzixcombatsystem;
 import me.xxgradzix.gradzixcombatsystem.armorEvent.ArmorListener;
 import me.xxgradzix.gradzixcombatsystem.commands.*;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
+import me.xxgradzix.gradzixcombatsystem.listeners.combatHeroPotion.effectsEvents.GigantysmOrbListener;
 import me.xxgradzix.gradzixcombatsystem.listeners.combatHeroPotion.effectsEvents.TeleportOrbListener;
 import me.xxgradzix.gradzixcombatsystem.listeners.*;
 import me.xxgradzix.gradzixcombatsystem.listeners.battleBottles.BottleListener;
@@ -12,6 +13,7 @@ import me.xxgradzix.gradzixcombatsystem.listeners.combatHeroPotion.effectsEvents
 import me.xxgradzix.gradzixcombatsystem.listeners.combatHeroPotion.effectsEvents.ExplosionOrbListener;
 import me.xxgradzix.gradzixcombatsystem.listeners.enchants.*;
 import me.xxgradzix.gradzixcombatsystem.managers.EconomyManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AbilitiesPointsManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class GradzixCombatSystem extends JavaPlugin {
@@ -54,6 +56,7 @@ public final class GradzixCombatSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MultiShot(), this);
         getServer().getPluginManager().registerEvents(new SoulStealListener(), this);
         getServer().getPluginManager().registerEvents(new WindEnchantChargeListener(), this);
+        getServer().getPluginManager().registerEvents(new PoisonAttackListener(), this);
 
         getServer().getPluginManager().registerEvents(new BottleListener(), this);
 
@@ -62,6 +65,9 @@ public final class GradzixCombatSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ExplosionOrbListener(), this);
         getServer().getPluginManager().registerEvents(new PotionDrinkEvent(), this);
         getServer().getPluginManager().registerEvents(new TeleportOrbListener(), this);
+        getServer().getPluginManager().registerEvents(new GigantysmOrbListener(), this);
+
+        AbilitiesPointsManager.registerListeners();
 
         getServer().getPluginManager().registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
 

@@ -8,10 +8,9 @@ import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,9 +64,9 @@ public class CombatBottlePoison implements CustomBottle {
     }
 
     @Override
-    public void affectedEffect(LivingEntity livingEntity, int tier) {
+    public void affectedEffect(Player caster, LivingEntity livingEntity, int tier) {
 
-        MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVairant.BATTLE_BOTTLE_APPLY, Optional.empty(), tier, false, Optional.empty(), Optional.of(livingEntity));
+        MagicEffectManager.usePoisonEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, Optional.empty(), Optional.of(livingEntity));
 //        livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20 * 5, tier >= 3 ? 2 : 1));
 //        if(tier >= 2) {
 //            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 20 * 2, 2));

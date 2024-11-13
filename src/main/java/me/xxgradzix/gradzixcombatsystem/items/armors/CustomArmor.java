@@ -6,21 +6,17 @@ import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
 import me.xxgradzix.gradzixcombatsystem.items.Upgradable;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.Attributable;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.Tierable;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.persistence.PersistentDataType;
 
-import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -89,7 +85,7 @@ public interface CustomArmor extends CustomItem, Attributable, Upgradable, Tiera
 
         lore.addAll(getShortDescription(tier));
 
-        lore.addAll(AttributeManager.getRequirementLore(meta));
+        lore.addAll(AttributePointsManager.getRequirementLore(meta));
 
         Multimap<Attribute, AttributeModifier> attributeModifiers = meta.getAttributeModifiers();
 

@@ -6,7 +6,7 @@ import me.xxgradzix.gradzixcombatsystem.items.weapons.Attributable;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.EnchantableWeapon;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.Tierable;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
@@ -82,7 +82,7 @@ public interface CustomArrow extends CustomItem, Tierable, Attributable {
             lore.addAll(modifiableWeapon.getQualityLore(meta));
         }
 
-        lore.addAll(AttributeManager.getRequirementLore(meta));
+        lore.addAll(AttributePointsManager.getRequirementLore(meta));
 
         if(this instanceof EnchantableWeapon enchantableWeapon) {
             lore.addAll(enchantableWeapon.getEnchantLore(meta));

@@ -2,14 +2,12 @@ package me.xxgradzix.gradzixcombatsystem.items.battleBottles.instances;
 
 import me.xxgradzix.gradzixcombatsystem.items.battleBottles.CombatPotionType;
 import me.xxgradzix.gradzixcombatsystem.items.battleBottles.CustomBottle;
-import me.xxgradzix.gradzixcombatsystem.items.weapons.EnchantableWeapon;
-import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -64,7 +62,7 @@ public class CombatBottleExplosion implements CustomBottle {
     }
 
     @Override
-    public void affectedEffect(LivingEntity livingEntity, int tier) {
+    public void affectedEffect(Player caster, LivingEntity livingEntity, int tier) {
 
     }
 

@@ -8,9 +8,9 @@ import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,9 +64,9 @@ public class CombatBottleWind implements CustomBottle {
     }
 
     @Override
-    public void affectedEffect(LivingEntity livingEntity, int tier) {
+    public void affectedEffect(Player caster, LivingEntity livingEntity, int tier) {
 
-        MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVairant.BATTLE_BOTTLE_APPLY, Optional.empty(), tier, false, Optional.empty(), Optional.of(livingEntity));
+        MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, Optional.empty(), Optional.of(livingEntity));
 
     }
 

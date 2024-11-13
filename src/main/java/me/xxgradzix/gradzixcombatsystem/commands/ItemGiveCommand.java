@@ -55,8 +55,19 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                 player.getInventory().addItem(teleportOrb);
                 ItemStack volcanoOrb = CustomItemManager.VOLCANO_ORB.getCustomItem().getDefaultItemStack();
                 player.getInventory().addItem(volcanoOrb);
-
-
+                ItemStack manaOrb = CustomItemManager.SUPERCHARGE_ORB.getCustomItem().getDefaultItemStack();
+                player.getInventory().addItem(manaOrb);
+                ItemStack gigantysmOrb = CustomItemManager.GIGANTYSM_ORB.getCustomItem().getDefaultItemStack();
+                player.getInventory().addItem(gigantysmOrb);
+                ItemStack fireSuperChargeOrb = CustomItemManager.FIRE_SUPER_CHARGE_ORB.getCustomItem().getDefaultItemStack();
+                player.getInventory().addItem(fireSuperChargeOrb);
+                ItemStack windSuperChargeOrb = CustomItemManager.WIND_SUPER_CHARGE_ORB.getCustomItem().getDefaultItemStack();
+                player.getInventory().addItem(windSuperChargeOrb);
+                ItemStack freezeSuperChargeOrb = CustomItemManager.FREEZE_ORB.getCustomItem().getDefaultItemStack();
+                player.getInventory().addItem(freezeSuperChargeOrb);
+                ItemStack poisonSuperChargeOrb = CustomItemManager.POISON_ORB.getCustomItem().getDefaultItemStack();
+                player.getInventory().addItem(poisonSuperChargeOrb);
+                return true;
             }
         }
 
@@ -84,18 +95,14 @@ public class ItemGiveCommand implements CommandExecutor, TabCompleter {
                         ItemStack armor = CustomItemManager.LIGHT_ARMOR.getCustomItem().getDefaultItemStack(tier, armorType);
                         player.getInventory().addItem(armor);
                     }
-//                    CustomItemManager.LIGHT_ARMOR.getCustomItem().defaultSetItemCustomId(tier);
-//                    ItemManager.getLightArmor(player, tier);
                 }
                 case MEDIUM -> {
-//                    ItemManager.getMediumArmor(player, tier);
                     for (ArmorType armorType : ArmorType.values()) {
                         ItemStack armor = CustomItemManager.MEDIUM_ARMOR.getCustomItem().getDefaultItemStack(tier, armorType);
                         player.getInventory().addItem(armor);
                     }
                 }
                 case HEAVY -> {
-//                    ItemManager.getHeavyArmor(player, tier);
                     for (ArmorType armorType : ArmorType.values()) {
                         ItemStack armor = CustomItemManager.HEAVY_ARMOR.getCustomItem().getDefaultItemStack(tier, armorType);
                         player.getInventory().addItem(armor);

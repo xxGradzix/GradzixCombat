@@ -5,17 +5,15 @@ import me.xxgradzix.gradzixcombatsystem.items.weapons.MelleWeapon;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.ShootableWeapon;
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -97,7 +95,7 @@ public interface CustomItem {
             lore.addAll(modifiableWeapon.getQualityLore(meta));
         }
 
-        lore.addAll(AttributeManager.getRequirementLore(meta));
+        lore.addAll(AttributePointsManager.getRequirementLore(meta));
 
         String enchantSuffix = "";
 

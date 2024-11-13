@@ -1,6 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.items.weapons;
 
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
 import org.bukkit.inventory.ItemStack;
 
@@ -10,7 +10,7 @@ public interface Attributable {
         for (CombatAttribute combatAttribute : CombatAttribute.values()) {
             int requiredAttribute = getRequiredAttribute(tier, combatAttribute);
             if(requiredAttribute != 0) {
-                AttributeManager.setAttributeRequirement(itemStack, combatAttribute, requiredAttribute);
+                AttributePointsManager.setAttributeRequirement(itemStack, combatAttribute, requiredAttribute);
             }
         }
     }

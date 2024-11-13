@@ -16,7 +16,7 @@ public class TeleportOrb implements CustomBattlePotionOrb {
 
     @Override
     public String getName(int tier) {
-        return "ᴏᴅłᴀᴍᴇᴋ ᴛᴇʟᴇᴘᴏʀᴛᴀᴄᴊɪ";
+        return "ᴋʀʏꜱᴢᴛᴀł ᴘʀᴢᴇꜱᴋᴏᴋᴜ ᴄᴢᴀꜱᴏᴘʀᴢᴇꜱᴛʀᴢᴇɴɴᴇɢᴏ";
     }
 
     @Override

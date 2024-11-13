@@ -17,7 +17,7 @@ public class HeartOrb implements CustomBattlePotionOrb {
 
     @Override
     public String getName(int tier) {
-        return "ᴏᴅłᴀᴍᴇᴋ żʏᴡᴏᴛɴᴏśᴄɪ";
+        return "ᴋʀʏꜱᴢᴛᴀł żʏᴄɪᴏᴡᴇᴊ ᴇɴᴇʀɢɪɪ";
     }
 
     @Override

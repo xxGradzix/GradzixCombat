@@ -1,7 +1,8 @@
 package me.xxgradzix.gradzixcombatsystem.listeners;
 
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AbilitiesPointsManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +18,8 @@ public class RestartPotionDrink implements Listener {
         Player player = event.getPlayer();
 
         if(ItemManager.restartPotion.equals(item)) {
-            AttributeManager.resetAttributes(player, AttributeManager.getTotalAttributePoints(player));
+            AttributePointsManager.resetAttributes(player, AttributePointsManager.getTotalAttributePoints(player));
+            AbilitiesPointsManager.resetAbilities(player);
         }
 
     }

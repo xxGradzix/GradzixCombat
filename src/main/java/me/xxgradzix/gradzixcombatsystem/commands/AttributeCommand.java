@@ -1,24 +1,20 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
-import com.google.common.collect.Multimap;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AbilitiesPointsManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
+import me.xxgradzix.gradzixcombatsystem.managers.magicEffects.MagicEffectManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageType;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.Collection;
 
 public class AttributeCommand implements CommandExecutor {
 
@@ -33,7 +29,7 @@ public class AttributeCommand implements CommandExecutor {
                 if(arg1.equalsIgnoreCase("reset")) {
                     boolean all = arg2.equalsIgnoreCase("all");
                     if(all) {
-                        AttributeManager.resetAllAttributes();
+                        AttributePointsManager.resetAllAttributes();
                         return true;
                     }
                     Player player = Bukkit.getPlayer(arg2);
@@ -41,7 +37,7 @@ public class AttributeCommand implements CommandExecutor {
                         commandSender.sendMessage("Gracz " + arg2 + " nie jest na serwerze");
                         return true;
                     }
-                    AttributeManager.resetAttributes(player, 0);
+                    AttributePointsManager.resetAttributes(player, 0);
                     return true;
                 }
                 if(arg1.equalsIgnoreCase("add")) {
@@ -50,7 +46,12 @@ public class AttributeCommand implements CommandExecutor {
                         commandSender.sendMessage("Gracz " + arg2 + " nie jest na serwerze");
                         return true;
                     }
-                    AttributeManager.givePointsToPlayer(player, 1, true);
+                    AttributePointsManager.givePointsToPlayer(player, 1, true);
+                    return true;
+                }
+                if(arg1.equalsIgnoreCase("test88")) {
+                    Player player = (Player) commandSender;
+                    MagicEffectManager.setSoulsStolen(player.getInventory().getItemInMainHand(), 88);
                     return true;
                 }
 
@@ -76,11 +77,16 @@ public class AttributeCommand implements CommandExecutor {
         int slot = 10;
 
         for (CombatAttribute attribute : CombatAttribute.values()) {
-            GuiItem attributeGuiItem = new GuiItem(ItemManager.getAttributeItem(player, attribute, AttributeManager.getAttributeLevel(player, attribute)));
+            GuiItem attributeGuiItem = new GuiItem(ItemManager.getAttributeItem(player, attribute, AttributePointsManager.getAttributeLevel(player, attribute)));
 
             attributeGuiItem.setAction((e) -> {
 
-                boolean isSuccessful = AttributeManager.incrementAttributeLevel(player, attribute);
+                if(e.isRightClick()) {
+                    AbilitiesPointsManager.openAbilitiesGui(player, attribute);
+                    return;
+                }
+
+                boolean isSuccessful = AttributePointsManager.incrementAttributeLevel(player, attribute);
 
                 if(isSuccessful) {
                     openAttributeGui(player);

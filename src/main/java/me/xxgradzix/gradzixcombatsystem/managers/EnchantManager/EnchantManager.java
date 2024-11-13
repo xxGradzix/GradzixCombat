@@ -5,10 +5,9 @@ import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
 import me.xxgradzix.gradzixcombatsystem.items.CustomItemManager;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.Attributable;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.Tierable;
-import me.xxgradzix.gradzixcombatsystem.listeners.enchants.MultiShot;
-import me.xxgradzix.gradzixcombatsystem.listeners.enchants.SoulStealListener;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
+import me.xxgradzix.gradzixcombatsystem.managers.magicEffects.MagicEffectManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.EnchantableWeapon;
@@ -117,7 +116,7 @@ public class EnchantManager {
         CustomItem weaponType = CustomItemManager.getCustomItem(itemStack);
 
         if(weaponType instanceof Attributable) {
-            AttributeManager.setAttributeRequirement(itemMeta, CombatAttribute.INTELLIGENCE, level * 3);
+            AttributePointsManager.setAttributeRequirement(itemMeta, CombatAttribute.INTELLIGENCE, level * 3);
         }
 
         if(weaponType instanceof Tierable) {
@@ -296,7 +295,7 @@ public class EnchantManager {
         }
 
         if(enchantMap.containsKey(Enchant.SOUL_STEAL)) {
-            lore.add(ColorFixer.addColors("&7ᴘᴏᴄʜłᴏɴɪęᴛᴇ ᴅᴜꜱᴢᴇ: " + SoulStealListener.getSoulsStolen(itemMeta)));
+            lore.add(ColorFixer.addColors("&7ᴘᴏᴄʜłᴏɴɪęᴛᴇ ᴅᴜꜱᴢᴇ: " + MagicEffectManager.getSoulsStolen(itemMeta)));
         }
         return lore;
     }

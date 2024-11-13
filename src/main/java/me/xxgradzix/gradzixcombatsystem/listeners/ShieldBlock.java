@@ -1,6 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.listeners;
 
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributeManager;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageType;
 import org.bukkit.Material;
@@ -24,7 +24,7 @@ public class ShieldBlock implements Listener {
             if(!player.isBlocking()) return;
 
             if(item.getType().equals(Material.SHIELD) || offItem.getType().equals(Material.SHIELD)) {
-                if(!AttributeManager.hasRequiredAttribute(item, player)) {
+                if(!AttributePointsManager.hasRequiredAttribute(item, player)) {
                     MessageManager.sendMessageFormated(player, MessageManager.BLOCKING_UNSUCCESSFUL, MessageType.SUBTITLE);
                 }
             }
@@ -43,7 +43,7 @@ public class ShieldBlock implements Listener {
 
             Player player = event.getPlayer();
             if(Material.SHIELD.equals(item.getType())) {
-                if(!AttributeManager.hasRequiredAttribute(item, event.getPlayer())) {
+                if(!AttributePointsManager.hasRequiredAttribute(item, event.getPlayer())) {
                     player.setShieldBlockingDelay(99999);
                     MessageManager.sendMessageFormated(player, MessageManager.BLOCKING_UNSUCCESSFUL, MessageType.SUBTITLE);
                 } else {

@@ -2,7 +2,6 @@ package me.xxgradzix.gradzixcombatsystem.listeners.enchants;
 
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
 import me.xxgradzix.gradzixcombatsystem.managers.magicEffects.MagicEffectManager;
-import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -13,7 +12,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Optional;
-import java.util.Random;
 
 public class FreezeAttackListener implements Listener {
 
@@ -32,7 +30,7 @@ public class FreezeAttackListener implements Listener {
 
         if(!(target instanceof LivingEntity)) return;
 
-        MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVairant.ENCHANT, Optional.of(damager), freezeLevel, false, Optional.empty(), Optional.of((LivingEntity) event.getEntity()));
+        MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(damager), freezeLevel, false, Optional.empty(), Optional.of((LivingEntity) event.getEntity()));
 
 //
 //        Entity damaged = event.getEntity();
