@@ -44,6 +44,16 @@ public class ItemManager {
 
     public static ItemStack moreItemsItemButton;
 
+    public static ItemStack abilitiesDownButton;
+    public static ItemStack abilitiesUpButton;
+
+    public static ItemStack returnToAttributesButton;
+    public static ItemStack restartAbilitiesButton;
+    public static ItemStack returnButton;
+    public static ItemStack refillButton;
+    public static ItemStack customPotionButton;
+    public static ItemStack thrownBottlesButton;
+
     /** OTHER ITEMS METHODS **/
 
     public static void init() {
@@ -62,26 +72,63 @@ public class ItemManager {
         createReforgeButtonItem();
 
         createMoreItemsButton();
+
+        createAbilityUpButton();
+        createAbilityDownButton();
+
+        createReturnToAttributesButton();
+        createRestartAbilitiesButton();
+
+        createReturnButton();
+        createRefillButton();
+        createCustomPotionButton();
+        createThrowBottlesButton();
+
     }
 
-    public static @NotNull ItemStack getAttributeItem(Player player, CombatAttribute attribute, int attributeLevel) {
+    public static @NotNull ItemStack getAttributeItem(Player player, CombatAttribute attribute, int attributeLevel, int slot) {
         Material material;
+        int customModelData = 0;
         String displayName;
+        material = Material.MAP;
+        customModelData = 1010;
+
+        if(slot == 1) {
+            material = Material.GLASS_PANE;
+            customModelData = 2020000 + attributeLevel ;
+        }
         switch (attribute) {
             case STRENGTH -> {
-                material = Material.RED_DYE;
+
+                if(slot == 1) {
+                    customModelData += 100000;
+                }
+
                 displayName = ColorFixer.addColors("#3e4040&lꜱɪᴌᴀ");
             }
             case ENDURANCE -> {
-                material = Material.CYAN_DYE;
+
+                if(slot == 1) {
+                    customModelData += 200000;
+                }
+
                 displayName = ColorFixer.addColors("#3e4040&lᴡʏᴛʀᴢʏᴍᴀᴌᴏść");
             }
             case DEXTERITY -> {
-                material = Material.LIME_DYE;
+
+                if(slot == 1) {
+                    customModelData += 300000;
+                }
+
                 displayName = ColorFixer.addColors("#3e4040&lᴢʀęᴄᴢɴᴏść");
             }
             case INTELLIGENCE -> {
-                material = Material.PURPLE_DYE;
+
+
+                if(slot == 1) {
+                    customModelData += 400000;
+                }
+
                 displayName = ColorFixer.addColors("#3e4040&lɪɴᴛᴇʟɪɢᴇɴᴄᴊᴀ");
             }
             default -> {
@@ -91,6 +138,8 @@ public class ItemManager {
         }
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
+
+        itemMeta.setCustomModelData(customModelData);
 
         itemMeta.setDisplayName((displayName));
         ArrayList<String> lore = new ArrayList<>();
@@ -158,7 +207,7 @@ public class ItemManager {
 
 
 
-    public static ItemStack upgradeWeaponButton(Player player, List<ItemStack> itemsNeeded, ItemStack previousItem, int price) {
+    public static ItemStack universalCreateItemButton(Player player, List<ItemStack> itemsNeeded, ItemStack previousItem, int price) {
         ItemStack item = new ItemStack(Material.MAP);
 
         ItemMeta itemMeta = item.getItemMeta();
@@ -393,6 +442,7 @@ public class ItemManager {
         ItemStack item = new ItemStack(Material.MAP);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(1020);
+        itemMeta.setMaxStackSize(1);
         itemMeta.setDisplayName((""));
         itemMeta.setHideTooltip(true);
         item.setItemMeta(itemMeta);
@@ -569,4 +619,145 @@ public class ItemManager {
 
         return tierItem;
     }
+
+    private static void createAbilityDownButton() {
+        ItemStack item = new ItemStack(Material.MAP);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(1020);
+        itemMeta.setDisplayName((ColorFixer.addColors("§8§l↓")));
+
+        item.setItemMeta(itemMeta);
+        abilitiesDownButton = item;
+    }
+
+
+    private static void createAbilityUpButton() {
+        ItemStack item = new ItemStack(Material.MAP);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(1020);
+        itemMeta.setDisplayName((ColorFixer.addColors("§8§l↑")));
+        item.setItemMeta(itemMeta);
+        abilitiesUpButton = item;
+    }
+    private static void createReturnToAttributesButton() {
+        ItemStack item = new ItemStack(Material.MAP);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(1020);
+        itemMeta.setDisplayName((ColorFixer.addColors("§c§lᴡʀóć ⮐")));
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴡʀóᴄɪć ᴅᴏ ᴍᴇɴᴜ ᴀᴛʀʏʙᴜᴛóᴡ"));
+        itemMeta.setLore(lore);
+        item.setItemMeta(itemMeta);
+        returnToAttributesButton = item;
+    }
+
+    private static void createRestartAbilitiesButton() {
+        ItemStack item = new ItemStack(Material.MAP);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(1020);
+        itemMeta.setDisplayName((ColorFixer.addColors("§7§lʀᴇꜱᴇᴛᴜᴊ ᴜᴍɪᴇᴊęᴛɴᴏśᴄɪ")));
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴢʀᴇꜱᴇᴛᴏᴡᴀć ᴛᴡᴏᴊᴇ ᴜᴍɪᴇᴊęᴛɴᴏśᴄɪ"));
+        itemMeta.setLore(lore);
+        item.setItemMeta(itemMeta);
+        restartAbilitiesButton = item;
+    }
+
+    public static @NotNull ItemStack getFreePointsItem(int freeAttributePoints) {
+
+        ItemStack item = new ItemStack(Material.GLASS_PANE);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(3020000 + freeAttributePoints);
+        itemMeta.setDisplayName((ColorFixer.addColors("§7§lᴅᴏꜱᴛęᴘɴᴇ ᴘᴜɴᴋᴛʏ ᴀᴛʀʏʙᴜᴛóᴡ: §a§l" + freeAttributePoints)));
+//        ArrayList<String> lore = new ArrayList<>();
+//        lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴢʀᴇꜱᴇᴛᴏᴡᴀć ᴛᴡᴏᴊᴇ ᴜᴍɪᴇᴊęᴛɴᴏśᴄɪ"));
+//        itemMeta.setLore(lore);
+        item.setItemMeta(itemMeta);
+        return item;
+    }
+    public static ItemStack potionTierButton(int currentTier, int maxTier) {
+
+        ItemStack tierItem = new ItemStack(Material.PAPER);
+
+        ItemMeta itemMeta = tierItem.getItemMeta();
+
+        itemMeta.setDisplayName((ColorFixer.addColors("&7ᴀᴋᴛᴜᴀʟɴʏ ᴛɪᴇʀ: " + MessageManager.getRomanNumeralsForEnchant(currentTier))));
+
+        ArrayList<String> lore = new ArrayList<>();
+
+        if ((currentTier-1) == 0) {
+            lore.add(ColorFixer.addColors("&7ᴀᴋᴛᴜᴀʟɴɪᴇ ᴜꜱᴛᴀᴡɪᴏɴʏ ᴊᴇꜱᴛ ɴᴀᴊɴɪżꜱᴢʏ ᴛɪᴇʀ ᴅʟᴀ ᴛᴇᴊ ᴍɪᴋꜱᴛᴜʀʏ"));
+        } else {
+            lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ &aʟᴘᴍ &7ᴀʙʏ ᴢᴍɪᴇɴɪć ᴀᴋᴛᴜᴀʟɴʏ ᴛɪᴇʀ ᴍɪᴋꜱᴛᴜʀʏ ɴᴀ: " + getRomanNumerals(currentTier -1)));
+        }
+
+        if(currentTier == maxTier) {
+            lore.add(ColorFixer.addColors("&7ᴀᴋᴛᴜᴀʟɴɪᴇ ᴜꜱᴛᴀᴡɪᴏɴʏ ᴊᴇꜱᴛ ɴᴀᴊᴡʏżꜱᴢʏ ᴛɪᴇʀ ᴅʟᴀ ᴛᴇᴊ ᴍɪᴋꜱᴛᴜʀʏ"));
+        } else {
+            lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ &aᴘᴘᴍ &7ᴀʙʏ ᴢᴍɪᴇɴɪć ᴀᴋᴛᴜᴀʟɴʏ ᴛɪᴇʀ ᴍɪᴋꜱᴛᴜʀʏ ɴᴀ: " + getRomanNumerals(currentTier +1)));
+        }
+
+//        itemMeta.setLore(lore);
+        itemMeta.setLore(lore);
+
+        tierItem.setItemMeta(itemMeta);
+
+        return tierItem;
+    }
+
+    private static void createReturnButton() {
+        ItemStack item = new ItemStack(Material.MAP);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(1020);
+
+        itemMeta.setDisplayName((ColorFixer.addColors("§c§lᴡʀóć")));
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴡʀóᴄɪć"));
+        itemMeta.setLore(lore);
+        item.setItemMeta(itemMeta);
+        returnButton = item;
+
+    }
+    private static void createRefillButton() {
+        ItemStack item = new ItemStack(Material.MAP);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(1020);
+
+        itemMeta.setDisplayName((ColorFixer.addColors("§b§lᴜᴢᴜᴘᴇłɴɪᴊ ᴍɪᴋꜱᴛᴜʀʏ")));
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴜᴢᴜᴘᴇłɴɪć ᴡꜱᴢʏꜱᴛᴋɪᴇ łᴀᴅᴜɴᴋɪ ᴄᴜᴅᴏᴡɴᴇᴊ ᴍɪᴋꜱᴛᴜʀʏ"));
+        itemMeta.setLore(lore);
+        item.setItemMeta(itemMeta);
+        refillButton = item;
+
+    }
+
+    private static void createCustomPotionButton() {
+        ItemStack item = new ItemStack(Material.MAP);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(1020);
+
+        itemMeta.setDisplayName((ColorFixer.addColors("&bᴄᴜᴅᴏᴡɴᴀ ᴍɪᴋꜱᴛᴜʀᴀ")));
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ColorFixer.addColors(" "));
+        lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴏᴛᴡᴏʀᴢʏć ᴍᴇɴᴜ ᴄᴜᴅᴏᴡɴᴇᴊ ᴍɪᴋꜱᴛᴜʀʏ"));
+        itemMeta.setLore(lore);
+        item.setItemMeta(itemMeta);
+        customPotionButton = item;
+    }
+
+    private static void createThrowBottlesButton() {
+        ItemStack item = new ItemStack(Material.MAP);
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(1020);
+
+        itemMeta.setDisplayName((ColorFixer.addColors("&2ᴍɪᴋꜱᴛᴜʀʏ ʀᴢᴜᴄᴀɴᴇ")));
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ColorFixer.addColors(" "));
+        lore.add(ColorFixer.addColors("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴏᴛᴡᴏʀᴢʏć ᴍᴇɴᴜ ʀᴢᴜᴄᴀɴʏᴄʜ ᴍɪꜱᴋᴛᴜʀ"));
+        itemMeta.setLore(lore);
+        item.setItemMeta(itemMeta);
+        thrownBottlesButton = item;
+    }
+
 }

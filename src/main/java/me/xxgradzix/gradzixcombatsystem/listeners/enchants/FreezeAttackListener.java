@@ -30,7 +30,9 @@ public class FreezeAttackListener implements Listener {
 
         if(!(target instanceof LivingEntity)) return;
 
-        MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(damager), freezeLevel, false, Optional.empty(), Optional.of((LivingEntity) event.getEntity()));
+//        MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(damager), freezeLevel, false, Optional.empty(), Optional.of());
+
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.FREEZE).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster(damager).level(freezeLevel).superCharge(false).target((LivingEntity) event.getEntity()).cast();
 
 //
 //        Entity damaged = event.getEntity();

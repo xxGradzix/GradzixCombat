@@ -23,7 +23,7 @@ public class PoisonSuperChargeOrb implements CustomBattlePotionOrb {
 
     @Override
     public int getModelData(int tier) {
-        return 0;
+        return 77010;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class PoisonSuperChargeOrb implements CustomBattlePotionOrb {
 
     @Override
     public Material getMaterial(int tier) {
-        return Material.POISONOUS_POTATO;
+        return Material.FLINT;
     }
 
 }

@@ -36,7 +36,9 @@ public class LightningEnchant implements Listener {
 
             Location location = event.getEntity().getLocation();
 
-            MagicEffectManager.useLightningEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(((Player) shooter)), enchantLevel, false, Optional.empty(), Optional.empty(), location);
+//            MagicEffectManager.useLightningEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(((Player) shooter)), enchantLevel, false, Optional.empty(), Optional.empty(), location);
+            new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.LIGHTNING).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster((Player) shooter).level(enchantLevel).superCharge(false).location(location).cast();
+
 
         }
 
@@ -48,14 +50,15 @@ public class LightningEnchant implements Listener {
             if(((Player) shooter).getCooldown(itemStack.getType()) > 0) return;
 
 
-
-//            int cooldown = 20 * (enchantLevel == 1 ? 16 : enchantLevel == 2 ? 12 : 8);
+            //            int cooldown = 20 * (enchantLevel == 1 ? 16 : enchantLevel == 2 ? 12 : 8);
 //
 //            ((Player) shooter).setCooldown(itemStack.getType(), cooldown);
 
 
             Location location = event.getEntity().getLocation();
-            MagicEffectManager.useLightningEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(((Player) shooter)), enchantLevel, false, Optional.empty(), Optional.empty(), location);
+//            MagicEffectManager.useLightningEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(((Player) shooter)), enchantLevel, false, Optional.empty(), Optional.empty(), location);
+            new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.LIGHTNING).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster((Player) shooter).level(enchantLevel).superCharge(false).location(location).cast();
+
 
         }
     }

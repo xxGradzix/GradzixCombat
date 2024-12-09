@@ -66,7 +66,9 @@ public class CombatBottlePoison implements CustomBottle {
     @Override
     public void affectedEffect(Player caster, LivingEntity livingEntity, int tier) {
 
-        MagicEffectManager.usePoisonEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, Optional.empty(), Optional.of(livingEntity));
+//        MagicEffectManager.usePoisonEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, Optional.empty(), Optional.of(livingEntity));
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.POISON).useVariant(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY).caster(caster).level(tier).superCharge(false).target(livingEntity).cast();
+
 //        livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20 * 5, tier >= 3 ? 2 : 1));
 //        if(tier >= 2) {
 //            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.NAUSEA, 20 * 2, 2));

@@ -9,6 +9,8 @@ import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.List;
+
 public interface CustomWeapon extends CustomItem, Tierable, Attributable {
 
     NamespacedKey DEFAULT_ATTACK_DAMAGE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_default_weapon_damage");
@@ -41,9 +43,12 @@ public interface CustomWeapon extends CustomItem, Tierable, Attributable {
 
         if(tier == 0) {
 
-            meta.setCustomModelData(getModelData(tier));
+            if(meta.getAttributeModifiers() != null) meta.getAttributeModifiers().clear();
+            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(DEFAULT_ATTACK_DAMAGE_KEY, 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND));
+            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(DEFAULT_ATTACK_SPEED_KEY,  1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND));            meta.setCustomModelData(getModelData(tier));
             defaultSetItemCustomId(meta);
             setLoreAndName(meta, tier);
+
 
             hideAll(meta);
             itemStack.setItemMeta(meta);
@@ -52,9 +57,10 @@ public interface CustomWeapon extends CustomItem, Tierable, Attributable {
 
         addBukkitEnchantments(tier, meta);
 
+
+
         if(this instanceof MelleWeapon melleWeapon) {
             if(meta.getAttributeModifiers() != null) meta.getAttributeModifiers().clear();
-
             meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(DEFAULT_ATTACK_DAMAGE_KEY, melleWeapon.getAttackDamage(tier), AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND));
             meta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(DEFAULT_ATTACK_SPEED_KEY,  -(4 - melleWeapon.getAttackSpeed(tier)), AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND));
         }
@@ -73,4 +79,5 @@ public interface CustomWeapon extends CustomItem, Tierable, Attributable {
         return itemStack;
     }
 
+    List<String> getItemPreviewLore();
 }

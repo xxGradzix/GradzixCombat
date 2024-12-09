@@ -66,7 +66,9 @@ public class SoulStealListener implements Listener {
 
         Player player = event.getPlayer();
 
-        MagicEffectManager.useSoulStealEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(player), 1, false, Optional.empty(), Optional.empty());
+//        MagicEffectManager.useSoulStealEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(player), 1, false, Optional.empty(), Optional.empty());
+
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.SOUL_STEAL).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster(player).level(1).superCharge(false).cast();
 
 
 //        BukkitRunnable bukkitRunnable = new BukkitRunnable() {

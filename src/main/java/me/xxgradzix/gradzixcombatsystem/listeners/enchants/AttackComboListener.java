@@ -49,9 +49,15 @@ public class AttackComboListener implements Listener {
         int enchantLevel = EnchantManager.getEnchantLevel(itemInMainHand, EnchantManager.Enchant.ATTACK_COMBO);
         if (enchantLevel == 0) return;
 
-        double baseMultiplier = MagicEffectManager.useComboEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(damager), enchantLevel, false, Optional.empty(), Optional.of(damaged));
+//        double baseMultiplier = MagicEffectManager.useComboEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(damager), enchantLevel, false, Optional.empty(), Optional.of(damaged));
 
-        event.setDamage(event.getDamage() * baseMultiplier);
+        Object cast = new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.COMBO).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster(damager).level(enchantLevel).superCharge(false).target(damaged).cast();
+
+        if(cast instanceof Double baseMultiplier) {
+            event.setDamage(event.getDamage() * baseMultiplier);
+        }
+
+
 
 
 

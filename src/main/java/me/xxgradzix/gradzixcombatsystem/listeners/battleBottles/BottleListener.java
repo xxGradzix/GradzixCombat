@@ -84,10 +84,15 @@ public class BottleListener implements Listener {
 
         switch (combatPotionType) {
             case FREEZE -> {
-                MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+//                MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+
+                new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.FREEZE).useVariant(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE).caster(player).level(tier).areaEffectCloud(areaEffectCloud).superCharge(false).cast();
+
             }
             case FIRE -> {
-                MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+//                MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+                new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.FIRE).useVariant(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE).caster(player).level(tier).areaEffectCloud(areaEffectCloud).superCharge(false).cast();
+
 //                tutaj
 //                areaEffectCloud.setDuration(220);
 //
@@ -96,7 +101,9 @@ public class BottleListener implements Listener {
 //                center.getWorld().spawnParticle(Particle.LARGE_SMOKE, center, 20, radius, radius, radius, 0.05);
             }
             case WIND -> {
-                MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+//                MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+                new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.WIND).useVariant(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE).caster(player).level(tier).areaEffectCloud(areaEffectCloud).superCharge(false).cast();
+
 //
 //                areaEffectCloud.setDuration(80);
 //
@@ -104,7 +111,8 @@ public class BottleListener implements Listener {
 //                center.getWorld().spawnParticle(Particle.CLOUD, center, 20, radius, radius, radius, 0.05);
             }
             case POISON -> {
-                MagicEffectManager.usePoisonEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+//                MagicEffectManager.usePoisonEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+                new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.POISON).useVariant(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE).caster(player).level(tier).areaEffectCloud(areaEffectCloud).superCharge(false).cast();
 
 //                areaEffectCloud.setDuration(280);
 //
@@ -115,7 +123,9 @@ public class BottleListener implements Listener {
             }
             case EXPLOSION -> {
                 event.setCancelled(true);
-                MagicEffectManager.useExplosionEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+//                MagicEffectManager.useExplosionEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE, Optional.of(player), tier, false, Optional.of(areaEffectCloud), Optional.empty());
+                new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.EXPLOSION).useVariant(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE).caster(player).level(tier).areaEffectCloud(areaEffectCloud).superCharge(false).cast();
+
             }
 
         }

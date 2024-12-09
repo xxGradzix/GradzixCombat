@@ -3,15 +3,21 @@ package me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilitie
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.CombatAbility;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.DexterityOrigin;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.EventableAbility;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public enum DodgeAbility implements CombatAbility, DexterityOrigin {
+public enum DodgeAbility implements CombatAbility, DexterityOrigin, EventableAbility {
 
     INSTANCE;
 
@@ -72,13 +78,14 @@ public enum DodgeAbility implements CombatAbility, DexterityOrigin {
             case 0 -> {
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
 
-                lore.add(ColorFixer.addColors("&7ᴅᴀᴊᴇ ꜱᴢᴀɴꜱę ɴᴀ ᴜɴɪᴋɴɪęᴄɪᴇ ᴀᴛᴀᴋᴜ ᴘᴏᴅᴄᴢᴀꜱ ꜱᴘʀɪɴᴛᴜ"));
+                lore.add(ColorFixer.addColors("&7ᴅᴀᴊᴇ ꜱᴢᴀɴꜱę ɴᴀ ᴜɴɪᴋɴɪęᴄɪᴇ ᴀᴛᴀᴋᴜ"));
                 lore.add(ColorFixer.addColors("&7ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜɴɪᴋɴɪęᴄɪᴇ ᴡʏɴᴏꜱɪ &a4%"));
             }
             case 1 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
-                lore.add(ColorFixer.addColors("&7ᴅᴀᴊᴇ ꜱᴢᴀɴꜱę ɴᴀ ᴜɴɪᴋɴɪęᴄɪᴇ ᴀᴛᴀᴋᴜ ᴘᴏᴅᴄᴢᴀꜱ ꜱᴘʀɪɴᴛᴜ"));
+                lore.add(ColorFixer.addColors("&7ᴅᴀᴊᴇ ꜱᴢᴀɴꜱę ɴᴀ ᴜɴɪᴋɴɪęᴄɪᴇ ᴀᴛᴀᴋᴜ"));
                 lore.add(ColorFixer.addColors("&7ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜɴɪᴋɴɪęᴄɪᴇ ᴡʏɴᴏꜱɪ 4%"));
+                lore.add(" ");
 
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
 
@@ -96,4 +103,23 @@ public enum DodgeAbility implements CombatAbility, DexterityOrigin {
         return lore;
     }
 
+    @Override
+    public Listener getListener() {
+        return new Listener() {
+
+            @EventHandler
+            public void onEntityDamage(EntityDamageByEntityEvent event) {
+                if(!(event.getEntity() instanceof Player player)) return;
+
+                if(event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK) return;
+
+                if(DodgeAbility.INSTANCE.getAbilityLevel(player) * 0.04 > Math.random()) {
+                    Bukkit.broadcastMessage("test Dodge ability triggered");
+                    event.setCancelled(true);
+                }
+
+            }
+
+        };
+    }
 }

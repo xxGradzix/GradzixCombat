@@ -22,3 +22,7 @@ commands:
   openEnchantGui:
     description: otwiera gui do enchantowania itemów
     permission: gradzixcombatsystem.enchant
+
+  openWitchGui:
+    description: otwiera gui wiedzmy
+    permission: gradzixcombatsystem.witch

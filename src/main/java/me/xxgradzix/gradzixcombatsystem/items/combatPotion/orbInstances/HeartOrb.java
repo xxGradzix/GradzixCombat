@@ -22,7 +22,7 @@ public class HeartOrb implements CustomBattlePotionOrb {
 
     @Override
     public int getModelData(int tier) {
-        return 0;
+        return 77007;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class HeartOrb implements CustomBattlePotionOrb {
 
     @Override
     public Material getMaterial(int tier) {
-        return Material.RED_DYE;
+        return Material.FLINT;
     }
 
 

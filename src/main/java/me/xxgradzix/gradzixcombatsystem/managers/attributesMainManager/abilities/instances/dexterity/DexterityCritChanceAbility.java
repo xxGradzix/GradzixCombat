@@ -1,17 +1,27 @@
 package me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.dexterity;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
+import me.xxgradzix.gradzixcombatsystem.events.critEvent.CriticalHitEvent;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItemManager;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.instances.BattleBow;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.instances.BattleSpear;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.instances.BattleSword;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.CombatAbility;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.DexterityOrigin;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.EventableAbility;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public enum DexterityCritChanceAbility implements CombatAbility, DexterityOrigin {
+public enum DexterityCritChanceAbility implements CombatAbility, DexterityOrigin, EventableAbility {
 
     INSTANCE;
 
@@ -40,7 +50,7 @@ public enum DexterityCritChanceAbility implements CombatAbility, DexterityOrigin
 
     @Override
     public int getMaxAbilityLevel() {
-        return 1;
+        return 3;
     }
 
     @Override
@@ -71,38 +81,57 @@ public enum DexterityCritChanceAbility implements CombatAbility, DexterityOrigin
 
             case 0 -> {
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
-
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ &a5%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ łᴜᴋóᴡ ɪ ᴍɪᴇᴄᴢʏ"));
             }
             case 1 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ 5%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ łᴜᴋóᴡ ɪ ᴍɪᴇᴄᴢʏ"));
-
+                lore.add(" ");
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
-
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ &a10%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ łᴜᴋóᴡ ɪ ᴍɪᴇᴄᴢʏ"));
             }
             case 2 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
-
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ 10%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ łᴜᴋóᴡ ɪ ᴍɪᴇᴄᴢʏ"));
-
+                lore.add(" ");
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ &a15%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ łᴜᴋóᴡ ɪ ᴍɪᴇᴄᴢʏ"));
             }
             case 3 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ &a15%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ łᴜᴋóᴡ ɪ ᴍɪᴇᴄᴢʏ"));
             }
 
         }
+        lore.add(" ");
+        lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ ᴛʏʟᴋᴏ łᴜᴋóᴡ ɪ ᴍɪᴇᴄᴢʏ"));
+
         return lore;
+    }
+
+
+    @Override
+    public Listener getListener() {
+        return new Listener() {
+
+            @EventHandler
+            public void onCriticalAttack(CriticalHitEvent event) {
+
+                Player player = event.getPlayer();
+
+                ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+
+                if(itemInMainHand == null) return;
+
+                CustomItem customItem = CustomItemManager.getCustomItem(itemInMainHand);
+
+                if(!(customItem instanceof BattleSword) && !(customItem instanceof BattleBow)) return;
+
+                event.setCriticalChance(event.getCriticalChance() + getAbilityLevel(player) * 0.05);
+
+            }
+
+        };
     }
 
 }

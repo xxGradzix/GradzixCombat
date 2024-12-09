@@ -60,7 +60,7 @@ public enum WarMachineAbility implements CombatAbility, StrengthOrigin {
 
     @Override
     public String getAbilityName() {
-        return "ᴍᴀᴄʜɪɴᴀ ᴡᴏᴊᴇɴɴᴀ";
+        return "&#790000&lᴍ&#830D00&lᴀ&#8C1A00&lᴄ&#962800&lʜ&#9F3500&lɪ&#A94200&lɴ&#B24F00&lᴀ &#C66A00&lᴡ&#CF7700&lᴏ&#D98400&lᴊ&#E29100&lᴇ&#EC9F00&lɴ&#F5AC00&lɴ&#FFB900&lᴀ";
     }
 
     @Override
@@ -71,19 +71,23 @@ public enum WarMachineAbility implements CombatAbility, StrengthOrigin {
 
             case 0 -> {
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
-                lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴛᴏᴘᴏʀᴜ ᴡ ᴘᴏłąᴄᴢᴇɴɪᴜ ᴢ ᴋᴜꜱᴢą, ᴢʏꜱᴋᴜᴊᴇꜱᴢ &a10% ᴘʀᴇᴍɪɪ ᴅᴏ ᴏʙʀᴀżᴇń"));
+                lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴛᴏᴘᴏʀᴜ ᴡ ᴘᴏłąᴄᴢᴇɴɪᴜ ᴢ ᴋᴜꜱᴢą,"));
+                lore.add(ColorFixer.addColors("&7ᴢʏꜱᴋᴜᴊᴇꜱᴢ &a10% ᴘʀᴇᴍɪɪ ᴅᴏ ᴏʙʀᴀżᴇń"));
 
             }
             case 1 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
-                lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴛᴏᴘᴏʀᴜ ᴡ ᴘᴏłąᴄᴢᴇɴɪᴜ ᴢ ᴋᴜꜱᴢą, ᴢʏꜱᴋᴜᴊᴇꜱᴢ 10% ᴘʀᴇᴍɪɪ ᴅᴏ ᴏʙʀᴀżᴇń"));
+                lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴛᴏᴘᴏʀᴜ ᴡ ᴘᴏłąᴄᴢᴇɴɪᴜ ᴢ ᴋᴜꜱᴢą,"));
+                lore.add(ColorFixer.addColors("&7ᴢʏꜱᴋᴜᴊᴇꜱᴢ 10% ᴘʀᴇᴍɪɪ ᴅᴏ ᴏʙʀᴀżᴇń"));
+                lore.add(" ");
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
-                lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴛᴏᴘᴏʀᴜ ᴡ ᴘᴏłąᴄᴢᴇɴɪᴜ ᴢ ᴋᴜꜱᴢą, ᴢʏꜱᴋᴜᴊᴇꜱᴢ &a15% ᴘʀᴇᴍɪɪ ᴅᴏ ᴏʙʀᴀżᴇń"));
+                lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴛᴏᴘᴏʀᴜ ᴡ ᴘᴏłąᴄᴢᴇɴɪᴜ ᴢ ᴋᴜꜱᴢą,"));
+                lore.add(ColorFixer.addColors("&7ᴢʏꜱᴋᴜᴊᴇꜱᴢ &a15% ᴘʀᴇᴍɪɪ ᴅᴏ ᴏʙʀᴀżᴇń"));
             }
             case 2 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
-                lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴛᴏᴘᴏʀᴜ ᴡ ᴘᴏłąᴄᴢᴇɴɪᴜ ᴢ ᴋᴜꜱᴢą, ᴢʏꜱᴋᴜᴊᴇꜱᴢ &a15% ᴘʀᴇᴍɪɪ ᴅᴏ ᴏʙʀᴀżᴇń"));
-
+                lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴛᴏᴘᴏʀᴜ ᴡ ᴘᴏłąᴄᴢᴇɴɪᴜ ᴢ ᴋᴜꜱᴢą,"));
+                lore.add(ColorFixer.addColors("&7ᴢʏꜱᴋᴜᴊᴇꜱᴢ &a15% ᴘʀᴇᴍɪɪ ᴅᴏ ᴏʙʀᴀżᴇń"));
             }
 
         }

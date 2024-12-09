@@ -1,10 +1,12 @@
 package me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
+import me.xxgradzix.gradzixcombatsystem.guis.attributes.AbilitiesGuiManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.AttributeOrigin;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.CombatAbility;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.EventableAbility;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.dexterity.*;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.endurance.*;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.strength.*;
 import org.bukkit.entity.Player;
 
@@ -14,6 +16,19 @@ import java.util.stream.Collectors;
 public class AbilitiesPointsManager {
 
     private static final Set<CombatAbility> abilities = Set.of(
+
+            BuildRange.INSTANCE,
+            ShieldJavelinComboAbility.INSTANCE,
+            ParryAbility.INSTANCE,
+            QuickSneak.INSTANCE,
+            JumperAbility.INSTANCE,
+            EnduranceCritChanceAbility.INSTANCE,
+            EffectResistance.INSTANCE,
+            MediumBonusSet.INSTANCE,
+            QuickSpearReturn.INSTANCE,
+            SprinterAbility.INSTANCE,
+            ShieldCooldown.INSTANCE,
+            SprintingAttack.INSTANCE,
 
             AssassinAbility.INSTANCE,
             AttackSpeedAbility.INSTANCE,

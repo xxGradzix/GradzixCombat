@@ -1,4 +1,4 @@
-package me.xxgradzix.gradzixcombatsystem.upgradeGuis;
+package me.xxgradzix.gradzixcombatsystem.guis.upgradeGuis;
 
 import dev.triumphteam.gui.components.GuiType;
 import dev.triumphteam.gui.guis.Gui;
@@ -73,7 +73,7 @@ public class ArmorUpgradeGuiManager {
     }
 
     private void setCraftButton() {
-        GuiItem upgradeButton = new GuiItem(ItemManager.upgradeWeaponButton(player, currentItemsNeeded, previousItem.get(), currentPrice.get()));
+        GuiItem upgradeButton = new GuiItem(ItemManager.universalCreateItemButton(player, currentItemsNeeded, previousItem.get(), currentPrice.get()));
 
         upgradeButton.setAction(event -> {
             if(currentItemToGet.get() == null) return;

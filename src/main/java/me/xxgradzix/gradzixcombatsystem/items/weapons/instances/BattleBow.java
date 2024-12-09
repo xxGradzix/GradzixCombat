@@ -29,6 +29,17 @@ public class BattleBow implements CustomWeapon, ShootableWeapon, EnchantableWeap
     }
 
     @Override
+    public List<String> getItemPreviewLore() {
+        return List.of(
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴅʏꜱᴛᴀɴꜱᴏᴡᴀ ᴏꜰᴇʀᴜᴊᴇ ᴜᴍɪᴀʀᴋᴏᴡᴀɴᴇ ᴏʙʀᴀżᴇɴɪᴀ"),
+                ColorFixer.addColors("&7ᴛᴏ ʀᴀᴄᴢᴇᴊ ꜱᴢʏʙᴋᴀ ʙʀᴏń"),
+                ColorFixer.addColors("&7 "),
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴏᴘɪᴇʀᴀ ꜱɪę ɴᴀ ᴀᴛʀʏʙᴜᴛᴀᴄʜ:"),
+                ColorFixer.addColors("&8 - " + CombatAttribute.DEXTERITY.getCustomName())
+        );
+    }
+
+    @Override
     public int getRequiredAttribute(int tier, CombatAttribute attribute) {
         switch (tier){
             case 1 -> {

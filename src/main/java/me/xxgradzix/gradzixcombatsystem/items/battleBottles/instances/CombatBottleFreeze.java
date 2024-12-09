@@ -67,7 +67,9 @@ public class CombatBottleFreeze implements CustomBottle {
 
         // todo supercharge
 
-        MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, Optional.empty(), Optional.of(livingEntity));
+//        MagicEffectManager.useFreezeEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, Optional.empty(), Optional.of(livingEntity));
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.FREEZE).useVariant(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY).caster(caster).level(tier).superCharge(false).target(livingEntity).cast();
+
 
 //        int ticksToAdd = switch (tier) {
 //            case 1 -> 75;

@@ -27,6 +27,17 @@ public class BattleAxe implements CustomWeapon, MelleWeapon, EnchantableWeapon, 
         return CUSTOM_ID;
     }
 
+    @Override
+    public List<String> getItemPreviewLore() {
+        return List.of(
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴏꜰᴇʀᴜᴊᴇ ᴅᴜżᴇ ᴏʙʀᴀżᴇɴɪᴀ ɪ ᴘᴏᴢᴡᴀʟᴀ ᴅᴇᴢᴀᴋᴛʏᴡᴏᴡᴀć ᴛᴀʀᴄᴢę"),
+                ColorFixer.addColors("&7ᴛᴏ ʀᴀᴄᴢᴇᴊ ᴘᴏᴡᴏʟɴᴀ ʙʀᴏń"),
+                ColorFixer.addColors("&7 "),
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴏᴘɪᴇʀᴀ ꜱɪę ɴᴀ ᴀᴛʀʏʙᴜᴛᴀᴄʜ:"),
+                ColorFixer.addColors("&8 - " + CombatAttribute.STRENGTH.getCustomName())
+        );
+    }
+
 
     @Override
     public double getAttackDamage(int tier) {

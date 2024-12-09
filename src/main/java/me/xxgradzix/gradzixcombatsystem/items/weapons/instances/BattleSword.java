@@ -40,6 +40,18 @@ public class BattleSword implements CustomWeapon, MelleWeapon, EnchantableWeapon
         }
     }
 
+
+    @Override
+    public List<String> getItemPreviewLore() {
+        return List.of(
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴏꜰᴇʀᴜᴊᴇ ᴜᴍɪᴀʀᴋᴏᴡᴀɴᴇ ᴏʙʀᴀżᴇɴɪᴀ"),
+                ColorFixer.addColors("&7ᴛᴏ ʀᴀᴄᴢᴇᴊ ꜱᴢʏʙᴋᴀ ʙʀᴏń"),
+                ColorFixer.addColors("&7 "),
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴏᴘɪᴇʀᴀ ꜱɪę ɴᴀ ᴀᴛʀʏʙᴜᴛᴀᴄʜ:"),
+                ColorFixer.addColors("&8 - " + CombatAttribute.DEXTERITY.getCustomName())
+        );
+    }
+
     @Override
     public double getAttackSpeed(int tier) {
         switch (tier) {

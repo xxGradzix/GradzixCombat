@@ -35,7 +35,9 @@ public class WindEnchantChargeListener implements Listener {
         if(enchantLevel < 1) return;
         if(player.getCooldown(itemInMainHand.getType()) > 0) return;
 
-        MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(player), enchantLevel, false, Optional.empty(), Optional.empty());
+//        MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(player), enchantLevel, false, Optional.empty(), Optional.empty());
+
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.WIND).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster(player).level(enchantLevel).superCharge(false).cast();
 
 //        Vector direction  = player.getLocation().clone().add(0, 1.5, 0).getDirection();
 //

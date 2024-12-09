@@ -1,6 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem;
 
-import me.xxgradzix.gradzixcombatsystem.armorEvent.ArmorListener;
+import me.xxgradzix.gradzixcombatsystem.events.armorEvent.ArmorListener;
 import me.xxgradzix.gradzixcombatsystem.commands.*;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.listeners.combatHeroPotion.effectsEvents.GigantysmOrbListener;
@@ -37,6 +37,7 @@ public final class GradzixCombatSystem extends JavaPlugin {
         getCommand("openUpgradeGui").setExecutor(new OpenUpgradeGuiCommand());
 
         getCommand("openEnchantGui").setExecutor(new EnchantGuiCommand());
+        getCommand("openWitchGui").setExecutor(new OpenWitchGuiCommand());
 
         getServer().getPluginManager().registerEvents(new ArmorBlock(), this);
         getServer().getPluginManager().registerEvents(new AttackCancelListener(), this);
@@ -66,6 +67,10 @@ public final class GradzixCombatSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PotionDrinkEvent(), this);
         getServer().getPluginManager().registerEvents(new TeleportOrbListener(), this);
         getServer().getPluginManager().registerEvents(new GigantysmOrbListener(), this);
+        getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new RecipeOpenEvent(), this);
+        getServer().getPluginManager().registerEvents(new CheckCriticalHitListener(), this);
+        getServer().getPluginManager().registerEvents(new WeaponCriticalBonusModifierEvent(), this);
 
         AbilitiesPointsManager.registerListeners();
 

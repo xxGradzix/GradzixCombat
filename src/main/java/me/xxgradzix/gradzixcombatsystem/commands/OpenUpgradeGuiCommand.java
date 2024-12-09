@@ -1,6 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
-import me.xxgradzix.gradzixcombatsystem.upgradeGuis.MainBlacksmithGui;
+import me.xxgradzix.gradzixcombatsystem.guis.upgradeGuis.MainBlacksmithGui;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

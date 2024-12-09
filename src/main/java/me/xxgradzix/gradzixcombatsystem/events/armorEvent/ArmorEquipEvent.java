@@ -1,4 +1,4 @@
-package me.xxgradzix.gradzixcombatsystem.armorEvent;
+package me.xxgradzix.gradzixcombatsystem.events.armorEvent;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;

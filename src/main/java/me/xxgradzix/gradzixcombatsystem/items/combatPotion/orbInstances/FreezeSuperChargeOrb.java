@@ -23,7 +23,7 @@ public class FreezeSuperChargeOrb implements CustomBattlePotionOrb {
 
     @Override
     public int getModelData(int tier) {
-        return 0;
+        return 77005;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class FreezeSuperChargeOrb implements CustomBattlePotionOrb {
 
     @Override
     public Material getMaterial(int tier) {
-        return Material.SNOWBALL;
+        return Material.FLINT;
     }
 
 }

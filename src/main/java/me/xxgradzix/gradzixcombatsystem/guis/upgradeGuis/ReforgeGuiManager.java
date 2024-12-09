@@ -1,4 +1,4 @@
-package me.xxgradzix.gradzixcombatsystem.upgradeGuis;
+package me.xxgradzix.gradzixcombatsystem.guis.upgradeGuis;
 
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
@@ -8,7 +8,6 @@ import me.xxgradzix.gradzixcombatsystem.items.CustomItemManager;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.managers.modifiersManager.ModifiersManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
-import me.xxgradzix.gradzixcombatsystem.items.weapons.CustomWeapon;
 import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;

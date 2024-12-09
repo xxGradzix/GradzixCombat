@@ -45,7 +45,11 @@ public class FireAfflictionEnchant implements Listener {
 
         if(cooldown > 0) return;
 
-        MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(player), enchantLevel, false, Optional.empty(), Optional.empty());
+//        MagicEffectManager.useFireEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(player), enchantLevel, false, Optional.empty(), Optional.empty());
+
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.FIRE).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster(player).level(enchantLevel).superCharge(false).cast();
+
+
 
 //        player.setCooldown(itemUsed.getType(), 20*7);
     }

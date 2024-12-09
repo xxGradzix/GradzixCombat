@@ -1,6 +1,10 @@
 package me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances;
 
+import me.xxgradzix.gradzixcombatsystem.guis.attributes.AbilitiesGuiManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.AttributeOrigin;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.DexterityOrigin;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.EnduranceOrigin;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.IntelligenceOrigin;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -53,18 +57,22 @@ public interface CombatAbility{
         boolean hasAbility = level > 0;
 
         String color = hasAbility ? "&a" : "&c";
-        itemMeta.setDisplayName(ColorFixer.addColors( getAbilityName() + " " + color + level + "/" + maxLevel));
+        itemMeta.setDisplayName(ColorFixer.addColors( getAbilityName() + " " + color + "§l" + level + "§l" + "/" + "§l" + maxLevel));
+
 
         ArrayList<String> lore = new ArrayList<>();
-        lore.add(" ");
-        String unlockStatus = hasAbility ? "&aᴏᴅʙʟᴏᴋᴏᴡᴀɴᴇ" : "&cᴢᴀʙʟᴏᴋᴏᴡᴀɴᴇ";
+        lore.add(ColorFixer.addColors("&8&l⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺"));
+
+        String unlockStatus = hasAbility ? "&a§lᴏᴅʙʟᴏᴋᴏᴡᴀɴᴇ" : "&c§lᴢᴀʙʟᴏᴋᴏᴡᴀɴᴇ";
         lore.add(ColorFixer.addColors(unlockStatus));
         lore.add(" ");
         lore.addAll(getAbilityDescription(level));
         lore.add(" ");
         if(this instanceof AttributeOrigin attributeOrigin) {
-            lore.add(ColorFixer.addColors("&7ᴡʏᴍᴀɢᴀɴʏ ᴘᴏᴢɪᴏᴍ " + attributeOrigin.getAttributeNameFormated() + ": #877239" + getRequiredAttributeLevel()));
+            lore.add(ColorFixer.addColors("&7ᴡʏᴍᴀɢᴀɴʏ ᴘᴏᴢɪᴏᴍ " + attributeOrigin.getAttributeNameFormated() + "&7: #877239" + "§l" + getRequiredAttributeLevel()));
         }
+        lore.add(ColorFixer.addColors("&8&l⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽⎽"));
+
         Set<CombatAbility> requiredAbilities = getRequiredAbilities();
 
         if(!requiredAbilities.isEmpty() && !hasAbility) {
@@ -84,21 +92,23 @@ public interface CombatAbility{
     }
     default int getCustomModelData(Player player) {
 
-        boolean hasAbility = hasAbility(player);
+        int originOffSet = 0;
 
-//        boolean isInitialLevel = getRequiredAttributeLevel() <= 1;
+        if(this instanceof EnduranceOrigin) originOffSet = 1000;
+        if(this instanceof DexterityOrigin) originOffSet = 2000;
+        if(this instanceof IntelligenceOrigin) originOffSet = 3000;
+
+
+        boolean hasAbility = hasAbility(player);
 
         boolean isInitialLevel = getRequiredAbilities().isEmpty();
 
         boolean havePreviousAbilities = getRequiredAbilities().stream().allMatch(ability -> ability.hasAbility(player));
-// todo sokole oko - trafienie z kuszy oslabia gracza na ataki z topora
-        // ttodo - szansa na niezuzycie bełtu
-
 
         if(isInitialLevel) {
             if(hasAbility) {
                 // unlocked and active initial level
-                return 1020774;
+                return 1020774 + originOffSet;
             } else {
                 // default not unlocked initial level
                 return 1020771;
@@ -106,12 +116,17 @@ public interface CombatAbility{
         }
 
         // unlocked and active
-        if(hasAbility) return 1020773;
+        if(hasAbility) return 1020773 + originOffSet;
 
         // possible to unlock
         if(havePreviousAbilities) return 1020772;
 
         // default not unlocked (invisible)
         return 1020770;
+
+    }
+
+    default Set<AbilitiesGuiManager.SlotData> getCustomLines() {
+        return Set.of();
     }
 }

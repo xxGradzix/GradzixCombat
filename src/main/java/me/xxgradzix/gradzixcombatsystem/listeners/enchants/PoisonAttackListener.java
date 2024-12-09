@@ -37,7 +37,9 @@ public class PoisonAttackListener implements Listener {
         Entity damaged = event.getEntity();
         if(!(damaged instanceof LivingEntity livingEntity)) return;
 
-        MagicEffectManager.usePoisonEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(damager), poisonLevel, false, Optional.empty(), Optional.of(livingEntity));
+//        MagicEffectManager.usePoisonEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(damager), poisonLevel, false, Optional.empty(), Optional.of(livingEntity));
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.POISON).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster(damager).level(poisonLevel).superCharge(false).target(livingEntity).cast();
+
 
 //        double chance = getPoisonChance(poisonLevel);
 //

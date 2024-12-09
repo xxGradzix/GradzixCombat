@@ -98,7 +98,6 @@ public enum AssassinAbility implements CombatAbility, DexterityOrigin, Eventable
     public Listener getListener() {
         return new Listener() {
 
-
             @EventHandler
             public void onEntityDamageByEntityTeleport(EntityDamageByEntityEvent event) {
 

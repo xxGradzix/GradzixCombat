@@ -1,6 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
-import me.xxgradzix.gradzixcombatsystem.upgradeGuis.MainEnchanterGui;
+import me.xxgradzix.gradzixcombatsystem.guis.upgradeGuis.MainEnchanterGui;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

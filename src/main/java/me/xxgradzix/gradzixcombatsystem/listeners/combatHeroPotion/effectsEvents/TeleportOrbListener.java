@@ -42,20 +42,21 @@ public class TeleportOrbListener implements Listener {
 
         if(!playerWithBackTeleportEffect.containsKey(damager.getUniqueId()))return;
 
-        teleportPlayerBehind(damager, damaged);
+        teleportPlayerBehind(damaged, damager);
 
     }
 
 //    private void teleportPlayerBehind(Entity entity, Entity teleported) {
 //        Vector playerToEntity = entity.getLocation().toVector().subtract(teleported.getLocation().toVector());
-//        playerToEntity.setY(0).normalize().multiply(4); // Przesunięcie o 5 kratek w poziomie
+//        playerToEntity.setY(0).normalize().multiply(-4); // Przesunięcie o 5 kratek w poziomie
 //        Location loc = teleported.getLocation().add(playerToEntity);
 //        loc.setPitch(0);
 ////        loc.setPitch(entity.getLocation().getPitch());
 //        loc.setYaw(entity.getLocation().getYaw());
 //        teleported.teleport(loc);
 //    }
-    private void teleportPlayerBehind(Entity entityToTeleport, Entity entity) {
+
+    private void teleportPlayerBehind(Entity entity, Entity entityToTeleport) {
 
         Location startLocation = entity.getLocation();
 
@@ -71,14 +72,12 @@ public class TeleportOrbListener implements Listener {
         Location targetLocation = startLocation.clone();
         double maxDistance = 3.0;
 
-        for (double d = 0.5; d <= maxDistance; d += 0.5) {
+        for (double d = 0.5; d <= maxDistance; d += 0.4) {
             Location nextLocation = startLocation.clone().add(directionBetweenLocations.clone().multiply(d));
 //            if (!nextLocation.getBlock().getType().equals(Material.AIR)) {
-            if (!nextLocation.getBlock().isEmpty()) {
-                Bukkit.broadcastMessage(nextLocation.getBlock().toString());
-                Bukkit.broadcastMessage("nextLocation.getBlock().getType().isSolid()");
-                break;
-            }
+//            if (!nextLocation.add(0, 1, 0).getBlock().isEmpty()) {
+            if (!nextLocation.getBlock().isEmpty()) break;
+
             targetLocation = nextLocation;
         }
 //        targetLocation = startLocation.clone().add(directionBetweenLocations.clone().multiply(maxDistance));

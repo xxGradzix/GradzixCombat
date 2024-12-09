@@ -1,17 +1,25 @@
 package me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.strength;
 
 import me.xxgradzix.gradzixcombatsystem.GradzixCombatSystem;
+import me.xxgradzix.gradzixcombatsystem.events.critEvent.CriticalHitEvent;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
+import me.xxgradzix.gradzixcombatsystem.items.CustomItemManager;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.instances.*;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.StrengthOrigin;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.CombatAbility;
+import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.instances.EventableAbility;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public enum StrengthCritChanceAbility implements CombatAbility, StrengthOrigin {
+public enum StrengthCritChanceAbility implements CombatAbility, StrengthOrigin, EventableAbility {
 
     INSTANCE;
 
@@ -44,7 +52,7 @@ public enum StrengthCritChanceAbility implements CombatAbility, StrengthOrigin {
 
     @Override
     public Set<CombatAbility> getRequiredAbilities() {
-        return Set.of(AdrenalineRushAbility.INSTANCE);
+        return Set.of(BullsEyeAbility.INSTANCE);
     }
 
     @Override
@@ -54,7 +62,7 @@ public enum StrengthCritChanceAbility implements CombatAbility, StrengthOrigin {
 
     @Override
     public int getColumn() {
-        return 1;
+        return 6;
     }
 
     @Override
@@ -71,38 +79,57 @@ public enum StrengthCritChanceAbility implements CombatAbility, StrengthOrigin {
 
             case 0 -> {
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
-
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ &a5%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ ᴛᴏᴘᴏʀóᴡ ɪ ᴋᴜꜱᴢʏ"));
             }
             case 1 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ 5%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ ᴛᴏᴘᴏʀóᴡ ɪ ᴋᴜꜱᴢʏ"));
-
+                lore.add(" ");
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
-
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ &a10%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ ᴛᴏᴘᴏʀóᴡ ɪ ᴋᴜꜱᴢʏ"));
             }
             case 2 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
-
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ 10%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ ᴛᴏᴘᴏʀóᴡ ɪ ᴋᴜꜱᴢʏ"));
-
+                lore.add(" ");
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ &a15%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ ᴛᴏᴘᴏʀóᴡ ɪ ᴋᴜꜱᴢʏ"));
             }
             case 3 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
                 lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ꜱᴢᴀɴꜱᴇ ɴᴀ ᴜᴅᴇʀᴢᴇɴɪᴇ ᴋʀʏᴛʏᴄᴢɴᴇ ᴏ &a15%"));
-                lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ ᴛᴏᴘᴏʀóᴡ ɪ ᴋᴜꜱᴢʏ"));
             }
-
         }
+        lore.add(" ");
+        lore.add(ColorFixer.addColors("&7ᴘʀᴇᴍɪᴀ ᴅᴏᴛʏᴄᴢʏ ᴛʏʟᴋᴏ ᴛᴏᴘᴏʀóᴡ ɪ ᴋᴜꜱᴢʏ"));
         return lore;
     }
+
+
+    @Override
+    public Listener getListener() {
+        return new Listener() {
+
+            @EventHandler
+            public void onCritAttck(CriticalHitEvent event) {
+
+                Player player = event.getPlayer();
+
+                ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
+
+                if(itemInMainHand == null) return;
+
+                CustomItem customItem = CustomItemManager.getCustomItem(itemInMainHand);
+
+                if(!(customItem instanceof BattleAxe) &&
+                !(customItem instanceof BattleCrossBow)) return;
+
+                event.setCriticalChance(event.getCriticalChance() + getAbilityLevel(player) * 0.05);
+
+            }
+
+        };
+    }
+
 
 }

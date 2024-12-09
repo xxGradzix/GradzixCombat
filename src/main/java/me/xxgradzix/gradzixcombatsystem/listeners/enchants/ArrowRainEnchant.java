@@ -28,7 +28,9 @@ public class ArrowRainEnchant implements Listener {
 
         projectile.setVisibleByDefault(false);
 
-        MagicEffectManager.useArrowRainEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(player), enchantLevel, false, Optional.empty(), Optional.empty(), arrow);
+//        MagicEffectManager.useArrowRainEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(player), enchantLevel, false, Optional.empty(), Optional.empty(), arrow);
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.ARROW_RAIN).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster(player).level(enchantLevel).superCharge(false).arrow(arrow).cast();
+
     }
 
 //    private void arrowRainV1(Arrow originalArrow, int enchantLevel, Player player) {

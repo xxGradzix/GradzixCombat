@@ -79,7 +79,6 @@ public enum StandingShotAbility implements CombatAbility, DexterityOrigin, Event
                 if(Material.BOW.equals(bow.getType())) return;
 
                 //todo check ability
-
                 // TODO do usuniecia
 
                 Vector velocity = shooter.getVelocity();
@@ -88,7 +87,7 @@ public enum StandingShotAbility implements CombatAbility, DexterityOrigin, Event
 
                 if(!isStanding) return;
 
-                event.getProjectile().getVelocity().multiply(1.2);
+                event.getProjectile().getVelocity().multiply(1.8);
                 Bukkit.broadcastMessage("Standing shot ability triggered");
 
             }
@@ -111,14 +110,13 @@ public enum StandingShotAbility implements CombatAbility, DexterityOrigin, Event
             case 0 -> {
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
 
-                lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ᴇɴᴇʀɢɪᴇ ɪ ᴘʀęᴅᴋᴏść ꜱᴛʀᴢᴀł"));
-                lore.add(ColorFixer.addColors("&7ɢᴅʏ ɢʀᴀᴄᴢ ꜱᴛᴏɪ ᴡ ᴍɪᴇᴊꜱᴄᴜ ᴘᴏᴅᴄᴢᴀꜱ ꜱᴛʀᴢᴀłᴜ ᴢ łᴜᴋᴜ"));
+                lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ᴇɴᴇʀɢɪᴇ ɪ ᴘʀęᴅᴋᴏść ꜱᴛʀᴢᴀł ɢᴅʏ "));
+                lore.add(ColorFixer.addColors("&7ɢʀᴀᴄᴢ ꜱᴛᴏɪ ᴡ ᴍɪᴇᴊꜱᴄᴜ ᴘᴏᴅᴄᴢᴀꜱ ꜱᴛʀᴢᴀłᴜ ᴢ łᴜᴋᴜ"));
             }
             case 1 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
-
-                lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ᴇɴᴇʀɢɪᴇ ɪ ᴘʀęᴅᴋᴏść ꜱᴛʀᴢᴀł"));
-                lore.add(ColorFixer.addColors("&7ɢᴅʏ ɢʀᴀᴄᴢ ꜱᴛᴏɪ ᴡ ᴍɪᴇᴊꜱᴄᴜ ᴘᴏᴅᴄᴢᴀꜱ ꜱᴛʀᴢᴀłᴜ ᴢ łᴜᴋᴜ"));
+                lore.add(ColorFixer.addColors("&7ᴢᴡɪęᴋꜱᴢᴀ ᴇɴᴇʀɢɪᴇ ɪ ᴘʀęᴅᴋᴏść ꜱᴛʀᴢᴀł ɢᴅʏ "));
+                lore.add(ColorFixer.addColors("&7ɢʀᴀᴄᴢ ꜱᴛᴏɪ ᴡ ᴍɪᴇᴊꜱᴄᴜ ᴘᴏᴅᴄᴢᴀꜱ ꜱᴛʀᴢᴀłᴜ ᴢ łᴜᴋᴜ"));
             }
 
         }

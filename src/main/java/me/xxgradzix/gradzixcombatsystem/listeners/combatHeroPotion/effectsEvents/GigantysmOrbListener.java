@@ -146,6 +146,7 @@ public class GigantysmOrbListener implements Listener {
     private static final NamespacedKey JUMP_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_gigantysm_jump");
     private static final NamespacedKey KNOCK_BACK_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_gigantysm_fall");
     private static final NamespacedKey FALL_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_gigantysm_knockback");
+    private static final NamespacedKey GRAVITY_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_gigantysm_gravity");
 
 
     private static void resetAttributes(Player player) {
@@ -157,6 +158,8 @@ public class GigantysmOrbListener implements Listener {
         player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).removeModifier(SPEED_KEY);
         player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).removeModifier(ATTACK_SPEED_KEY);
         player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).removeModifier(JUMP_KEY);
+
+        player.getAttribute(Attribute.GENERIC_GRAVITY).removeModifier(GRAVITY_KEY);
     }
 
     private static void setAttributes(Player player, boolean superCharge) {
@@ -165,11 +168,12 @@ public class GigantysmOrbListener implements Listener {
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(new AttributeModifier(HEALTH_KEY,  (superCharge ? 2 : 1), AttributeModifier.Operation.MULTIPLY_SCALAR_1));
         player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).addModifier(new AttributeModifier(REACH_BLOCK_KEY,  (superCharge ? 1 : 0.6), AttributeModifier.Operation.MULTIPLY_SCALAR_1));
         player.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).addModifier(new AttributeModifier(REACH_ENTITY_KEY,  (superCharge ? 1 : 0.6), AttributeModifier.Operation.MULTIPLY_SCALAR_1));
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).addModifier(new AttributeModifier(SPEED_KEY,  (superCharge ? 0.3 : 0.1), AttributeModifier.Operation.MULTIPLY_SCALAR_1));
+        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).addModifier(new AttributeModifier(SPEED_KEY,  (superCharge ? 0.1 : -0.1), AttributeModifier.Operation.MULTIPLY_SCALAR_1));
         player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(new AttributeModifier(ATTACK_SPEED_KEY, -0.5, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
         player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).addModifier(new AttributeModifier(JUMP_KEY,  (superCharge ? 0.5 : 0.2), AttributeModifier.Operation.MULTIPLY_SCALAR_1));
         player.getAttribute(Attribute.GENERIC_SAFE_FALL_DISTANCE).addModifier(new AttributeModifier(FALL_KEY,  2, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
         player.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).addModifier(new AttributeModifier(KNOCK_BACK_KEY,  3, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
+        player.getAttribute(Attribute.GENERIC_GRAVITY).addModifier(new AttributeModifier(GRAVITY_KEY,  -0.2, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
     }
 
 }

@@ -1,4 +1,4 @@
-package me.xxgradzix.gradzixcombatsystem.armorEvent;
+package me.xxgradzix.gradzixcombatsystem.events.armorEvent;
 
 import java.util.List;
 

@@ -124,16 +124,16 @@ public class MessageManager extends OkaeriConfig {
         switch (attribute) {
 
             case STRENGTH -> {
-                return "&cꜱɪᴌᴀ &4⚔&8: #a18b3d" + value;
+                return attribute.getCustomName() + " &4⚔&8: #a18b3d" + value;
             }
             case ENDURANCE -> {
-                return "&7ᴡʏᴛʀᴢʏᴍᴀᴌᴏść &8☄&8:  #a18b3d" + value;
+                return attribute.getCustomName() + " &8☄&8:  #a18b3d" + value;
             }
             case DEXTERITY -> {
-                return "#c3f075ᴢʀęᴄᴢɴᴏść #a8eb34⚡&8: #a18b3d" + value;
+                return attribute.getCustomName() + " #a8eb34⚡&8: #a18b3d" + value;
             }
             case INTELLIGENCE -> {
-                return "#81ecf0ɪɴᴛᴇʟɪɢᴇɴᴄᴊᴀ #20ced4 &8:" + value;
+                return attribute.getCustomName() + " #20ced4 &8:" + value;
             }
         }
         return "";

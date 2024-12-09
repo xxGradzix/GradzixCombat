@@ -1,15 +1,8 @@
 package me.xxgradzix.gradzixcombatsystem.commands;
 
-import dev.triumphteam.gui.guis.Gui;
-import dev.triumphteam.gui.guis.GuiItem;
-import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AbilitiesPointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
-import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
+import me.xxgradzix.gradzixcombatsystem.guis.attributes.AttributesGuiManager;
 import me.xxgradzix.gradzixcombatsystem.managers.magicEffects.MagicEffectManager;
-import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
-import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageType;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -62,44 +55,8 @@ public class AttributeCommand implements CommandExecutor {
             return false;
         }
 
-        openAttributeGui(player);
+        new AttributesGuiManager(player);
 
         return false;
-    }
-
-    private void openAttributeGui(Player player) {
-        Gui gui = Gui.gui()
-                .title(Component.text("Atrybuty"))
-                .rows(3)
-                .disableAllInteractions()
-                .create();
-
-        int slot = 10;
-
-        for (CombatAttribute attribute : CombatAttribute.values()) {
-            GuiItem attributeGuiItem = new GuiItem(ItemManager.getAttributeItem(player, attribute, AttributePointsManager.getAttributeLevel(player, attribute)));
-
-            attributeGuiItem.setAction((e) -> {
-
-                if(e.isRightClick()) {
-                    AbilitiesPointsManager.openAbilitiesGui(player, attribute);
-                    return;
-                }
-
-                boolean isSuccessful = AttributePointsManager.incrementAttributeLevel(player, attribute);
-
-                if(isSuccessful) {
-                    openAttributeGui(player);
-                } else {
-                    MessageManager.sendMessageFormated(player, MessageManager.NOT_ENOUGH_FREE_POINTS, MessageType.CHAT);
-                }
-
-            });
-            gui.setItem(slot, attributeGuiItem);
-            slot+=2;
-
-        }
-
-        gui.open(player);
     }
 }

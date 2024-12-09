@@ -1,4 +1,4 @@
-package me.xxgradzix.gradzixcombatsystem.upgradeGuis;
+package me.xxgradzix.gradzixcombatsystem.guis.upgradeGuis;
 
 import dev.triumphteam.gui.components.GuiType;
 import dev.triumphteam.gui.guis.Gui;

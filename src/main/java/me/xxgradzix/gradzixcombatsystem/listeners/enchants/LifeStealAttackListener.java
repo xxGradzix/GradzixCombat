@@ -28,7 +28,10 @@ public class LifeStealAttackListener implements Listener {
         int enchantLevel = EnchantManager.getEnchantLevel(itemInMainHand, EnchantManager.Enchant.LIFE_STEAL);
         if(enchantLevel == 0) return;
 
-        MagicEffectManager.useLifeStealEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(damager), enchantLevel, false, Optional.empty(), Optional.of(damaged));
+//        MagicEffectManager.useLifeStealEffect(MagicEffectManager.MagicUseVariant.ENCHANT, Optional.of(damager), enchantLevel, false, Optional.empty(), Optional.of(damaged));
+
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.FIRE).useVariant(MagicEffectManager.MagicUseVariant.ENCHANT).caster(damager).level(enchantLevel).superCharge(false).target(damaged).cast();
+
 
 //        if(!isLifeStealSuccessful(enchantLevel)) return;
 //

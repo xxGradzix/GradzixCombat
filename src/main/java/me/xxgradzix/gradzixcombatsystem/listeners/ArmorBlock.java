@@ -1,6 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.listeners;
 
-import me.xxgradzix.gradzixcombatsystem.armorEvent.ArmorEquipEvent;
+import me.xxgradzix.gradzixcombatsystem.events.armorEvent.ArmorEquipEvent;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageType;

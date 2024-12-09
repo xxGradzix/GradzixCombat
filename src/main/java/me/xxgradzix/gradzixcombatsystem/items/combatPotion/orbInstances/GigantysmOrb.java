@@ -23,19 +23,19 @@ public class GigantysmOrb implements CustomBattlePotionOrb {
 
     @Override
     public int getModelData(int tier) {
-        return 0;
+        return 77006;
     }
 
     @Override
     public void onDrink(Player player) {
 
         boolean equals = player.getGameMode().equals(GameMode.CREATIVE);
-        GigantysmOrbListener.addPlayer(player, 3*60, equals);
+        GigantysmOrbListener.addPlayer(player, (int) (1.5*60), equals);
     }
 
     @Override
     public Material getMaterial(int tier) {
-        return Material.HEAVY_CORE;
+        return Material.FLINT;
     }
 
 }

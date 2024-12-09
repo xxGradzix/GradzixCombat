@@ -22,7 +22,7 @@ public class VolcanoOrb implements CustomBattlePotionOrb {
 
     @Override
     public int getModelData(int tier) {
-        return 0;
+        return 77003;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class VolcanoOrb implements CustomBattlePotionOrb {
 
     @Override
     public Material getMaterial(int tier) {
-        return Material.FIRE_CHARGE;
+        return Material.FLINT;
     }
 
 }

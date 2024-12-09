@@ -1,10 +1,12 @@
-package me.xxgradzix.gradzixcombatsystem.upgradeGuis;
+package me.xxgradzix.gradzixcombatsystem.guis.potion;
 
 import dev.triumphteam.gui.components.GuiType;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import me.xxgradzix.gradzixcombatsystem.items.*;
-import me.xxgradzix.gradzixcombatsystem.items.weapons.*;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.MelleWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.ShootableWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.Tierable;
 import me.xxgradzix.gradzixcombatsystem.managers.EconomyManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
@@ -13,13 +15,17 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class WeaponUpgradeGuiManager {
+public class ThrowPotionUpgradeGuiManager {
 
-    private static final int MAX_TIER = 5;
+
+    private static final int MAX_TIER = 3;
 
     /** START OF WEAPON GUI **/
 
@@ -34,7 +40,13 @@ public class WeaponUpgradeGuiManager {
 
     private final Player player;
 
-    private final ArrayList<CustomItem> weapons;
+    private final Set<CustomItemManager> potions = Set.of(
+            CustomItemManager.POISON_COMBAT_POTION,
+            CustomItemManager.FIRE_COMBAT_POTION,
+            CustomItemManager.EXPLOSION_COMBAT_POTION,
+            CustomItemManager.WIND_COMBAT_POTION,
+            CustomItemManager.FREEZE_COMBAT_POTION
+    );
 
     private void clearCraftSection() {
         currentPrice.set(0);
@@ -43,11 +55,10 @@ public class WeaponUpgradeGuiManager {
         previousItem.set(null);
     }
 
-    public WeaponUpgradeGuiManager(Player player, ArrayList<CustomItem> weapons) {
+    public ThrowPotionUpgradeGuiManager(Player player) {
         this.player = player;
-        this.weapons = weapons;
         this.gui = Gui.gui(GuiType.CHEST)
-                .title(Component.text("&f七七七七七七七七≋".replace("&", "§")))
+                .title(Component.text("&f七七七七七七七七≖".replace("&", "§")))
                 .disableAllInteractions()
                 .rows(6)
                 .create();
@@ -70,7 +81,7 @@ public class WeaponUpgradeGuiManager {
     }
 
     private void setCraftButton() {
-        GuiItem upgradeButton = new GuiItem(ItemManager.upgradeWeaponButton(player, currentItemsNeeded, previousItem.get(), currentPrice.get()));
+        GuiItem upgradeButton = new GuiItem(ItemManager.universalCreateItemButton(player, currentItemsNeeded, previousItem.get(), currentPrice.get()));
 
         upgradeButton.setAction(event -> {
             if(currentItemToGet.get() == null) return;
@@ -83,9 +94,9 @@ public class WeaponUpgradeGuiManager {
     private void setScrollItems() {
 
         int i = 0;
-        for (CustomItem customItem : weapons) {
+        for (CustomItemManager throwablePotion : potions) {
+            CustomItem customItem = throwablePotion.getCustomItem();
             if(i > 6) break;
-
 
             if (!(customItem instanceof Upgradable)) continue;
 
@@ -106,7 +117,7 @@ public class WeaponUpgradeGuiManager {
         GuiItem moreItems = new GuiItem(ItemManager.moreItemsItemButton);
         moreItems.setAction(event -> {
             event.setCancelled(true);
-            new MainBlacksmithGui(player, 1);
+            new MainPotionGui(player);
         });
         gui.setItem(45, moreItems);
     }

@@ -5,8 +5,11 @@ import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.DexterityOrigin;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 
+import javax.xml.stream.events.Namespace;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -20,17 +23,20 @@ public enum AttackSpeedAbility implements CombatAbility, DexterityOrigin {
         return new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_ability_dexterity_attack_speed");
     }
 
+    private final NamespacedKey ATTACK_SPEED_ATTRIBUTE_KEY = new NamespacedKey(GradzixCombatSystem.plugin, "gradzixcombat_attribute_dexterity_attack_speed");
+
     @Override
     public void applyAbility(Player player, int level) {
         if(level > getMaxAbilityLevel()) level = getMaxAbilityLevel();
         removeAbility(player);
         setAbilityLevel(player, level);
-        //TODO: Add crit chance
+        player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(new AttributeModifier(ATTACK_SPEED_ATTRIBUTE_KEY, 0.1, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
     }
 
     @Override
     public void removeAbility(Player player) {
         setAbilityLevel(player, 0);
+        player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).removeModifier(ATTACK_SPEED_ATTRIBUTE_KEY);
     }
 
     @Override

@@ -24,7 +24,19 @@ public class BattleSpear implements CustomWeapon, MelleWeapon, ThrowableWeapon, 
     public String getCustomId() {
         return CUSTOM_ID;
     }
-
+    @Override
+    public List<String> getItemPreviewLore() {
+        return List.of(
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴏꜰᴇʀᴜᴊᴇ ᴅᴜżᴇ ᴏʙʀᴀżᴇɴɪᴀ ɪ ᴅᴜżʏ ᴢᴀꜱɪęɢ ᴅᴢɪᴀłᴀɴɪᴀ"),
+                ColorFixer.addColors("&7ᴛᴏ ʀᴀᴄᴢᴇᴊ ᴘᴏᴡᴏʟɴᴀ ʙʀᴏń"),
+                ColorFixer.addColors("&7 "),
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴏᴘɪᴇʀᴀ ꜱɪę ɴᴀ ᴀᴛʀʏʙᴜᴛᴀᴄʜ:"),
+                ColorFixer.addColors("&8 - " + CombatAttribute.ENDURANCE.getCustomName()),
+                ColorFixer.addColors("&8 - " + CombatAttribute.STRENGTH.getCustomName()),
+                ColorFixer.addColors("&7 "),
+                ColorFixer.addColors("&7ᴛą ʙʀᴏɴɪą ᴍᴏżɴᴀ ʀᴢᴜᴄᴀć")
+                );
+    }
     @Override
     public double getAttackDamage(int tier) {
         switch (tier) {

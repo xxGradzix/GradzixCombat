@@ -21,7 +21,7 @@ public class DashOrb implements CustomBattlePotionOrb {
 
     @Override
     public int getModelData(int tier) {
-        return 0;
+        return 77002;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class DashOrb implements CustomBattlePotionOrb {
 
     @Override
     public Material getMaterial(int tier) {
-        return Material.ENDER_PEARL;
+        return Material.FLINT;
     }
 
 }

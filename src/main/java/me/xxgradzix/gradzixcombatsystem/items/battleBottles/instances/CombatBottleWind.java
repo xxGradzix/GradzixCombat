@@ -66,7 +66,9 @@ public class CombatBottleWind implements CustomBottle {
     @Override
     public void affectedEffect(Player caster, LivingEntity livingEntity, int tier) {
 
-        MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, Optional.empty(), Optional.of(livingEntity));
+//        MagicEffectManager.useWindEffect(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY, Optional.of(caster), tier, false, Optional.empty(), Optional.of(livingEntity));
+        new MagicEffectManager.SpellBuilder().effectType(MagicEffectManager.MagicEffectType.WIND).useVariant(MagicEffectManager.MagicUseVariant.BATTLE_BOTTLE_APPLY).caster(caster).level(tier).superCharge(false).target(livingEntity).cast();
+
 
     }
 

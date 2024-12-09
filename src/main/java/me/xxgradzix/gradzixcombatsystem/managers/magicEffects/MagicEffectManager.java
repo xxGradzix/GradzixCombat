@@ -59,14 +59,105 @@ public class MagicEffectManager {
         return superCharges.getOrDefault(player.getUniqueId(), new HashMap<>()).getOrDefault(magicEffectType, 0L) > System.currentTimeMillis();
     }
 
-    public static void useFireEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
+    public static class SpellBuilder {
+        private MagicEffectType effectType = null;
+        private MagicEffectManager.MagicUseVariant useVariant = null;
+        private boolean superCharge = false;
+        private int level = 1;
+        private AreaEffectCloud areaEffectCloud = null;
+        private LivingEntity target = null;
+        private Player caster = null;
+        private Arrow arrow = null;
+        private Location hitLocation = null;
 
-        if(optionalCaster.isPresent()) {
-            Player player = optionalCaster.get();
-            if(isSuperCharged(player, MagicEffectType.FIRE)) {
-                superCharged = true;
+        public SpellBuilder effectType(MagicEffectType effectType) {
+            this.effectType = effectType;
+            return this;
+        }
+        public SpellBuilder useVariant(MagicEffectManager.MagicUseVariant useVariant) {
+            this.useVariant = useVariant;
+            return this;
+        }
+        public SpellBuilder superCharge(boolean superCharge) {
+            this.superCharge = superCharge;
+            return this;
+        }
+        public SpellBuilder level(int level) {
+            this.level = level;
+            return this;
+        }
+        public SpellBuilder areaEffectCloud(AreaEffectCloud areaEffectCloud) {
+            this.areaEffectCloud = areaEffectCloud;
+            return this;
+        }
+        public SpellBuilder target(LivingEntity target) {
+            this.target = target;
+            return this;
+        }
+        public SpellBuilder caster(Player caster) {
+            this.caster = caster;
+            return this;
+        }
+        public SpellBuilder arrow(Arrow arrow) {
+            this.arrow = arrow;
+            return this;
+        }
+        public SpellBuilder location(Location location) {
+            this.hitLocation = location;
+            return this;
+        }
+        public Object cast() {
+            if(effectType == null || useVariant == null) return null;
+            if(caster != null) {
+                if(isSuperCharged(caster, MagicEffectType.FIRE)) superCharge = true;
+            }
+            return castMagic(Optional.ofNullable(caster), effectType, useVariant, superCharge, level, Optional.ofNullable(areaEffectCloud), Optional.ofNullable(target), Optional.ofNullable(arrow), Optional.ofNullable(hitLocation));
+        }
+
+    }
+
+    private static Object castMagic(Optional<Player> optionalCaster, MagicEffectType effectType, MagicEffectManager.MagicUseVariant useVariant, boolean superCharge, int level, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget, Optional<Arrow> arrow, Optional<Location> hitLocation) {
+
+        switch (effectType) {
+
+            case WIND -> {
+                useWindEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget);
+            }
+            case FIRE -> {
+                useFireEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget);
+            }
+            case FREEZE -> {
+                useFreezeEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget);
+            }
+            case POISON -> {
+                usePoisonEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget);
+            }
+            case EXPLOSION -> {
+                useExplosionEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget);
+            }
+            case ARROW_RAIN -> {
+                useArrowRainEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget, arrow);
+            }
+            case LIFE_STEAL -> {
+                useLifeStealEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget);
+            }
+            case COMBO -> {
+                return useComboEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget);
+            }
+            case LIGHTNING -> {
+                useLightningEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget, hitLocation);
+            }
+            case SOUL_STEAL -> {
+                useSoulStealEffect(useVariant, optionalCaster, level, superCharge, optionalAreaEffectCloud, optionalTarget);
             }
         }
+        return true;
+
+    }
+
+
+    private static void useFireEffect(MagicEffectManager.MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
+
         boolean finalSuperCharged = superCharged;
         switch (variant) {
             case BATTLE_BOTTLE -> {
@@ -186,14 +277,8 @@ public class MagicEffectManager {
     }
 
 
-    public static void useFreezeEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
+    private static void useFreezeEffect(MagicEffectManager.MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
 
-        if(optionalCaster.isPresent()) {
-            Player player = optionalCaster.get();
-            if(isSuperCharged(player, MagicEffectType.FREEZE)) {
-                superCharged = true;
-            }
-        }
         switch (variant) {
             case BATTLE_BOTTLE -> {
 
@@ -271,14 +356,8 @@ public class MagicEffectManager {
     }
 
 
-    public static void usePoisonEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
+    private static void usePoisonEffect(MagicEffectManager.MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
 
-        if(optionalCaster.isPresent()) {
-            Player player = optionalCaster.get();
-            if(isSuperCharged(player, MagicEffectType.POISON)) {
-                superCharged = true;
-            }
-        }
         switch (variant) {
             case BATTLE_BOTTLE -> {
 
@@ -329,14 +408,8 @@ public class MagicEffectManager {
     }
 
 
-    public static void useWindEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
+    private static void useWindEffect(MagicEffectManager.MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
 
-        if(optionalCaster.isPresent()) {
-            Player player = optionalCaster.get();
-            if(isSuperCharged(player, MagicEffectType.WIND)) {
-                superCharged = true;
-            }
-        }
         switch (variant) {
             case BATTLE_BOTTLE -> {
 
@@ -387,14 +460,8 @@ public class MagicEffectManager {
         };
     }
 
-    public static void useExplosionEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
+    private static void useExplosionEffect(MagicEffectManager.MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
 
-        if(optionalCaster.isPresent()) {
-            Player player = optionalCaster.get();
-            if(isSuperCharged(player, MagicEffectType.EXPLOSION)) {
-                superCharged = true;
-            }
-        }
         switch (variant) {
             case BATTLE_BOTTLE -> {
 
@@ -435,7 +502,11 @@ public class MagicEffectManager {
     }
 
 
-    public static void useArrowRainEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget, Arrow arrow) {
+    private static void useArrowRainEffect(MagicEffectManager.MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget, Optional<Arrow> optionalArrow) {
+
+        if(optionalArrow.isEmpty()) return;
+
+        Arrow arrow = optionalArrow.get();
 
         switch (variant) {
             case ENCHANT -> {
@@ -551,14 +622,8 @@ public class MagicEffectManager {
         playerCombos.remove(damaged.getUniqueId());
     }
 
-    public static double useComboEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
+    private static double useComboEffect(MagicEffectManager.MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
 
-        if(optionalCaster.isPresent()) {
-            Player player = optionalCaster.get();
-            if(isSuperCharged(player, MagicEffectType.EXPLOSION)) {
-                superCharged = true;
-            }
-        }
         switch (variant) {
             case ENCHANT -> {
 
@@ -620,14 +685,8 @@ public class MagicEffectManager {
 
 
 
-    public static void useLifeStealEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
+    private static void useLifeStealEffect(MagicEffectManager.MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
 
-        if(optionalCaster.isPresent()) {
-            Player player = optionalCaster.get();
-            if(isSuperCharged(player, MagicEffectType.LIFE_STEAL)) {
-                superCharged = true;
-            }
-        }
         switch (variant) {
             case ENCHANT -> {
 
@@ -678,14 +737,11 @@ public class MagicEffectManager {
 
     private static final HashMap<UUID, Long> lastLightningUse = new HashMap<>();
 
-    public static void useLightningEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget, Location hitLocation) {
+    private static void useLightningEffect(MagicEffectManager.MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget, Optional<Location> optionalHitLocation) {
 
-        if(optionalCaster.isPresent()) {
-            Player player = optionalCaster.get();
-            if(isSuperCharged(player, MagicEffectType.LIGHTNING)) {
-                superCharged = true;
-            }
-        }
+        if(optionalHitLocation.isEmpty()) return;
+        Location hitLocation = optionalHitLocation.get();
+
         switch (variant) {
             case ENCHANT -> {
 
@@ -742,14 +798,8 @@ public class MagicEffectManager {
         };
     }
 
-    public static void useSoulStealEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
+    private static void useSoulStealEffect(MagicUseVariant variant, Optional<Player> optionalCaster, int level, boolean superCharged, Optional<AreaEffectCloud> optionalAreaEffectCloud, Optional<LivingEntity> optionalTarget) {
 
-        if(optionalCaster.isPresent()) {
-            Player player = optionalCaster.get();
-            if(isSuperCharged(player, MagicEffectType.LIFE_STEAL)) {
-                superCharged = true;
-            }
-        }
         boolean finalSuperCharged = superCharged;
         switch (variant) {
             case ENCHANT -> {
@@ -803,7 +853,7 @@ public class MagicEffectManager {
         }
     }
 
-    private static int getSoulsStolen(ItemStack itemStack) {
+    public static int getSoulsStolen(ItemStack itemStack) {
         return itemStack.getItemMeta().getPersistentDataContainer().getOrDefault(SOULS_STOLEN_KEY, PersistentDataType.INTEGER, 0);
 
     }

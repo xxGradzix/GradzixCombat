@@ -28,7 +28,16 @@ public class BattleCrossBow implements CustomWeapon, ShootableWeapon, Enchantabl
     public String getCustomId() {
         return CUSTOM_ID;
     }
-
+    @Override
+    public List<String> getItemPreviewLore() {
+        return List.of(
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴏꜰᴇʀᴜᴊᴇ ᴅᴜżᴇ ᴏʙʀᴀżᴇɴɪᴀ"),
+                ColorFixer.addColors("&7ᴛᴏ ʀᴀᴄᴢᴇᴊ ᴘᴏᴡᴏʟɴᴀ ʙʀᴏń"),
+                ColorFixer.addColors("&7 "),
+                ColorFixer.addColors("&7ᴛᴀ ʙʀᴏń ᴏᴘɪᴇʀᴀ ꜱɪę ɴᴀ ᴀᴛʀʏʙᴜᴛᴀᴄʜ:"),
+                ColorFixer.addColors("&8 - " + CombatAttribute.STRENGTH.getCustomName())
+        );
+    }
     @Override
     public int getRequiredAttribute(int tier, CombatAttribute attribute) {
         switch (tier){

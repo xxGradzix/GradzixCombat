@@ -1,6 +1,5 @@
-package me.xxgradzix.gradzixcombatsystem.armorEvent;
+package me.xxgradzix.gradzixcombatsystem.events.armorEvent;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 /**

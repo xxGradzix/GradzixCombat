@@ -1,5 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.items.battleBottles.instances;
 
+import me.xxgradzix.gradzixcombatsystem.items.Upgradable;
 import me.xxgradzix.gradzixcombatsystem.items.battleBottles.CombatPotionType;
 import me.xxgradzix.gradzixcombatsystem.items.battleBottles.CustomBottle;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.CombatAttribute;
@@ -85,4 +86,6 @@ public class CombatBottleExplosion implements CustomBottle {
     public boolean isLowerTierItemRequired(int tier) {
         return false;
     }
+
+
 }

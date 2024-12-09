@@ -25,7 +25,7 @@ public class SuperChargeOrb implements CustomBattlePotionOrb {
 
     @Override
     public int getModelData(int tier) {
-        return 0;
+        return 77008;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class SuperChargeOrb implements CustomBattlePotionOrb {
 
     @Override
     public Material getMaterial(int tier) {
-        return Material.NETHER_STAR;
+        return Material.FLINT;
     }
 
 }

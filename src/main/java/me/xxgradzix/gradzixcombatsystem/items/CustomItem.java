@@ -1,9 +1,6 @@
 package me.xxgradzix.gradzixcombatsystem.items;
 
-import me.xxgradzix.gradzixcombatsystem.items.weapons.EnchantableWeapon;
-import me.xxgradzix.gradzixcombatsystem.items.weapons.MelleWeapon;
-import me.xxgradzix.gradzixcombatsystem.items.weapons.ModifiableWeapon;
-import me.xxgradzix.gradzixcombatsystem.items.weapons.ShootableWeapon;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.*;
 import me.xxgradzix.gradzixcombatsystem.managers.EnchantManager.EnchantManager;
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.AttributePointsManager;
 import me.xxgradzix.gradzixcombatsystem.managers.messages.MessageManager;
@@ -32,6 +29,7 @@ public interface CustomItem {
     String getCustomId();
 
     static Optional<String> getCustomId(ItemMeta meta) {
+        if(meta == null) return Optional.empty();
         return Optional.ofNullable(meta.getPersistentDataContainer().get(getItemCustomIdKey(), PersistentDataType.STRING));
     }
 
@@ -71,6 +69,14 @@ public interface CustomItem {
         if(tier == 0) {
             meta.setDisplayName(ColorFixer.addColors("#3e4040") + getName(tier));
             ArrayList<String> lore = new ArrayList<>();
+
+            if(this instanceof CustomWeapon customWeapon) {
+
+                lore.addAll(customWeapon.getItemPreviewLore());
+
+            }
+            lore.add(" ");
+
             lore.add("&7ᴋʟɪᴋɴɪᴊ ᴀʙʏ ᴡʏʙʀᴀć ᴛᴇɴ ᴘʀᴢᴇᴅᴍɪᴏᴛ".replace("&", "§"));
             meta.setLore(lore);
             return;

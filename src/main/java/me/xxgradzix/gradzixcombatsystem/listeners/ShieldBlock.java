@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class ShieldBlock implements Listener {
@@ -29,8 +30,9 @@ public class ShieldBlock implements Listener {
                 }
             }
         }
-
     }
+
+
 
     @EventHandler
     public void onShieldBlock(PlayerInteractEvent event) {

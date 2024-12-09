@@ -31,6 +31,8 @@ public interface CustomBottle extends CustomItem, Tierable, Upgradable {
             }
         }
 
+
+
         ItemStack itemStack = new ItemStack(Material.LINGERING_POTION);
 
         setTier(itemStack, tier);
@@ -42,7 +44,7 @@ public interface CustomBottle extends CustomItem, Tierable, Upgradable {
         potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.UNLUCK, 0, 0, true, false, false), false);
 
         potionMeta.setColor(null);
-        meta.setMaxStackSize(tier);
+        meta.setMaxStackSize(tier <= 0 ? 1 : tier);
         meta.setCustomModelData(getModelData(tier));
 
         defaultSetItemCustomId(meta);

@@ -6,11 +6,13 @@ import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities
 import me.xxgradzix.gradzixcombatsystem.managers.attributesMainManager.abilities.attributeOrigins.DexterityOrigin;
 import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +74,13 @@ public enum OneHandAbility implements CombatAbility, DexterityOrigin, EventableA
                 if(!(event.getDamager() instanceof Player damager)) return;
 
                 // TODO do usuniecia
+
+                ItemStack itemInMainHand = damager.getInventory().getItemInMainHand();
+                ItemStack itemInOffHand = damager.getInventory().getItemInMainHand();
+
+                if(itemInMainHand == null || itemInMainHand.isEmpty()) return;
+                if(itemInOffHand != null && !itemInOffHand.isEmpty() && !itemInOffHand.getType().equals(Material.AIR)) return;
+
                 Bukkit.broadcastMessage("One hand ability triggered");
                 event.setDamage(event.getDamage() * (1 + getAbilityLevel(damager) * 0.4));
             }
@@ -94,35 +103,37 @@ public enum OneHandAbility implements CombatAbility, DexterityOrigin, EventableA
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
 
                 lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴍɪᴇᴄᴢᴀ ɪ ᴅʀᴜɢᴀ ʀęᴋᴀ ᴊᴇꜱᴛ ᴡᴏʟɴᴀ"));
-                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ &a5 ᴏʙʀᴀżᴇń"));
+                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ &a5% ᴏʙʀᴀżᴇń"));
             }
             case 1 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
 
                 lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴍɪᴇᴄᴢᴀ ɪ ᴅʀᴜɢᴀ ʀęᴋᴀ ᴊᴇꜱᴛ ᴡᴏʟɴᴀ"));
-                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ 5 ᴏʙʀᴀżᴇń"));
+                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ 5% ᴏʙʀᴀżᴇń"));
 
+                lore.add(" ");
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
 
                 lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴍɪᴇᴄᴢᴀ ɪ ᴅʀᴜɢᴀ ʀęᴋᴀ ᴊᴇꜱᴛ ᴡᴏʟɴᴀ"));
-                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ &a10 ᴏʙʀᴀżᴇń"));
+                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ &a10% ᴏʙʀᴀżᴇń"));
             }
             case 2 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
 
                 lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴍɪᴇᴄᴢᴀ ɪ ᴅʀᴜɢᴀ ʀęᴋᴀ ᴊᴇꜱᴛ ᴡᴏʟɴᴀ"));
-                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ 10 ᴏʙʀᴀżᴇń"));
+                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ 10% ᴏʙʀᴀżᴇń"));
+                lore.add(" ");
 
                 lore.add(ColorFixer.addColors("#877239ɴᴀꜱᴛęᴘɴʏ ᴘᴏᴢɪᴏᴍ"));
 
                 lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴍɪᴇᴄᴢᴀ ɪ ᴅʀᴜɢᴀ ʀęᴋᴀ ᴊᴇꜱᴛ ᴡᴏʟɴᴀ"));
-                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ &a15 ᴏʙʀᴀżᴇń"));
+                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ &a15% ᴏʙʀᴀżᴇń"));
             }
             case 3 -> {
                 lore.add(ColorFixer.addColors("#877239ᴏʙᴇᴄɴʏ ᴘᴏᴢɪᴏᴍ"));
 
                 lore.add(ColorFixer.addColors("&7ɢᴅʏ ᴜżʏᴡᴀꜱᴢ ᴍɪᴇᴄᴢᴀ ɪ ᴅʀᴜɢᴀ ʀęᴋᴀ ᴊᴇꜱᴛ ᴡᴏʟɴᴀ"));
-                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ &a15 ᴏʙʀᴀżᴇń"));
+                lore.add(ColorFixer.addColors("&7ᴢᴀᴅᴀᴊᴇꜱᴢ ᴅᴏᴅᴀᴛᴋᴏᴡᴇ &a15% ᴏʙʀᴀżᴇń"));
             }
 
         }

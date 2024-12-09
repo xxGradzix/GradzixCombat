@@ -1,5 +1,7 @@
 package me.xxgradzix.gradzixcombatsystem.listeners.combatHeroPotion;
 
+import dev.triumphteam.gui.components.GuiType;
+import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.StorageGui;
 import me.xxgradzix.gradzixcombatsystem.items.CustomItem;
@@ -7,6 +9,9 @@ import me.xxgradzix.gradzixcombatsystem.items.CustomItemManager;
 import me.xxgradzix.gradzixcombatsystem.items.ItemManager;
 import me.xxgradzix.gradzixcombatsystem.items.combatPotion.CustomBattlePotion;
 import me.xxgradzix.gradzixcombatsystem.items.combatPotion.CustomBattlePotionOrb;
+import me.xxgradzix.gradzixcombatsystem.items.weapons.Tierable;
+import me.xxgradzix.gradzixcombatsystem.utils.ColorFixer;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -40,16 +45,21 @@ public class LeftClickHeroPotion implements Listener {
 
         if(!(customItem instanceof CustomBattlePotion customBattlePotion)) return;
 
+
         event.setCancelled(true);
         ItemMeta itemMeta = potion.getItemMeta();
 
         HashMap<Integer, CustomBattlePotionOrb> orbs = customBattlePotion.getOrbs(itemMeta);
 
-        StorageGui gui = new StorageGui(1, "ᴍɪᴋꜱᴛᴜʀᴀ ʙᴏʜᴀᴛᴇʀᴀ");
+        StorageGui gui = Gui.storage()
+                .title(Component.text(ColorFixer.addColors("&f七七七七七七七七≓")))
+                .rows(2)
+                .create();
 
         GuiItem invisibleItem = new GuiItem(ItemManager.invisibleFiller, e -> {
             e.setCancelled(true);
         });
+
 
         gui.getFiller().fill(invisibleItem);
 
@@ -73,6 +83,12 @@ public class LeftClickHeroPotion implements Listener {
 
             customBattlePotion.setOrbAtIndex(itemMeta, 1, customBattlePotionOrb1);
             customBattlePotion.setOrbAtIndex(itemMeta, 2, customBattlePotionOrb2);
+
+            int tier = 1;
+            if(customItem instanceof Tierable tierable) {
+                tier = Tierable.getTier(potion);
+            }
+            customItem.setLoreAndName(itemMeta, tier);
 
             potion.setItemMeta(itemMeta);
         });
